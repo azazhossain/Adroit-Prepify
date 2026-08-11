@@ -44,6 +44,9 @@ jobs:
       - name: Validate mobile app
         run: pnpm run typecheck
 
+      - name: Align Expo dependencies
+        run: pnpm exec expo install --fix
+
       - name: Generate native Android project
         run: pnpm exec expo prebuild --platform android --non-interactive
 
