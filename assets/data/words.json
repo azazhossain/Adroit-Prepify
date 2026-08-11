@@ -1,0 +1,4739 @@
+{
+  "source": "Appropriate_Prepositions_Part1-14_1786391828927.xlsx",
+  "headers": [
+    "Part",
+    "Headword",
+    "Appropriate Preposition",
+    "Meaning",
+    "Sentence"
+  ],
+  "expectedCount": 526,
+  "actualCount": 525,
+  "entries": [
+    {
+      "sourceRow": 2,
+      "part": "Part 1",
+      "headword": "abhorrence",
+      "preposition": "of sth",
+      "meaning": "ঘৃণা",
+      "sentence": "I have abhorrence of corruption.",
+      "extra": []
+    },
+    {
+      "sourceRow": 3,
+      "part": "Part 1",
+      "headword": "abhorrent",
+      "preposition": "to sb",
+      "meaning": "ঘৃণ্য",
+      "sentence": "Hypocrisy is abhorrent to honest people.",
+      "extra": []
+    },
+    {
+      "sourceRow": 4,
+      "part": "Part 1",
+      "headword": "abide",
+      "preposition": "by",
+      "meaning": "মেনে চলা",
+      "sentence": "You'll have to abide by the rules of the club.",
+      "extra": []
+    },
+    {
+      "sourceRow": 5,
+      "part": "Part 1",
+      "headword": "abide",
+      "preposition": "with",
+      "meaning": "(কারো) সাথে থাকা",
+      "sentence": "My brother abides with me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 6,
+      "part": "Part 1",
+      "headword": "abide",
+      "preposition": "in",
+      "meaning": "(কোনো স্থানে) থাকা",
+      "sentence": "He abides in a new building.",
+      "extra": []
+    },
+    {
+      "sourceRow": 7,
+      "part": "Part 1",
+      "headword": "abound",
+      "preposition": "in (a place)",
+      "meaning": "প্রচুর পরিমাণে থাকা",
+      "sentence": "Rivers abound in Bangladesh. [যেখানে থাকে তার পূর্বে in]",
+      "extra": []
+    },
+    {
+      "sourceRow": 8,
+      "part": "Part 1",
+      "headword": "abound",
+      "preposition": "with sb/sth",
+      "meaning": "প্রচুর পরিমাণে থাকা",
+      "sentence": "The rivers abound with fish. [যা থাকে তার পূর্বে with]",
+      "extra": []
+    },
+    {
+      "sourceRow": 9,
+      "part": "Part 1",
+      "headword": "absent",
+      "preposition": "from",
+      "meaning": "অনুপস্থিত",
+      "sentence": "She has been absent from school for several days.",
+      "extra": []
+    },
+    {
+      "sourceRow": 10,
+      "part": "Part 1",
+      "headword": "absolve",
+      "preposition": "sb from/of sth",
+      "meaning": "মুক্ত করা",
+      "sentence": "I absolve you from/of all your sins.",
+      "extra": []
+    },
+    {
+      "sourceRow": 11,
+      "part": "Part 1",
+      "headword": "absorbed",
+      "preposition": "in",
+      "meaning": "নিমগ্ন",
+      "sentence": "She seemed totally absorbed in her book.",
+      "extra": []
+    },
+    {
+      "sourceRow": 12,
+      "part": "Part 1",
+      "headword": "abstain",
+      "preposition": "from",
+      "meaning": "বিরত থাকা",
+      "sentence": "The workers who abstained from work yesterday have been suspended.",
+      "extra": []
+    },
+    {
+      "sourceRow": 13,
+      "part": "Part 1",
+      "headword": "accede",
+      "preposition": "to",
+      "meaning": "সম্মত হওয়া",
+      "sentence": "He acceded to demands for his resignation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 14,
+      "part": "Part 1",
+      "headword": "acceptable",
+      "preposition": "to",
+      "meaning": "গ্রহণযোগ্য",
+      "sentence": "Your offer is not acceptable to me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 15,
+      "part": "Part 1",
+      "headword": "access",
+      "preposition": "to",
+      "meaning": "প্রবেশাধিকার",
+      "sentence": "Students must have access to good resources.",
+      "extra": []
+    },
+    {
+      "sourceRow": 16,
+      "part": "Part 1",
+      "headword": "accommodate",
+      "preposition": "sb with sth",
+      "meaning": "সাহায্য করা",
+      "sentence": "I can accommodate you with a suggestion.",
+      "extra": []
+    },
+    {
+      "sourceRow": 17,
+      "part": "Part 1",
+      "headword": "accommodate",
+      "preposition": "to sth",
+      "meaning": "খাপ খাওয়ানো",
+      "sentence": "I needed to accommodate to the new schedule.",
+      "extra": []
+    },
+    {
+      "sourceRow": 18,
+      "part": "Part 1",
+      "headword": "accompany",
+      "preposition": "by",
+      "meaning": "সঙ্গী হওয়া",
+      "sentence": "He was accompanied by his father.",
+      "extra": []
+    },
+    {
+      "sourceRow": 19,
+      "part": "Part 1",
+      "headword": "accomplished",
+      "preposition": "in",
+      "meaning": "দক্ষ",
+      "sentence": "Mr. Jhon is accomplished in Mathematics.",
+      "extra": []
+    },
+    {
+      "sourceRow": 20,
+      "part": "Part 1",
+      "headword": "accord",
+      "preposition": "with sth",
+      "meaning": "সংগতিপূর্ণ হওয়া",
+      "sentence": "His views accord with public opinion.",
+      "extra": []
+    },
+    {
+      "sourceRow": 21,
+      "part": "Part 1",
+      "headword": "according",
+      "preposition": "to",
+      "meaning": "অনুসারে",
+      "sentence": "The work was done according to her instructions.",
+      "extra": []
+    },
+    {
+      "sourceRow": 22,
+      "part": "Part 1",
+      "headword": "account",
+      "preposition": "for",
+      "meaning": "কোনো কিছুর কারণ হওয়া",
+      "sentence": "The poor weather may have accounted for the small crowd.",
+      "extra": []
+    },
+    {
+      "sourceRow": 23,
+      "part": "Part 1",
+      "headword": "accuse",
+      "preposition": "of",
+      "meaning": "অভিযুক্ত করা",
+      "sentence": "He was accused of stealing the book.",
+      "extra": []
+    },
+    {
+      "sourceRow": 24,
+      "part": "Part 1",
+      "headword": "accustomed",
+      "preposition": "to",
+      "meaning": "অভ্যস্ত",
+      "sentence": "My eyes slowly grew accustomed to the dark",
+      "extra": []
+    },
+    {
+      "sourceRow": 25,
+      "part": "Part 1",
+      "headword": "acquainted",
+      "preposition": "with",
+      "meaning": "পরিচিত",
+      "sentence": "The students are acquainted with the work of Shakespeare.",
+      "extra": []
+    },
+    {
+      "sourceRow": 26,
+      "part": "Part 1",
+      "headword": "acquit",
+      "preposition": "sb of sth",
+      "meaning": "খালাস দেওয়া",
+      "sentence": "The jury acquitted him of murder.",
+      "extra": []
+    },
+    {
+      "sourceRow": 27,
+      "part": "Part 1",
+      "headword": "adapt",
+      "preposition": "to sth",
+      "meaning": "খাপ খাওয়ানো",
+      "sentence": "We had to adapt quickly to the new system.",
+      "extra": []
+    },
+    {
+      "sourceRow": 28,
+      "part": "Part 1",
+      "headword": "add",
+      "preposition": "to",
+      "meaning": "যোগ করা",
+      "sentence": "Chlorine is added to the water to kill bacteria.",
+      "extra": []
+    },
+    {
+      "sourceRow": 29,
+      "part": "Part 1",
+      "headword": "addicted",
+      "preposition": "to",
+      "meaning": "আসক্ত",
+      "sentence": "He's addicted to computer games.",
+      "extra": []
+    },
+    {
+      "sourceRow": 30,
+      "part": "Part 1",
+      "headword": "adept",
+      "preposition": "in/at",
+      "meaning": "দক্ষ",
+      "sentence": "He is adept in/at typing.",
+      "extra": []
+    },
+    {
+      "sourceRow": 31,
+      "part": "Part 1",
+      "headword": "adequate",
+      "preposition": "to",
+      "meaning": "পর্যাপ্ত",
+      "sentence": "Will future oil supplies be adequate to meet world needs?",
+      "extra": []
+    },
+    {
+      "sourceRow": 32,
+      "part": "Part 1",
+      "headword": "adhere",
+      "preposition": "to",
+      "meaning": "লেগে থাকা",
+      "sentence": "There was oil adhering to the bird's feathers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 33,
+      "part": "Part 1",
+      "headword": "adjacent",
+      "preposition": "to",
+      "meaning": "সংলগ্ন",
+      "sentence": "Our farm land was adjacent to the river.",
+      "extra": []
+    },
+    {
+      "sourceRow": 34,
+      "part": "Part 1",
+      "headword": "adjust",
+      "preposition": "to",
+      "meaning": "খাপ খাওয়ানো",
+      "sentence": "Adjust your language to the age of your audience.",
+      "extra": []
+    },
+    {
+      "sourceRow": 35,
+      "part": "Part 1",
+      "headword": "admit",
+      "preposition": "of",
+      "meaning": "সুযোগ/অবকাশ থাকা",
+      "sentence": "This clause admits of no other interpretation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 36,
+      "part": "Part 1",
+      "headword": "admit",
+      "preposition": "to/into",
+      "meaning": "প্রবেশ করতে দেওয়া",
+      "sentence": "You will not be admitted to/into the theatre.",
+      "extra": []
+    },
+    {
+      "sourceRow": 37,
+      "part": "Part 1",
+      "headword": "admit",
+      "preposition": "to/into",
+      "meaning": "ভর্তি করা",
+      "sentence": "Women were admitted to/into the club last year.",
+      "extra": []
+    },
+    {
+      "sourceRow": 38,
+      "part": "Part 1",
+      "headword": "affection",
+      "preposition": "for",
+      "meaning": "স্নেহ/ভালোবাসা",
+      "sentence": "His affection for his motherland amazed me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 39,
+      "part": "Part 1",
+      "headword": "affectionate",
+      "preposition": "to",
+      "meaning": "স্নেহশীল",
+      "sentence": "He is very affectionate to his children.",
+      "extra": []
+    },
+    {
+      "sourceRow": 40,
+      "part": "Part 1",
+      "headword": "afraid",
+      "preposition": "of",
+      "meaning": "ভীত",
+      "sentence": "I started to feel afraid of going out alone at night.",
+      "extra": []
+    },
+    {
+      "sourceRow": 41,
+      "part": "Part 1",
+      "headword": "agree",
+      "preposition": "with sb/sth",
+      "meaning": "একমত হওয়া",
+      "sentence": "He agreed with them about the need for change. I agree with her analysis of the situation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 42,
+      "part": "Part 1",
+      "headword": "agree",
+      "preposition": "with sb on a point",
+      "meaning": "কারো সাথে কোনো বিষয়ে একমত হওয়া",
+      "sentence": "Khaleda Zia agreed with Sheikh Hasina on that point.",
+      "extra": []
+    },
+    {
+      "sourceRow": 43,
+      "part": "Part 1",
+      "headword": "agree",
+      "preposition": "to a proposal",
+      "meaning": "কারো প্রস্তাবে একমত হওয়া",
+      "sentence": "Do you think he'll agree to their proposal?",
+      "extra": []
+    },
+    {
+      "sourceRow": 44,
+      "part": "Part 2",
+      "headword": "aim",
+      "preposition": "at",
+      "meaning": "লক্ষ্য করা",
+      "sentence": "These measures are aimed at preventing violent crime.",
+      "extra": []
+    },
+    {
+      "sourceRow": 45,
+      "part": "Part 2",
+      "headword": "alarmed",
+      "preposition": "at",
+      "meaning": "আতঙ্কিত",
+      "sentence": "She was alarmed at the prospect of travelling alone.",
+      "extra": []
+    },
+    {
+      "sourceRow": 46,
+      "part": "Part 2",
+      "headword": "allot",
+      "preposition": "to",
+      "meaning": "বরাদ্দ করা",
+      "sentence": "How much money has been allotted to us?",
+      "extra": []
+    },
+    {
+      "sourceRow": 47,
+      "part": "Part 2",
+      "headword": "aloof",
+      "preposition": "from",
+      "meaning": "দূরে থাকা",
+      "sentence": "The Emperor kept himself aloof from the people.",
+      "extra": []
+    },
+    {
+      "sourceRow": 48,
+      "part": "Part 2",
+      "headword": "alternative",
+      "preposition": "to",
+      "meaning": "বিকল্প",
+      "sentence": "This book is alternative to that book.",
+      "extra": []
+    },
+    {
+      "sourceRow": 49,
+      "part": "Part 2",
+      "headword": "ambition",
+      "preposition": "for",
+      "meaning": "উচ্চাকাঙ্ক্ষা",
+      "sentence": "He has ambition for being a doctor.",
+      "extra": []
+    },
+    {
+      "sourceRow": 50,
+      "part": "Part 2",
+      "headword": "ambitious",
+      "preposition": "of",
+      "meaning": "উচ্চাকাঙ্ক্ষী",
+      "sentence": "Donald Trump is ambitious of fame.",
+      "extra": []
+    },
+    {
+      "sourceRow": 51,
+      "part": "Part 2",
+      "headword": "amenable",
+      "preposition": "to",
+      "meaning": "বশ্য",
+      "sentence": "He secmed most amenable to my idea.",
+      "extra": []
+    },
+    {
+      "sourceRow": 52,
+      "part": "Part 2",
+      "headword": "angry",
+      "preposition": "with sb",
+      "meaning": "ক্রুদ্ধ",
+      "sentence": "I was angry with myself for making such a stupid mistake.",
+      "extra": []
+    },
+    {
+      "sourceRow": 53,
+      "part": "Part 2",
+      "headword": "angry",
+      "preposition": "at/about/for sth",
+      "meaning": "ক্রুদ্ধ",
+      "sentence": "I was angry at/about/for the result",
+      "extra": []
+    },
+    {
+      "sourceRow": 54,
+      "part": "Part 2",
+      "headword": "annoyed",
+      "preposition": "with sb at/about/for sth",
+      "meaning": "বিরক্ত",
+      "sentence": "He was very annoyed with me at/about/for my carelessness.",
+      "extra": []
+    },
+    {
+      "sourceRow": 55,
+      "part": "Part 2",
+      "headword": "answer",
+      "preposition": "for",
+      "meaning": "দায়ভার নেওয়া",
+      "sentence": "You will have to answer for your behaviour.",
+      "extra": []
+    },
+    {
+      "sourceRow": 56,
+      "part": "Part 2",
+      "headword": "antipathy",
+      "preposition": "to",
+      "meaning": "বিদ্বেষ",
+      "sentence": "I feel a profound antipathy to using any weapon.",
+      "extra": []
+    },
+    {
+      "sourceRow": 57,
+      "part": "Part 2",
+      "headword": "anxious",
+      "preposition": "about sth",
+      "meaning": "উদ্বিগ্ন",
+      "sentence": "He seemed anxious about the meeting.",
+      "extra": []
+    },
+    {
+      "sourceRow": 58,
+      "part": "Part 2",
+      "headword": "anxious",
+      "preposition": "for sb",
+      "meaning": "উদ্বিগ্ন",
+      "sentence": "Parents are naturally anxious for their children.",
+      "extra": []
+    },
+    {
+      "sourceRow": 59,
+      "part": "Part 2",
+      "headword": "apologize (apologise)",
+      "preposition": "to sb",
+      "meaning": "কারো কাছে ক্ষমা চাওয়া",
+      "sentence": "Go and apologize to her.",
+      "extra": []
+    },
+    {
+      "sourceRow": 60,
+      "part": "Part 2",
+      "headword": "apologize (apologise)",
+      "preposition": "for",
+      "meaning": "কোনো কিছুর জন্য ক্ষমা চাওয়া",
+      "sentence": "He apologized for canceling our meeting at such a short notice.",
+      "extra": []
+    },
+    {
+      "sourceRow": 61,
+      "part": "Part 2",
+      "headword": "appeal",
+      "preposition": "to sb for sth",
+      "meaning": "আবেদন করা",
+      "sentence": "We appeal to the government for order in our society.",
+      "extra": []
+    },
+    {
+      "sourceRow": 62,
+      "part": "Part 2",
+      "headword": "appeal",
+      "preposition": "against sth",
+      "meaning": "আবেদন করা",
+      "sentence": "He appealed against the three-match ban.",
+      "extra": []
+    },
+    {
+      "sourceRow": 63,
+      "part": "Part 2",
+      "headword": "appear",
+      "preposition": "before",
+      "meaning": "হাজির হওয়া",
+      "sentence": "The candidate appeared before the viva-voce Board.",
+      "extra": []
+    },
+    {
+      "sourceRow": 64,
+      "part": "Part 2",
+      "headword": "appetite",
+      "preposition": "for",
+      "meaning": "আকাঙ্ক্ষা",
+      "sentence": "The public have an insatiable appetite for scandal.",
+      "extra": []
+    },
+    {
+      "sourceRow": 65,
+      "part": "Part 2",
+      "headword": "apply",
+      "preposition": "to sb for sth",
+      "meaning": "আবেদন করা",
+      "sentence": "He applied to the authority for the job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 66,
+      "part": "Part 2",
+      "headword": "appoint",
+      "preposition": "to sth",
+      "meaning": "নিয়োগ করা",
+      "sentence": "She has recently been appointed to the committee.",
+      "extra": []
+    },
+    {
+      "sourceRow": 67,
+      "part": "Part 2",
+      "headword": "appointment",
+      "preposition": "with sb",
+      "meaning": "সাক্ষাৎসূচি",
+      "sentence": "I have an appointment with my lawyer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 68,
+      "part": "Part 2",
+      "headword": "appointment",
+      "preposition": "for sth",
+      "meaning": "সাক্ষাৎসূচি",
+      "sentence": "He had an appointment for a blood test.",
+      "extra": []
+    },
+    {
+      "sourceRow": 69,
+      "part": "Part 2",
+      "headword": "approve",
+      "preposition": "of",
+      "meaning": "অনুমোদন করা বা সমর্থন করা",
+      "sentence": "I cannot approve of her conduct.",
+      "extra": []
+    },
+    {
+      "sourceRow": 70,
+      "part": "Part 2",
+      "headword": "aptitude",
+      "preposition": "for",
+      "meaning": "স্বাভাবিক দক্ষতা",
+      "sentence": "His aptitude for dealing with children got him the job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 71,
+      "part": "Part 2",
+      "headword": "argue",
+      "preposition": "with sb about sth",
+      "meaning": "তর্ক করা",
+      "sentence": "I don't want to argue with you about this.",
+      "extra": []
+    },
+    {
+      "sourceRow": 72,
+      "part": "Part 2",
+      "headword": "argue",
+      "preposition": "for sth",
+      "meaning": "পক্ষে যুক্তি দেখানো",
+      "sentence": "They argued for the right of women.",
+      "extra": []
+    },
+    {
+      "sourceRow": 73,
+      "part": "Part 2",
+      "headword": "argue",
+      "preposition": "against sth",
+      "meaning": "বিপক্ষে যুক্তি দেখানো",
+      "sentence": "They argued against the right of voluntary death.",
+      "extra": []
+    },
+    {
+      "sourceRow": 74,
+      "part": "Part 2",
+      "headword": "arrive",
+      "preposition": "at",
+      "meaning": "ছোট স্থানে বা সিদ্ধান্তে পৌঁছানো",
+      "sentence": "The train arrived at the station 20 minutes late.",
+      "extra": []
+    },
+    {
+      "sourceRow": 75,
+      "part": "Part 2",
+      "headword": "arrive",
+      "preposition": "in",
+      "meaning": "দেশে বা বড় স্থানে পৌঁছানো",
+      "sentence": "She'll arrive in New York at noon.",
+      "extra": []
+    },
+    {
+      "sourceRow": 76,
+      "part": "Part 2",
+      "headword": "ashamed",
+      "preposition": "of",
+      "meaning": "লজ্জিত",
+      "sentence": "She was deeply ashamed of her behaviour at the party.",
+      "extra": []
+    },
+    {
+      "sourceRow": 77,
+      "part": "Part 2",
+      "headword": "ask",
+      "preposition": "for sth",
+      "meaning": "চাওয়",
+      "sentence": "Jalal asked for a loan of Tk. 500/-",
+      "extra": []
+    },
+    {
+      "sourceRow": 78,
+      "part": "Part 2",
+      "headword": "aspire",
+      "preposition": "to sth",
+      "meaning": "আকাঙ্ক্ষা করা",
+      "sentence": "She aspired to a glorious career.",
+      "extra": []
+    },
+    {
+      "sourceRow": 79,
+      "part": "Part 2",
+      "headword": "assign",
+      "preposition": "to",
+      "meaning": "বরাদ্দ করা",
+      "sentence": "The two large classrooms have been assigned to us.",
+      "extra": []
+    },
+    {
+      "sourceRow": 80,
+      "part": "Part 2",
+      "headword": "assist",
+      "preposition": "sb in doing sth",
+      "meaning": "সহযোগিতা করা",
+      "sentence": "We will assist you in finding somewhere to live.",
+      "extra": []
+    },
+    {
+      "sourceRow": 81,
+      "part": "Part 2",
+      "headword": "associated",
+      "preposition": "with",
+      "meaning": "জড়িত",
+      "sentence": "He doesn't want to be associated with the party any longer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 82,
+      "part": "Part 2",
+      "headword": "assure",
+      "preposition": "of",
+      "meaning": "নিশ্চিত করা",
+      "sentence": "We assured him of our support.",
+      "extra": []
+    },
+    {
+      "sourceRow": 83,
+      "part": "Part 2",
+      "headword": "astonished",
+      "preposition": "at",
+      "meaning": "বিস্মিত",
+      "sentence": "My parents looked astonished at my news.",
+      "extra": []
+    },
+    {
+      "sourceRow": 84,
+      "part": "Part 2",
+      "headword": "atone",
+      "preposition": "for",
+      "meaning": "প্রায়শ্চিত্ত করা",
+      "sentence": "He has to atone for this crime.",
+      "extra": []
+    },
+    {
+      "sourceRow": 85,
+      "part": "Part 2",
+      "headword": "attach",
+      "preposition": "to",
+      "meaning": "সংযুক্ত করে দেওয়া",
+      "sentence": "Attach the coupon to the front of your letter.",
+      "extra": []
+    },
+    {
+      "sourceRow": 86,
+      "part": "Part 2",
+      "headword": "attend",
+      "preposition": "to",
+      "meaning": "মনোযোগ দেওয়া",
+      "sentence": "I have some urgent business to attend to.",
+      "extra": []
+    },
+    {
+      "sourceRow": 87,
+      "part": "Part 2",
+      "headword": "attribute",
+      "preposition": "to",
+      "meaning": "আরোপ করা",
+      "sentence": "She attributes her success to hard work and a little luck.",
+      "extra": []
+    },
+    {
+      "sourceRow": 88,
+      "part": "Part 2",
+      "headword": "avail",
+      "preposition": "oneself of",
+      "meaning": "সুযোগ গ্রহণ করা",
+      "sentence": "Guests are encouraged to avail themselves of the full range of hotel facilities.",
+      "extra": []
+    },
+    {
+      "sourceRow": 89,
+      "part": "Part 2",
+      "headword": "averse",
+      "preposition": "to",
+      "meaning": "বিমুখ",
+      "sentence": "I mentioned it to Kate and she wasn't averse to the idea.",
+      "extra": []
+    },
+    {
+      "sourceRow": 90,
+      "part": "Part 2",
+      "headword": "aware",
+      "preposition": "of",
+      "meaning": "সচেতন",
+      "sentence": "Everybody should be made aware of the risks involved.",
+      "extra": []
+    },
+    {
+      "sourceRow": 91,
+      "part": "Part 3",
+      "headword": "barrier",
+      "preposition": "to",
+      "meaning": "প্রতিবন্ধকতা",
+      "sentence": "Lack of confidence is a psychological barrier to success.",
+      "extra": []
+    },
+    {
+      "sourceRow": 92,
+      "part": "Part 3",
+      "headword": "based",
+      "preposition": "on",
+      "meaning": "ভিত্তি",
+      "sentence": "The report is based on figures from six different European cities.",
+      "extra": []
+    },
+    {
+      "sourceRow": 93,
+      "part": "Part 3",
+      "headword": "beg",
+      "preposition": "sb for sth",
+      "meaning": "কোনো কিছু চাওয়া",
+      "sentence": "They begged him for help.",
+      "extra": []
+    },
+    {
+      "sourceRow": 94,
+      "part": "Part 3",
+      "headword": "beg",
+      "preposition": "sth of/from sb",
+      "meaning": "কোনো কিছু চাওয়া",
+      "sentence": "Can I beg a favor of/from you?",
+      "extra": []
+    },
+    {
+      "sourceRow": 95,
+      "part": "Part 3",
+      "headword": "believe",
+      "preposition": "in",
+      "meaning": "বিশ্বাস করা",
+      "sentence": "I never thought I could make it as an actor, but my parents always believed in me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 96,
+      "part": "Part 3",
+      "headword": "belong",
+      "preposition": "to",
+      "meaning": "অধিকারে থাকা",
+      "sentence": "The islands belong to Spain.",
+      "extra": []
+    },
+    {
+      "sourceRow": 97,
+      "part": "Part 3",
+      "headword": "bent",
+      "preposition": "on",
+      "meaning": "সংকল্পবদ্ধ",
+      "sentence": "She seems bent on making life difficult for me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 98,
+      "part": "Part 3",
+      "headword": "bereft",
+      "preposition": "of",
+      "meaning": "বঞ্চিত",
+      "sentence": "The poor are bereft of their basic rights.",
+      "extra": []
+    },
+    {
+      "sourceRow": 99,
+      "part": "Part 3",
+      "headword": "bestowed",
+      "preposition": "on",
+      "meaning": "(সম্মানার্থে) প্রদান করা বা দেওয়া",
+      "sentence": "The gifts will be bestowed on the guests.",
+      "extra": []
+    },
+    {
+      "sourceRow": 100,
+      "part": "Part 3",
+      "headword": "beware",
+      "preposition": "of",
+      "meaning": "সতর্ক হওয়া",
+      "sentence": "Motorists have been warned to beware of icy roads",
+      "extra": []
+    },
+    {
+      "sourceRow": 101,
+      "part": "Part 3",
+      "headword": "blame",
+      "preposition": "sth on sb/sth",
+      "meaning": "দোষারোপ করা",
+      "sentence": "Police are blaming the accident on dangerous driving.",
+      "extra": []
+    },
+    {
+      "sourceRow": 102,
+      "part": "Part 3",
+      "headword": "blessed",
+      "preposition": "in",
+      "meaning": "সুখী",
+      "sentence": "He is blessed in his children.",
+      "extra": []
+    },
+    {
+      "sourceRow": 103,
+      "part": "Part 3",
+      "headword": "blessed",
+      "preposition": "with",
+      "meaning": "সৌভাগ্যশালী",
+      "sentence": "She was blessed with a child.",
+      "extra": []
+    },
+    {
+      "sourceRow": 104,
+      "part": "Part 3",
+      "headword": "blind",
+      "preposition": "to",
+      "meaning": "(দোষের প্রতি) অন্ধ",
+      "sentence": "She is blind to her husband's faults.",
+      "extra": []
+    },
+    {
+      "sourceRow": 105,
+      "part": "Part 3",
+      "headword": "blind",
+      "preposition": "of/in (eye)",
+      "meaning": "দৃষ্টিশক্তিতে অন্ধ",
+      "sentence": "The man is blind of/in one eye.",
+      "extra": []
+    },
+    {
+      "sourceRow": 106,
+      "part": "Part 3",
+      "headword": "blush",
+      "preposition": "with",
+      "meaning": "লজ্জায় লাল হওয়া",
+      "sentence": "He blushed wih shame.",
+      "extra": []
+    },
+    {
+      "sourceRow": 107,
+      "part": "Part 3",
+      "headword": "boast",
+      "preposition": "of",
+      "meaning": "দম্ভ করা",
+      "sentence": "He openly boasted of his skill as a burglar.",
+      "extra": []
+    },
+    {
+      "sourceRow": 108,
+      "part": "Part 3",
+      "headword": "born",
+      "preposition": "of/to sb",
+      "meaning": "জন্মগ্রহণ করা",
+      "sentence": "He was born of/to German parents.",
+      "extra": []
+    },
+    {
+      "sourceRow": 109,
+      "part": "Part 3",
+      "headword": "bound",
+      "preposition": "for",
+      "meaning": "যাত্রার জন্য প্রস্তুত",
+      "sentence": "This plane is bound for New York.",
+      "extra": []
+    },
+    {
+      "sourceRow": 110,
+      "part": "Part 3",
+      "headword": "bring",
+      "preposition": "up",
+      "meaning": "লালন-পালন করা",
+      "sentence": "He was brought up by his aunt.",
+      "extra": []
+    },
+    {
+      "sourceRow": 111,
+      "part": "Part 3",
+      "headword": "brood",
+      "preposition": "on/over",
+      "meaning": "মন খারাপ করা",
+      "sentence": "You're not still brooding on/over what he said, are you?",
+      "extra": []
+    },
+    {
+      "sourceRow": 112,
+      "part": "Part 3",
+      "headword": "burst",
+      "preposition": "into (tears)",
+      "meaning": "কান্নায় ভেঙে পড়া",
+      "sentence": "She burst into tears to see her dead son.",
+      "extra": []
+    },
+    {
+      "sourceRow": 113,
+      "part": "Part 3",
+      "headword": "burst",
+      "preposition": "out (laughing)",
+      "meaning": "হাসিতে ফেটে পড়া",
+      "sentence": "He burst out laughing.",
+      "extra": []
+    },
+    {
+      "sourceRow": 114,
+      "part": "Part 3",
+      "headword": "busy",
+      "preposition": "with",
+      "meaning": "ব্যস্ত",
+      "sentence": "He is now busy with his new work.",
+      "extra": []
+    },
+    {
+      "sourceRow": 115,
+      "part": "Part 3",
+      "headword": "callous",
+      "preposition": "to",
+      "meaning": "উদাসীন",
+      "sentence": "He was callous to his family.",
+      "extra": []
+    },
+    {
+      "sourceRow": 116,
+      "part": "Part 3",
+      "headword": "capable",
+      "preposition": "of",
+      "meaning": "সমর্থ",
+      "sentence": "You are capable of better work than this.",
+      "extra": []
+    },
+    {
+      "sourceRow": 117,
+      "part": "Part 3",
+      "headword": "capacity",
+      "preposition": "for",
+      "meaning": "যোগ্যতা",
+      "sentence": "She has an enormous capacity for hard work.",
+      "extra": []
+    },
+    {
+      "sourceRow": 118,
+      "part": "Part 3",
+      "headword": "care",
+      "preposition": "about",
+      "meaning": "পাতা দেওয়া",
+      "sentence": "He does not care about what will happen.",
+      "extra": []
+    },
+    {
+      "sourceRow": 119,
+      "part": "Part 3",
+      "headword": "care",
+      "preposition": "for",
+      "meaning": "সেবা করা",
+      "sentence": "She moved back home to care for her old parents.",
+      "extra": []
+    },
+    {
+      "sourceRow": 120,
+      "part": "Part 3",
+      "headword": "careful",
+      "preposition": "of/about",
+      "meaning": "সতর্ক",
+      "sentence": "Be careful of/about the traffic.",
+      "extra": []
+    },
+    {
+      "sourceRow": 121,
+      "part": "Part 3",
+      "headword": "cause",
+      "preposition": "for",
+      "meaning": "কারণ",
+      "sentence": "There is no cause for concern.",
+      "extra": []
+    },
+    {
+      "sourceRow": 122,
+      "part": "Part 3",
+      "headword": "certain",
+      "preposition": "of/about",
+      "meaning": "নিশ্চিত",
+      "sentence": "If you want to be certain of/about getting a ticket, book now.",
+      "extra": []
+    },
+    {
+      "sourceRow": 123,
+      "part": "Part 3",
+      "headword": "charge",
+      "preposition": "sb with sth",
+      "meaning": "অভিযোগ করা",
+      "sentence": "Opposition MPs charged the minister with neglecting her duty.",
+      "extra": []
+    },
+    {
+      "sourceRow": 124,
+      "part": "Part 3",
+      "headword": "charge",
+      "preposition": "against/on sb",
+      "meaning": "অভিযোগ করা",
+      "sentence": "Theft was charged against/on him.",
+      "extra": []
+    },
+    {
+      "sourceRow": 125,
+      "part": "Part 3",
+      "headword": "close",
+      "preposition": "to",
+      "meaning": "নিকটে",
+      "sentence": "The bank is close to the office.",
+      "extra": []
+    },
+    {
+      "sourceRow": 126,
+      "part": "Part 3",
+      "headword": "clue",
+      "preposition": "to",
+      "meaning": "সূত্র",
+      "sentence": "The videotape may hold vital clues to the identity of the killer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 127,
+      "part": "Part 3",
+      "headword": "coincide",
+      "preposition": "with",
+      "meaning": "মিলে যাওয়া",
+      "sentence": "The strike was timed to coincide with the party conference.",
+      "extra": []
+    },
+    {
+      "sourceRow": 128,
+      "part": "Part 3",
+      "headword": "come",
+      "preposition": "of",
+      "meaning": "বংশোদ্ভূত হওয়া",
+      "sentence": "He comes of a respectable family.",
+      "extra": []
+    },
+    {
+      "sourceRow": 129,
+      "part": "Part 3",
+      "headword": "commence",
+      "preposition": "with",
+      "meaning": "শুরু হওয়া/করা",
+      "sentence": "The day commenced with a welcome from the principal.",
+      "extra": []
+    },
+    {
+      "sourceRow": 130,
+      "part": "Part 3",
+      "headword": "comment",
+      "preposition": "on",
+      "meaning": "মন্তব্য করা",
+      "sentence": "I don't feel I can comment on their decision.",
+      "extra": []
+    },
+    {
+      "sourceRow": 131,
+      "part": "Part 3",
+      "headword": "committed",
+      "preposition": "to",
+      "meaning": "প্রতিজ্ঞাবদ্ধ",
+      "sentence": "Bangladesh is committed to a policy of peaceful existence.",
+      "extra": []
+    },
+    {
+      "sourceRow": 132,
+      "part": "Part 3",
+      "headword": "compare",
+      "preposition": "with",
+      "meaning": "তুলনা করা (এক জাতীয় বিষয়)",
+      "sentence": "Nazrul can be compared with Shelly.",
+      "extra": []
+    },
+    {
+      "sourceRow": 133,
+      "part": "Part 3",
+      "headword": "compare",
+      "preposition": "to",
+      "meaning": "তুলনা করা (অসম বিষয়)",
+      "sentence": "Knowledge can be compared to light.",
+      "extra": []
+    },
+    {
+      "sourceRow": 134,
+      "part": "Part 4",
+      "headword": "compatible",
+      "preposition": "with",
+      "meaning": "সুসংগত",
+      "sentence": "The new system will be compatible with existing equipment.",
+      "extra": []
+    },
+    {
+      "sourceRow": 135,
+      "part": "Part 4",
+      "headword": "compensate",
+      "preposition": "for",
+      "meaning": "ক্ষতিপূরণ করা",
+      "sentence": "Her lawyer says she should be compensated for the suffering.",
+      "extra": []
+    },
+    {
+      "sourceRow": 136,
+      "part": "Part 4",
+      "headword": "compete",
+      "preposition": "with/against sb",
+      "meaning": "প্রতিযোগিতা করা",
+      "sentence": "We can't compete with/against them.",
+      "extra": []
+    },
+    {
+      "sourceRow": 137,
+      "part": "Part 4",
+      "headword": "compete",
+      "preposition": "for sth",
+      "meaning": "প্রতিযোগিতা করা",
+      "sentence": "Several companies are competing for the contract.",
+      "extra": []
+    },
+    {
+      "sourceRow": 138,
+      "part": "Part 4",
+      "headword": "complain",
+      "preposition": "to sb about/of sth",
+      "meaning": "অভিযোগ করা",
+      "sentence": "I'm going to complain to the manager about/of this.",
+      "extra": []
+    },
+    {
+      "sourceRow": 139,
+      "part": "Part 4",
+      "headword": "comply",
+      "preposition": "with",
+      "meaning": "মেনে নেওয়া",
+      "sentence": "They refused to comply with the UN resolution.",
+      "extra": []
+    },
+    {
+      "sourceRow": 140,
+      "part": "Part 4",
+      "headword": "composed",
+      "preposition": "of",
+      "meaning": "তৈরি",
+      "sentence": "The committee is composed of lawyers only.",
+      "extra": []
+    },
+    {
+      "sourceRow": 141,
+      "part": "Part 4",
+      "headword": "comprised",
+      "preposition": "of",
+      "meaning": "তৈরি",
+      "sentence": "The house is comprised of five rooms.",
+      "extra": []
+    },
+    {
+      "sourceRow": 142,
+      "part": "Part 4",
+      "headword": "conceive",
+      "preposition": "of sth as sth",
+      "meaning": "ধারণা করা",
+      "sentence": "God is often conceived of as male.",
+      "extra": []
+    },
+    {
+      "sourceRow": 143,
+      "part": "Part 4",
+      "headword": "concentrate",
+      "preposition": "on",
+      "meaning": "কেন্দ্রীভূত করা",
+      "sentence": "I decided to concentrate all my efforts on finding somewhere to live.",
+      "extra": []
+    },
+    {
+      "sourceRow": 144,
+      "part": "Part 4",
+      "headword": "concern",
+      "preposition": "about/for",
+      "meaning": "উদ্বেগ",
+      "sentence": "Voters raised concerns about/for health care.",
+      "extra": []
+    },
+    {
+      "sourceRow": 145,
+      "part": "Part 4",
+      "headword": "concerned",
+      "preposition": "in (a plot)",
+      "meaning": "(ষড়যন্ত্রে) জড়িত",
+      "sentence": "Five men were concerned in the plot.",
+      "extra": []
+    },
+    {
+      "sourceRow": 146,
+      "part": "Part 4",
+      "headword": "concur",
+      "preposition": "with sb in sth",
+      "meaning": "একমত হওয়া",
+      "sentence": "Historians have concurred with each other in this view.",
+      "extra": []
+    },
+    {
+      "sourceRow": 147,
+      "part": "Part 4",
+      "headword": "concur",
+      "preposition": "with sth",
+      "meaning": "একমত হওয়া",
+      "sentence": "The manager concurred with this assessment.",
+      "extra": []
+    },
+    {
+      "sourceRow": 148,
+      "part": "Part 4",
+      "headword": "conducive",
+      "preposition": "to",
+      "meaning": "উপযোগী",
+      "sentence": "The plan is really conducive to growth.",
+      "extra": []
+    },
+    {
+      "sourceRow": 149,
+      "part": "Part 4",
+      "headword": "confess",
+      "preposition": "to",
+      "meaning": "স্বীকার করা",
+      "sentence": "She confessed to the murder.",
+      "extra": []
+    },
+    {
+      "sourceRow": 150,
+      "part": "Part 4",
+      "headword": "confide",
+      "preposition": "to",
+      "meaning": "বিশ্বাস করে বলা",
+      "sentence": "He confided to me that he had applied for another job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 151,
+      "part": "Part 4",
+      "headword": "confide",
+      "preposition": "in sb",
+      "meaning": "আস্থা রাখা",
+      "sentence": "She used to confide in him whenever she had a problem.",
+      "extra": []
+    },
+    {
+      "sourceRow": 152,
+      "part": "Part 4",
+      "headword": "confidence",
+      "preposition": "in",
+      "meaning": "আত্মবিশ্বাস, আস্থা",
+      "sentence": "The players all have confidence in their manager.",
+      "extra": []
+    },
+    {
+      "sourceRow": 153,
+      "part": "Part 4",
+      "headword": "confident",
+      "preposition": "of",
+      "meaning": "স্থির বিশ্বাসী",
+      "sentence": "The team feels confident of winning.",
+      "extra": []
+    },
+    {
+      "sourceRow": 154,
+      "part": "Part 4",
+      "headword": "confine",
+      "preposition": "in (a small or closed space)",
+      "meaning": "আবদ্ধ/সীমাবদ্ধ রাখা",
+      "sentence": "The dog was confined in a cage.",
+      "extra": []
+    },
+    {
+      "sourceRow": 155,
+      "part": "Part 4",
+      "headword": "confine",
+      "preposition": "to (bed, wheel chair)",
+      "meaning": "আবদ্ধ/সীমাবদ্ধ রাখা",
+      "sentence": "She was confined to bed with the flu.",
+      "extra": []
+    },
+    {
+      "sourceRow": 156,
+      "part": "Part 4",
+      "headword": "conform",
+      "preposition": "to/with (a rule, law etc.)",
+      "meaning": "মেনে চলা",
+      "sentence": "The building does not conform to/with safety regulations.",
+      "extra": []
+    },
+    {
+      "sourceRow": 157,
+      "part": "Part 4",
+      "headword": "congratulate",
+      "preposition": "on",
+      "meaning": "অভিনন্দন জানানো",
+      "sentence": "I congratulated him on his success.",
+      "extra": []
+    },
+    {
+      "sourceRow": 158,
+      "part": "Part 4",
+      "headword": "connection",
+      "preposition": "with",
+      "meaning": "সম্পর্ক",
+      "sentence": "His resignation must have some connection with the recent scandal.",
+      "extra": []
+    },
+    {
+      "sourceRow": 159,
+      "part": "Part 4",
+      "headword": "conscious",
+      "preposition": "of",
+      "meaning": "সচেতন",
+      "sentence": "She is very conscious of the problems involved.",
+      "extra": []
+    },
+    {
+      "sourceRow": 160,
+      "part": "Part 4",
+      "headword": "consist",
+      "preposition": "in",
+      "meaning": "কোনো কিছুর মূল উপাদান হওয়া",
+      "sentence": "The beauty of the city consists in its magnificent buildings.",
+      "extra": []
+    },
+    {
+      "sourceRow": 161,
+      "part": "Part 4",
+      "headword": "consist",
+      "preposition": "of",
+      "meaning": "গঠিত হওয়া",
+      "sentence": "The committee consists of ten members.",
+      "extra": []
+    },
+    {
+      "sourceRow": 162,
+      "part": "Part 4",
+      "headword": "consistent",
+      "preposition": "with",
+      "meaning": "সামঞ্জস্যপূর্ণ",
+      "sentence": "The results are entirely consistent with our earlier research.",
+      "extra": []
+    },
+    {
+      "sourceRow": 163,
+      "part": "Part 4",
+      "headword": "consult",
+      "preposition": "with sb on/about sth",
+      "meaning": "পরামর্শ করা",
+      "sentence": "Consult with your physician on/about possible treatments.",
+      "extra": []
+    },
+    {
+      "sourceRow": 164,
+      "part": "Part 4",
+      "headword": "contemporary (noun)",
+      "preposition": "of",
+      "meaning": "সামসময়িক ব্যক্তি",
+      "sentence": "He was a contemporary of Freud and may have known him.",
+      "extra": []
+    },
+    {
+      "sourceRow": 165,
+      "part": "Part 4",
+      "headword": "contemporary (adjective)",
+      "preposition": "with",
+      "meaning": "সামসময়িক",
+      "sentence": "He was contemporary with Nazrul.",
+      "extra": []
+    },
+    {
+      "sourceRow": 166,
+      "part": "Part 4",
+      "headword": "contrary",
+      "preposition": "to",
+      "meaning": "বিপরীতক্রমে",
+      "sentence": "Contrary to popular belief, many cats dislike milk.",
+      "extra": []
+    },
+    {
+      "sourceRow": 167,
+      "part": "Part 4",
+      "headword": "contribute",
+      "preposition": "to",
+      "meaning": "দান হিসাবে দেওয়া",
+      "sentence": "Would you like to contribute to our collection?",
+      "extra": []
+    },
+    {
+      "sourceRow": 168,
+      "part": "Part 4",
+      "headword": "control",
+      "preposition": "over/of",
+      "meaning": "কর্তৃত্ব",
+      "sentence": "The Democrats will probably lose control over/of Congress.",
+      "extra": []
+    },
+    {
+      "sourceRow": 169,
+      "part": "Part 4",
+      "headword": "conversant",
+      "preposition": "with",
+      "meaning": "অভিজ্ঞ",
+      "sentence": "You need to become fully conversant with the company's procedures.",
+      "extra": []
+    },
+    {
+      "sourceRow": 170,
+      "part": "Part 4",
+      "headword": "cope",
+      "preposition": "with",
+      "meaning": "খাপ খাওয়ানো",
+      "sentence": "I cannot cope with the situation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 171,
+      "part": "Part 4",
+      "headword": "count",
+      "preposition": "for",
+      "meaning": "গণ্য হওয়া",
+      "sentence": "Her apologoy conunts for nothing.",
+      "extra": []
+    },
+    {
+      "sourceRow": 172,
+      "part": "Part 4",
+      "headword": "count",
+      "preposition": "on/upon",
+      "meaning": "নির্ভর করা",
+      "sentence": "Don't count on/upon his help.",
+      "extra": []
+    },
+    {
+      "sourceRow": 173,
+      "part": "Part 4",
+      "headword": "crave",
+      "preposition": "for",
+      "meaning": "আকাঙ্ক্ষা করা",
+      "sentence": "He always craved for money.",
+      "extra": []
+    },
+    {
+      "sourceRow": 174,
+      "part": "Part 4",
+      "headword": "credit",
+      "preposition": "with (amount); (amount) to",
+      "meaning": "জমা করা",
+      "sentence": "Your account has been credited with BDT 50,000. Please, credit BDT 50,000 to my bank account.",
+      "extra": []
+    },
+    {
+      "sourceRow": 175,
+      "part": "Part 4",
+      "headword": "cure (noun)",
+      "preposition": "for",
+      "meaning": "আরোগ্য",
+      "sentence": "Science can not provide cure for all the world problems.",
+      "extra": []
+    },
+    {
+      "sourceRow": 176,
+      "part": "Part 4",
+      "headword": "cure (verb)",
+      "preposition": "of",
+      "meaning": "সুস্থ হওয়া/করা",
+      "sentence": "She completely cured him of his illness.",
+      "extra": []
+    },
+    {
+      "sourceRow": 177,
+      "part": "Part 5",
+      "headword": "deaf",
+      "preposition": "of/in",
+      "meaning": "বধির",
+      "sentence": "He is deaf of/in one ear.",
+      "extra": []
+    },
+    {
+      "sourceRow": 178,
+      "part": "Part 5",
+      "headword": "deaf",
+      "preposition": "to",
+      "meaning": "শুনতে অনিচ্ছুক",
+      "sentence": "He was deaf to my request.",
+      "extra": []
+    },
+    {
+      "sourceRow": 179,
+      "part": "Part 5",
+      "headword": "deal",
+      "preposition": "in",
+      "meaning": "ব্যাবসা করা",
+      "sentence": "The company deals in computer software.",
+      "extra": []
+    },
+    {
+      "sourceRow": 180,
+      "part": "Part 5",
+      "headword": "deal",
+      "preposition": "with",
+      "meaning": "মিল রেখে চলা",
+      "sentence": "She is used to dealing with all kinds of people in her job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 181,
+      "part": "Part 5",
+      "headword": "dedicate",
+      "preposition": "to",
+      "meaning": "উৎসর্গ করা",
+      "sentence": "She dedicates herself to her work.",
+      "extra": []
+    },
+    {
+      "sourceRow": 182,
+      "part": "Part 5",
+      "headword": "defend",
+      "preposition": "from/against",
+      "meaning": "রক্ষা করা",
+      "sentence": "Our officers are trained to defend themselves from/against knife attacks.",
+      "extra": []
+    },
+    {
+      "sourceRow": 183,
+      "part": "Part 5",
+      "headword": "delight",
+      "preposition": "in/at",
+      "meaning": "আনন্দ",
+      "sentence": "He takes delight in/at proving others wrong.",
+      "extra": []
+    },
+    {
+      "sourceRow": 184,
+      "part": "Part 5",
+      "headword": "depart",
+      "preposition": "from",
+      "meaning": "প্রস্থান করা",
+      "sentence": "Flights for Rome depart from Terminal 3.",
+      "extra": []
+    },
+    {
+      "sourceRow": 185,
+      "part": "Part 5",
+      "headword": "depend",
+      "preposition": "on/upon",
+      "meaning": "নির্ভর করা",
+      "sentence": "You can not depend on/upon him.",
+      "extra": []
+    },
+    {
+      "sourceRow": 186,
+      "part": "Part 5",
+      "headword": "deprived",
+      "preposition": "of",
+      "meaning": "বঞ্চিত",
+      "sentence": "These are the children who are deprived of love.",
+      "extra": []
+    },
+    {
+      "sourceRow": 187,
+      "part": "Part 5",
+      "headword": "descend",
+      "preposition": "on",
+      "meaning": "আক্রমণ করা",
+      "sentence": "Robbers descended on the travellers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 188,
+      "part": "Part 5",
+      "headword": "desire",
+      "preposition": "for",
+      "meaning": "ইচ্ছা",
+      "sentence": "He had a strong desire for power.",
+      "extra": []
+    },
+    {
+      "sourceRow": 189,
+      "part": "Part 5",
+      "headword": "desirous",
+      "preposition": "of",
+      "meaning": "ইচ্ছুক",
+      "sentence": "At that point Franco was desirous of prolonging the war.",
+      "extra": []
+    },
+    {
+      "sourceRow": 190,
+      "part": "Part 5",
+      "headword": "despair",
+      "preposition": "of",
+      "meaning": "নিরাশ হওয়া",
+      "sentence": "I despair of him; he can't keep a job for more than six months.",
+      "extra": []
+    },
+    {
+      "sourceRow": 191,
+      "part": "Part 5",
+      "headword": "destined",
+      "preposition": "to do sth",
+      "meaning": "পূর্ব নির্ধারিত",
+      "sentence": "We seem destined never to meet.",
+      "extra": []
+    },
+    {
+      "sourceRow": 192,
+      "part": "Part 5",
+      "headword": "detached",
+      "preposition": "from",
+      "meaning": "বিচ্ছিন্ন",
+      "sentence": "The students became detached from library work.",
+      "extra": []
+    },
+    {
+      "sourceRow": 193,
+      "part": "Part 5",
+      "headword": "detrimental",
+      "preposition": "to",
+      "meaning": "ক্ষতিকর",
+      "sentence": "The policy will be detrimental to the peace process.",
+      "extra": []
+    },
+    {
+      "sourceRow": 194,
+      "part": "Part 5",
+      "headword": "deviate",
+      "preposition": "from",
+      "meaning": "অন্য পথে যাওয়া",
+      "sentence": "He never deviated from his original plan.",
+      "extra": []
+    },
+    {
+      "sourceRow": 195,
+      "part": "Part 5",
+      "headword": "devoid",
+      "preposition": "of",
+      "meaning": "বর্জিত",
+      "sentence": "The letter was devoid of warmth and feeling.",
+      "extra": []
+    },
+    {
+      "sourceRow": 196,
+      "part": "Part 5",
+      "headword": "devote",
+      "preposition": "to",
+      "meaning": "উৎসর্গ করা",
+      "sentence": "She devoted herself to her career.",
+      "extra": []
+    },
+    {
+      "sourceRow": 197,
+      "part": "Part 5",
+      "headword": "die",
+      "preposition": "of/from a disease from an effect for a cause by poison in peace",
+      "meaning": "মারা যাওয়া",
+      "sentence": "He died of/from Colera. He died from over eating. He died for his country. He died by poison. Let me die in peace.",
+      "extra": []
+    },
+    {
+      "sourceRow": 198,
+      "part": "Part 5",
+      "headword": "differ",
+      "preposition": "with sb on/about/over sth",
+      "meaning": "ভিন্ন মত হওয়া",
+      "sentence": "I have to differ with you on/about/over that.",
+      "extra": []
+    },
+    {
+      "sourceRow": 199,
+      "part": "Part 5",
+      "headword": "differ",
+      "preposition": "in opinion",
+      "meaning": "ভিন্ন মত হওয়া",
+      "sentence": "They differ in their opinions.",
+      "extra": []
+    },
+    {
+      "sourceRow": 200,
+      "part": "Part 5",
+      "headword": "differ",
+      "preposition": "from",
+      "meaning": "ভিন্নরূপ হওয়া",
+      "sentence": "French differs from English in this respect.",
+      "extra": []
+    },
+    {
+      "sourceRow": 201,
+      "part": "Part 5",
+      "headword": "difference",
+      "preposition": "in",
+      "meaning": "পার্থক্য",
+      "sentence": "There is no difference in the results.",
+      "extra": []
+    },
+    {
+      "sourceRow": 202,
+      "part": "Part 5",
+      "headword": "difference",
+      "preposition": "between",
+      "meaning": "পার্থক্য (দুয়ের মধ্যে)",
+      "sentence": "He was studying the differences between humans and animals.",
+      "extra": []
+    },
+    {
+      "sourceRow": 203,
+      "part": "Part 5",
+      "headword": "different",
+      "preposition": "from",
+      "meaning": "পৃথক",
+      "sentence": "American English is significantly different from British English.",
+      "extra": []
+    },
+    {
+      "sourceRow": 204,
+      "part": "Part 5",
+      "headword": "difficulty",
+      "preposition": "in difficulty",
+      "meaning": "কঠিন পরিস্থিতি",
+      "sentence": "He is in difficulty because of his new work.",
+      "extra": []
+    },
+    {
+      "sourceRow": 205,
+      "part": "Part 5",
+      "headword": "discourage",
+      "preposition": "from",
+      "meaning": "নিরুৎসাহিত করা",
+      "sentence": "The weather discouraged people from attending the event.",
+      "extra": []
+    },
+    {
+      "sourceRow": 206,
+      "part": "Part 5",
+      "headword": "disgrace",
+      "preposition": "to",
+      "meaning": "কলঙ্ক",
+      "sentence": "That sort of behaviour is a disgrace to the legal profession.",
+      "extra": []
+    },
+    {
+      "sourceRow": 207,
+      "part": "Part 5",
+      "headword": "disgusted",
+      "preposition": "at/by sth",
+      "meaning": "বিরক্ত",
+      "sentence": "I was disgusted at/by the sight.",
+      "extra": []
+    },
+    {
+      "sourceRow": 208,
+      "part": "Part 5",
+      "headword": "disgusted",
+      "preposition": "with sb",
+      "meaning": "বিরক্ত",
+      "sentence": "I was disgusted with myself for eating so much.",
+      "extra": []
+    },
+    {
+      "sourceRow": 209,
+      "part": "Part 5",
+      "headword": "dislike",
+      "preposition": "of/for",
+      "meaning": "অপছন্দ",
+      "sentence": "He did not try to hide his dislike of/for his boss.",
+      "extra": []
+    },
+    {
+      "sourceRow": 210,
+      "part": "Part 6",
+      "headword": "dispense",
+      "preposition": "with",
+      "meaning": "মুক্তি পাওয়া/দেওয়া",
+      "sentence": "The master dispensed with the services of his servant.",
+      "extra": []
+    },
+    {
+      "sourceRow": 211,
+      "part": "Part 6",
+      "headword": "displeased",
+      "preposition": "with sb/sth",
+      "meaning": "অসন্তুষ্ট",
+      "sentence": "Are you displeased with me?",
+      "extra": []
+    },
+    {
+      "sourceRow": 212,
+      "part": "Part 6",
+      "headword": "displeased",
+      "preposition": "at/with sth",
+      "meaning": "অসন্তুষ্ট",
+      "sentence": "Are you displeased at/with my work?",
+      "extra": []
+    },
+    {
+      "sourceRow": 213,
+      "part": "Part 6",
+      "headword": "dispose",
+      "preposition": "of",
+      "meaning": "খালাস করা",
+      "sentence": "We should look for ways to dispose of neuclear waste.",
+      "extra": []
+    },
+    {
+      "sourceRow": 214,
+      "part": "Part 6",
+      "headword": "distaste",
+      "preposition": "for",
+      "meaning": "অপছন্দ",
+      "sentence": "The general people have a distaste for politics of any sort",
+      "extra": []
+    },
+    {
+      "sourceRow": 215,
+      "part": "Part 6",
+      "headword": "distinguish",
+      "preposition": "A from B",
+      "meaning": "প্রভেদ করা",
+      "sentence": "It was hard to distinguish one twin from the other.",
+      "extra": []
+    },
+    {
+      "sourceRow": 216,
+      "part": "Part 6",
+      "headword": "distinguish",
+      "preposition": "between A and B",
+      "meaning": "প্রভেদ করা (দয়ের মধ্যে)",
+      "sentence": "It is often difficult to distinguish between right and wrong.",
+      "extra": []
+    },
+    {
+      "sourceRow": 217,
+      "part": "Part 6",
+      "headword": "distrust",
+      "preposition": "of",
+      "meaning": "অবিশ্বাস",
+      "sentence": "He has a deep distrust of all modern technology.",
+      "extra": []
+    },
+    {
+      "sourceRow": 218,
+      "part": "Part 6",
+      "headword": "divert",
+      "preposition": "from",
+      "meaning": "সরিয়ে নেওয়া",
+      "sentence": "The war diverted people's attention from economic situation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 219,
+      "part": "Part 6",
+      "headword": "divide",
+      "preposition": "into",
+      "meaning": "ভাগ করা",
+      "sentence": "The questions divide into two categories: easy and hard.",
+      "extra": []
+    },
+    {
+      "sourceRow": 220,
+      "part": "Part 6",
+      "headword": "divide",
+      "preposition": "between A and B",
+      "meaning": "ভাগ করা (দয়ের মধ্যে)",
+      "sentence": "He divides his energy between politics and business.",
+      "extra": []
+    },
+    {
+      "sourceRow": 221,
+      "part": "Part 6",
+      "headword": "divide",
+      "preposition": "among",
+      "meaning": "ভাগ করা (দয়ের অধিকের মধ্যে)",
+      "sentence": "Divide the mangoes among the boys.",
+      "extra": []
+    },
+    {
+      "sourceRow": 222,
+      "part": "Part 6",
+      "headword": "dream",
+      "preposition": "of/about",
+      "meaning": "স্বপ্ন দেখা",
+      "sentence": "I dreamt of/about you last night.",
+      "extra": []
+    },
+    {
+      "sourceRow": 223,
+      "part": "Part 6",
+      "headword": "drop",
+      "preposition": "off",
+      "meaning": "ঝরে পড়া",
+      "sentence": "When a girl gets married, she usually drops off school.",
+      "extra": []
+    },
+    {
+      "sourceRow": 224,
+      "part": "Part 6",
+      "headword": "due",
+      "preposition": "to",
+      "meaning": "প্রদেয়",
+      "sentence": "Our thanks are due to the whole team.",
+      "extra": []
+    },
+    {
+      "sourceRow": 225,
+      "part": "Part 6",
+      "headword": "due",
+      "preposition": "to",
+      "meaning": "কারণে",
+      "sentence": "His absense is due to illness.",
+      "extra": []
+    },
+    {
+      "sourceRow": 226,
+      "part": "Part 6",
+      "headword": "dwell",
+      "preposition": "on/upon",
+      "meaning": "কোনো কিছু নিয়ে চিন্তা করা",
+      "sentence": "There's no need to dwell on your past mistakes.",
+      "extra": []
+    },
+    {
+      "sourceRow": 227,
+      "part": "Part 6",
+      "headword": "eager",
+      "preposition": "for sth",
+      "meaning": "আগ্রহী",
+      "sentence": "She is eager for her parents' approval.",
+      "extra": []
+    },
+    {
+      "sourceRow": 228,
+      "part": "Part 6",
+      "headword": "eligible",
+      "preposition": "for",
+      "meaning": "যোগ্য",
+      "sentence": "Only those over 70 are eligible for the special payment.",
+      "extra": []
+    },
+    {
+      "sourceRow": 229,
+      "part": "Part 6",
+      "headword": "encroach",
+      "preposition": "on/upon sth",
+      "meaning": "অনধিকার প্রবেশ করা",
+      "sentence": "I won't encroach on your time any longer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 230,
+      "part": "Part 6",
+      "headword": "end",
+      "preposition": "in",
+      "meaning": "শেষ হওয়া",
+      "sentence": "Their long struggle ended in failure.",
+      "extra": []
+    },
+    {
+      "sourceRow": 231,
+      "part": "Part 6",
+      "headword": "endowed",
+      "preposition": "with",
+      "meaning": "সহজাতভাবে অধিকারী",
+      "sentence": "She was endowed with intelligence and wit.",
+      "extra": []
+    },
+    {
+      "sourceRow": 232,
+      "part": "Part 6",
+      "headword": "engaged",
+      "preposition": "to",
+      "meaning": "সম্পর্কে জড়িয়েছে এমন",
+      "sentence": "She is engaged to Sakib Khan.",
+      "extra": []
+    },
+    {
+      "sourceRow": 233,
+      "part": "Part 6",
+      "headword": "engaged",
+      "preposition": "in sth",
+      "meaning": "কোনো কিছুতে নিযুক্ত",
+      "sentence": "They were engaged in conversation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 234,
+      "part": "Part 6",
+      "headword": "engaged",
+      "preposition": "with sb/sth",
+      "meaning": "কারো সাথে বা কোনো কিছুতে নিযুক্ত",
+      "sentence": "We need to be more engaged with history.",
+      "extra": []
+    },
+    {
+      "sourceRow": 235,
+      "part": "Part 6",
+      "headword": "enquire",
+      "preposition": "into",
+      "meaning": "তদন্ত করা",
+      "sentence": "A committee was appointed to enquire into the allegations.",
+      "extra": []
+    },
+    {
+      "sourceRow": 236,
+      "part": "Part 6",
+      "headword": "enquire",
+      "preposition": "about sb/sth of sb",
+      "meaning": "জানতে চাওয়া",
+      "sentence": "I called the station to enquire about train times. 'What were you doing?' She enquired of Rahman.",
+      "extra": []
+    },
+    {
+      "sourceRow": 237,
+      "part": "Part 6",
+      "headword": "enter",
+      "preposition": "into sth",
+      "meaning": "কিছু শুরু করা",
+      "sentence": "They entered into an agreement.",
+      "extra": []
+    },
+    {
+      "sourceRow": 238,
+      "part": "Part 6",
+      "headword": "entitled",
+      "preposition": "to",
+      "meaning": "অধিকারী",
+      "sentence": "You are not entitled to this property.",
+      "extra": []
+    },
+    {
+      "sourceRow": 239,
+      "part": "Part 6",
+      "headword": "entrust",
+      "preposition": "sb with sth sth to sb",
+      "meaning": "বিশ্বাস করে দেওয়া",
+      "sentence": "He entrusted his nephew with the task. He entrusted the task to his nephew.",
+      "extra": []
+    },
+    {
+      "sourceRow": 240,
+      "part": "Part 6",
+      "headword": "envious",
+      "preposition": "of",
+      "meaning": "ঈর্ষান্বিত",
+      "sentence": "They were envious of his success.",
+      "extra": []
+    },
+    {
+      "sourceRow": 241,
+      "part": "Part 6",
+      "headword": "envy",
+      "preposition": "of sb",
+      "meaning": "ঈর্ষা",
+      "sentence": "He could not hide his envy of me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 242,
+      "part": "Part 6",
+      "headword": "equal",
+      "preposition": "to",
+      "meaning": "সমতুল্য",
+      "sentence": "One unit of alcohol is equal to half a pint of beer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 243,
+      "part": "Part 6",
+      "headword": "escape",
+      "preposition": "from",
+      "meaning": "পলায়ন করা",
+      "sentence": "She managed to escape from the burning car.",
+      "extra": []
+    },
+    {
+      "sourceRow": 244,
+      "part": "Part 6",
+      "headword": "essential",
+      "preposition": "to/for sth",
+      "meaning": "অত্যাবশ্যক",
+      "sentence": "Experience is essential to/for this job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 245,
+      "part": "Part 7",
+      "headword": "excel",
+      "preposition": "in/at sth",
+      "meaning": "তুলনামূলকভাবে উত্তম হওয়া",
+      "sentence": "As a child, he excelled in/at music and art.",
+      "extra": []
+    },
+    {
+      "sourceRow": 246,
+      "part": "Part 7",
+      "headword": "except",
+      "preposition": "for",
+      "meaning": "ছাড়া",
+      "sentence": "We work every day except for Sunday.",
+      "extra": []
+    },
+    {
+      "sourceRow": 247,
+      "part": "Part 7",
+      "headword": "exception",
+      "preposition": "to",
+      "meaning": "ব্যতিক্রম",
+      "sentence": "This is an exception to the rule.",
+      "extra": []
+    },
+    {
+      "sourceRow": 248,
+      "part": "Part 7",
+      "headword": "exess",
+      "preposition": "of",
+      "meaning": "অতিরিক্ত",
+      "sentence": "Excess of anything is bad.",
+      "extra": []
+    },
+    {
+      "sourceRow": 249,
+      "part": "Part 7",
+      "headword": "exchange",
+      "preposition": "sth with sb sth for sth",
+      "meaning": "বিনিময় করা",
+      "sentence": "I exchanged a few words with the manager. You can exchange your currency for dollars in the hotel.",
+      "extra": []
+    },
+    {
+      "sourceRow": 250,
+      "part": "Part 7",
+      "headword": "excuse",
+      "preposition": "for",
+      "meaning": "অজুহাত",
+      "sentence": "It's just an excuse for a party.",
+      "extra": []
+    },
+    {
+      "sourceRow": 251,
+      "part": "Part 7",
+      "headword": "excuse",
+      "preposition": "from",
+      "meaning": "অব্যাহতি দেওয়া",
+      "sentence": "I asked the teacher if I could be excused from hockey practice as my knee still hurt.",
+      "extra": []
+    },
+    {
+      "sourceRow": 252,
+      "part": "Part 7",
+      "headword": "exempt",
+      "preposition": "from",
+      "meaning": "অব্যাহতি দেওয়া",
+      "sentence": "Charities were exempted from paying the tax.",
+      "extra": []
+    },
+    {
+      "sourceRow": 253,
+      "part": "Part 7",
+      "headword": "exile",
+      "preposition": "from",
+      "meaning": "নির্বাসিত করা",
+      "sentence": "The leader was exiled from the village for his misdeed.",
+      "extra": []
+    },
+    {
+      "sourceRow": 254,
+      "part": "Part 7",
+      "headword": "exposed",
+      "preposition": "to",
+      "meaning": "সম্মুখীন হওয়া",
+      "sentence": "She hasn't yet been exposed to measles.",
+      "extra": []
+    },
+    {
+      "sourceRow": 255,
+      "part": "Part 7",
+      "headword": "exult",
+      "preposition": "over/at/in",
+      "meaning": "আনন্দ করা",
+      "sentence": "They exulted over/at/in their victory.",
+      "extra": []
+    },
+    {
+      "sourceRow": 256,
+      "part": "Part 7",
+      "headword": "fail",
+      "preposition": "in",
+      "meaning": "ব্যর্থ হওয়া",
+      "sentence": "I failed in my attempt to persuade her.",
+      "extra": []
+    },
+    {
+      "sourceRow": 257,
+      "part": "Part 7",
+      "headword": "faith",
+      "preposition": "in",
+      "meaning": "বিশ্বাস",
+      "sentence": "I have great faith in you— I know you'll do well.",
+      "extra": []
+    },
+    {
+      "sourceRow": 258,
+      "part": "Part 7",
+      "headword": "faithful",
+      "preposition": "to",
+      "meaning": "বিশ্বস্ত",
+      "sentence": "He is faithful to me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 259,
+      "part": "Part 7",
+      "headword": "familiar",
+      "preposition": "to sb",
+      "meaning": "পরিচিত",
+      "sentence": "The smell is very familiar to everyone who lives near a bakery.",
+      "extra": []
+    },
+    {
+      "sourceRow": 260,
+      "part": "Part 7",
+      "headword": "familiar",
+      "preposition": "with sth",
+      "meaning": "পরিচিত",
+      "sentence": "Are you familiar with the computer software they use?",
+      "extra": []
+    },
+    {
+      "sourceRow": 261,
+      "part": "Part 7",
+      "headword": "famous",
+      "preposition": "for",
+      "meaning": "বিখ্যাত",
+      "sentence": "He became internationally famous for his novels.",
+      "extra": []
+    },
+    {
+      "sourceRow": 262,
+      "part": "Part 7",
+      "headword": "fantasize",
+      "preposition": "about",
+      "meaning": "কল্পনা করা",
+      "sentence": "He sometimes fantasized about winning the gold medal.",
+      "extra": []
+    },
+    {
+      "sourceRow": 263,
+      "part": "Part 7",
+      "headword": "fatal",
+      "preposition": "to",
+      "meaning": "মারাত্মক",
+      "sentence": "The doctor's mistake proved fatal to his life.",
+      "extra": []
+    },
+    {
+      "sourceRow": 264,
+      "part": "Part 7",
+      "headword": "fatigued",
+      "preposition": "with",
+      "meaning": "পরিশ্রান্ত",
+      "sentence": "He was fatigued with the tedious work.",
+      "extra": []
+    },
+    {
+      "sourceRow": 265,
+      "part": "Part 7",
+      "headword": "favor",
+      "preposition": "in favor with",
+      "meaning": "সমর্থনপুষ্ট",
+      "sentence": "The government is in favor with the media. (এই সরকার মিডিয়ার সমর্থনপুষ্ট)",
+      "extra": []
+    },
+    {
+      "sourceRow": 266,
+      "part": "Part 7",
+      "headword": "favor",
+      "preposition": "in favor of",
+      "meaning": "সমর্থক",
+      "sentence": "The media is in favor of the government. (মিডিয়া এই সরকারের সমর্থক)",
+      "extra": []
+    },
+    {
+      "sourceRow": 267,
+      "part": "Part 7",
+      "headword": "favour",
+      "preposition": "with",
+      "meaning": "অনুগ্রহ করা",
+      "sentence": "Will you favour us with interview?",
+      "extra": []
+    },
+    {
+      "sourceRow": 268,
+      "part": "Part 7",
+      "headword": "favourable",
+      "preposition": "to",
+      "meaning": "অনুকূল",
+      "sentence": "The terms of the agreement are favourable to both sides.",
+      "extra": []
+    },
+    {
+      "sourceRow": 269,
+      "part": "Part 7",
+      "headword": "feel",
+      "preposition": "for",
+      "meaning": "সহানুভূতি অনুভব করা",
+      "sentence": "I feel for you in your trouble.",
+      "extra": []
+    },
+    {
+      "sourceRow": 270,
+      "part": "Part 7",
+      "headword": "fill",
+      "preposition": "in sth with",
+      "meaning": "সম্পূর্ণ করা",
+      "sentence": "Fill in the gaps with appropriate words.",
+      "extra": []
+    },
+    {
+      "sourceRow": 271,
+      "part": "Part 7",
+      "headword": "fit",
+      "preposition": "for",
+      "meaning": "যোগ্য",
+      "sentence": "He is not fit for the job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 272,
+      "part": "Part 7",
+      "headword": "focus",
+      "preposition": "on",
+      "meaning": "মনোযোগ দেওয়া",
+      "sentence": "The discussion focused on three main problems.",
+      "extra": []
+    },
+    {
+      "sourceRow": 273,
+      "part": "Part 7",
+      "headword": "fond",
+      "preposition": "of",
+      "meaning": "অনুরাগী",
+      "sentence": "Over the years, I have grown quite fond of her.",
+      "extra": []
+    },
+    {
+      "sourceRow": 274,
+      "part": "Part 7",
+      "headword": "fondness",
+      "preposition": "for",
+      "meaning": "আসক্তি",
+      "sentence": "She has great fondness for TikTok.",
+      "extra": []
+    },
+    {
+      "sourceRow": 275,
+      "part": "Part 7",
+      "headword": "free",
+      "preposition": "from",
+      "meaning": "মুক্ত",
+      "sentence": "He is now free from danger.",
+      "extra": []
+    },
+    {
+      "sourceRow": 276,
+      "part": "Part 7",
+      "headword": "frown",
+      "preposition": "upon/on",
+      "meaning": "সহ্য/বরদাস্ত না করা",
+      "sentence": "I would frown upon/on that sort of snobbish attitude.",
+      "extra": []
+    },
+    {
+      "sourceRow": 277,
+      "part": "Part 7",
+      "headword": "full",
+      "preposition": "of",
+      "meaning": "পরিপূর্ণ",
+      "sentence": "My suitcase was full of books.",
+      "extra": []
+    },
+    {
+      "sourceRow": 278,
+      "part": "Part 8",
+      "headword": "glance",
+      "preposition": "at",
+      "meaning": "দ্রুত পড়া",
+      "sentence": "I glanced at my emails.",
+      "extra": []
+    },
+    {
+      "sourceRow": 279,
+      "part": "Part 8",
+      "headword": "good",
+      "preposition": "at sth",
+      "meaning": "দক্ষ",
+      "sentence": "He is good at his job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 280,
+      "part": "Part 8",
+      "headword": "grateful",
+      "preposition": "to sb",
+      "meaning": "কৃতজ্ঞ",
+      "sentence": "I am extremely grateful to all the teachers for their help.",
+      "extra": []
+    },
+    {
+      "sourceRow": 281,
+      "part": "Part 8",
+      "headword": "grateful",
+      "preposition": "for sth",
+      "meaning": "কৃতজ্ঞ",
+      "sentence": "We would be grateful for any information you can give us.",
+      "extra": []
+    },
+    {
+      "sourceRow": 282,
+      "part": "Part 8",
+      "headword": "greed",
+      "preposition": "for",
+      "meaning": "লোভ",
+      "sentence": "Nothing would satisfy her greed for power.",
+      "extra": []
+    },
+    {
+      "sourceRow": 283,
+      "part": "Part 8",
+      "headword": "guess (verb)",
+      "preposition": "at",
+      "meaning": "অনুমান করা",
+      "sentence": "We can only guess at her reasons for leaving.",
+      "extra": []
+    },
+    {
+      "sourceRow": 284,
+      "part": "Part 8",
+      "headword": "guilty",
+      "preposition": "of",
+      "meaning": "অপরাধী",
+      "sentence": "The jury found the criminal not guilty of the offence.",
+      "extra": []
+    },
+    {
+      "sourceRow": 285,
+      "part": "Part 8",
+      "headword": "hand",
+      "preposition": "over to sb",
+      "meaning": "দায়িত্ব বা কর্তৃত্ব হস্তান্তর করা",
+      "sentence": "He will soon hand over to a new director.",
+      "extra": []
+    },
+    {
+      "sourceRow": 286,
+      "part": "Part 8",
+      "headword": "hanker",
+      "preposition": "after/for sth",
+      "meaning": "তীব্র আকাঙ্ক্ষা করা",
+      "sentence": "He hankered after/for money all his life.",
+      "extra": []
+    },
+    {
+      "sourceRow": 287,
+      "part": "Part 8",
+      "headword": "heir",
+      "preposition": "of (a person)",
+      "meaning": "উত্তরাধিকারী",
+      "sentence": "He is heir of Abdullah.",
+      "extra": []
+    },
+    {
+      "sourceRow": 288,
+      "part": "Part 8",
+      "headword": "heir",
+      "preposition": "to (a property)",
+      "meaning": "উত্তরাধিকারী",
+      "sentence": "He's heir to this property.",
+      "extra": []
+    },
+    {
+      "sourceRow": 289,
+      "part": "Part 8",
+      "headword": "hinder",
+      "preposition": "sb/sth from sth",
+      "meaning": "বাধা দেওয়া",
+      "sentence": "An injury was hindering him from playing his best.",
+      "extra": []
+    },
+    {
+      "sourceRow": 290,
+      "part": "Part 8",
+      "headword": "hit",
+      "preposition": "upon",
+      "meaning": "হঠাৎ ভালো কোনো চিন্তা উদয় হওয়া",
+      "sentence": "She hit upon the perfect title for her new novel.",
+      "extra": []
+    },
+    {
+      "sourceRow": 291,
+      "part": "Part 8",
+      "headword": "hope",
+      "preposition": "for sth",
+      "meaning": "আশা করা",
+      "sentence": "We are hoping for good weather on sunday.",
+      "extra": []
+    },
+    {
+      "sourceRow": 292,
+      "part": "Part 8",
+      "headword": "hopeful",
+      "preposition": "of sth",
+      "meaning": "আশাবাদী",
+      "sentence": "I am hopeful of winning.",
+      "extra": []
+    },
+    {
+      "sourceRow": 293,
+      "part": "Part 8",
+      "headword": "hostile",
+      "preposition": "to",
+      "meaning": "বিরোধী",
+      "sentence": "The nature is sometimes hostile to us.",
+      "extra": []
+    },
+    {
+      "sourceRow": 294,
+      "part": "Part 8",
+      "headword": "hunger",
+      "preposition": "for sth",
+      "meaning": "তীব্র আকাঙ্ক্ষা",
+      "sentence": "Nothing seemed to satisfy their hunger for truth.",
+      "extra": []
+    },
+    {
+      "sourceRow": 295,
+      "part": "Part 8",
+      "headword": "ignorant",
+      "preposition": "of/about",
+      "meaning": "অজ্ঞ",
+      "sentence": "He is ignorant of/about modern technology.",
+      "extra": []
+    },
+    {
+      "sourceRow": 296,
+      "part": "Part 8",
+      "headword": "ill",
+      "preposition": "with",
+      "meaning": "অসুস্থ",
+      "sentence": "He is ill with fever.",
+      "extra": []
+    },
+    {
+      "sourceRow": 297,
+      "part": "Part 8",
+      "headword": "impose",
+      "preposition": "on/upon",
+      "meaning": "আরোপ করা",
+      "sentence": "Tax is imposed on/upon the goods imported.",
+      "extra": []
+    },
+    {
+      "sourceRow": 298,
+      "part": "Part 8",
+      "headword": "inclusive",
+      "preposition": "of",
+      "meaning": "অন্তর্ভুক্ত/সহ",
+      "sentence": "The price was inclusive of VAT.",
+      "extra": []
+    },
+    {
+      "sourceRow": 299,
+      "part": "Part 8",
+      "headword": "incompatible",
+      "preposition": "with",
+      "meaning": "অসামঞ্জস্যপূর্ণ",
+      "sentence": "The hours of the job are incompatible with family life.",
+      "extra": []
+    },
+    {
+      "sourceRow": 300,
+      "part": "Part 8",
+      "headword": "indebted",
+      "preposition": "to sb for sth",
+      "meaning": "ঋণী, কৃতজ্ঞ",
+      "sentence": "I am deeply indebted to my family for all their help.",
+      "extra": []
+    },
+    {
+      "sourceRow": 301,
+      "part": "Part 8",
+      "headword": "indifferent",
+      "preposition": "to",
+      "meaning": "উদাসীন",
+      "sentence": "The government cannot be indifferent to public opinion.",
+      "extra": []
+    },
+    {
+      "sourceRow": 302,
+      "part": "Part 8",
+      "headword": "indispensable",
+      "preposition": "1. to sth/sb 2. for sth",
+      "meaning": "অত্যাবশ্যক",
+      "sentence": "1. She made herself indispensable to the department. 2. A good dictionary is indispensable for learning a foreign language.",
+      "extra": []
+    },
+    {
+      "sourceRow": 303,
+      "part": "Part 8",
+      "headword": "indulge",
+      "preposition": "in sth",
+      "meaning": "উপভোগ করা",
+      "sentence": "They went into town to indulge in some serious shopping.",
+      "extra": []
+    },
+    {
+      "sourceRow": 304,
+      "part": "Part 8",
+      "headword": "indulge",
+      "preposition": "sb with sth",
+      "meaning": "প্রশয় দেওয়া",
+      "sentence": "She didn't believe in indulging the children with presents.",
+      "extra": []
+    },
+    {
+      "sourceRow": 305,
+      "part": "Part 8",
+      "headword": "infected/infested",
+      "preposition": "with",
+      "meaning": "আক্রান্ত/উপদ্রুত",
+      "sentence": "The kitchen was infected/infested with ants.",
+      "extra": []
+    },
+    {
+      "sourceRow": 306,
+      "part": "Part 8",
+      "headword": "inferior",
+      "preposition": "to",
+      "meaning": "নিম্নতর",
+      "sentence": "Modern music is often considered inferior to that of the past.",
+      "extra": []
+    },
+    {
+      "sourceRow": 307,
+      "part": "Part 8",
+      "headword": "inform",
+      "preposition": "sb of/about sth",
+      "meaning": "জানানো",
+      "sentence": "He went to inform them of/about his decision.",
+      "extra": []
+    },
+    {
+      "sourceRow": 308,
+      "part": "Part 8",
+      "headword": "inimical",
+      "preposition": "to sth",
+      "meaning": "ক্ষতিকর",
+      "sentence": "This policy is inimical to the interest of our society.",
+      "extra": []
+    },
+    {
+      "sourceRow": 309,
+      "part": "Part 8",
+      "headword": "injurious",
+      "preposition": "to",
+      "meaning": "ক্ষতিকর",
+      "sentence": "Smoking is injurious to health.",
+      "extra": []
+    },
+    {
+      "sourceRow": 310,
+      "part": "Part 8",
+      "headword": "inquire",
+      "preposition": "about sb/sth",
+      "meaning": "তথ্য চাওয়া",
+      "sentence": "I called the school to inquire about the application process.",
+      "extra": []
+    },
+    {
+      "sourceRow": 311,
+      "part": "Part 8",
+      "headword": "inquire",
+      "preposition": "into sth",
+      "meaning": "কিছু সম্পর্কে তথ্য খুঁজে বের করা",
+      "sentence": "A committee was appointed to inquire into the allegations.",
+      "extra": []
+    },
+    {
+      "sourceRow": 312,
+      "part": "Part 8",
+      "headword": "insist",
+      "preposition": "on/upon",
+      "meaning": "জোর করা",
+      "sentence": "She insisted on/upon his wearing a suit.",
+      "extra": []
+    },
+    {
+      "sourceRow": 313,
+      "part": "Part 8",
+      "headword": "intent",
+      "preposition": "on",
+      "meaning": "অভিনিবিষ্ট, একাগ্রচিত্ত",
+      "sentence": "He is intent on visiting South Korea.",
+      "extra": []
+    },
+    {
+      "sourceRow": 314,
+      "part": "Part 8",
+      "headword": "interest",
+      "preposition": "in",
+      "meaning": "আগ্রহ",
+      "sentence": "Do your parents take an interest in your friends?",
+      "extra": []
+    },
+    {
+      "sourceRow": 315,
+      "part": "Part 8",
+      "headword": "interfere",
+      "preposition": "with sb/sth",
+      "meaning": "হস্তক্ষেপ করা",
+      "sentence": "He was found guilty of interfering with witnesses.",
+      "extra": []
+    },
+    {
+      "sourceRow": 316,
+      "part": "Part 8",
+      "headword": "interfere",
+      "preposition": "in sth",
+      "meaning": "হস্তক্ষেপ করা",
+      "sentence": "The police are very unwilling to interfere in family problems.",
+      "extra": []
+    },
+    {
+      "sourceRow": 317,
+      "part": "Part 8",
+      "headword": "invest",
+      "preposition": "in",
+      "meaning": "বিনিয়োগ করা",
+      "sentence": "The government has invested heavily in public transport.",
+      "extra": []
+    },
+    {
+      "sourceRow": 318,
+      "part": "Part 8",
+      "headword": "invest",
+      "preposition": "sb with sth",
+      "meaning": "কর্তৃত্ব প্রদান করা",
+      "sentence": "The parliament invested the new organization with judicial authority.",
+      "extra": []
+    },
+    {
+      "sourceRow": 319,
+      "part": "Part 8",
+      "headword": "invite",
+      "preposition": "sb to/for sth",
+      "meaning": "নিমন্ত্রণ করা",
+      "sentence": "Successful candidates will be invited to/for interview.",
+      "extra": []
+    },
+    {
+      "sourceRow": 320,
+      "part": "Part 8",
+      "headword": "involved",
+      "preposition": "in, with",
+      "meaning": "জড়িত",
+      "sentence": "They were involved in a road accident. Several people have been involved with the project.",
+      "extra": []
+    },
+    {
+      "sourceRow": 321,
+      "part": "Part 8",
+      "headword": "irritated",
+      "preposition": "at/by/with",
+      "meaning": "বিরক্ত",
+      "sentence": "She was irritated at his comments.",
+      "extra": []
+    },
+    {
+      "sourceRow": 322,
+      "part": "Part 9",
+      "headword": "jealous",
+      "preposition": "of",
+      "meaning": "ঈর্ষাপরায়ণ",
+      "sentence": "She is jealous of my success.",
+      "extra": []
+    },
+    {
+      "sourceRow": 323,
+      "part": "Part 9",
+      "headword": "jeer",
+      "preposition": "at sb",
+      "meaning": "বিদ্রূপ করা",
+      "sentence": "The crowd jeered at the police.",
+      "extra": []
+    },
+    {
+      "sourceRow": 324,
+      "part": "Part 9",
+      "headword": "jump",
+      "preposition": "at sth",
+      "meaning": "সুযোগ গ্রহণ করা",
+      "sentence": "He jumped at the opportunity.",
+      "extra": []
+    },
+    {
+      "sourceRow": 325,
+      "part": "Part 9",
+      "headword": "jump",
+      "preposition": "to",
+      "meaning": "তাড়াহুড়ো করে সিদ্ধান্তে আসা",
+      "sentence": "Do not jump to a conclusion without much thinking.",
+      "extra": []
+    },
+    {
+      "sourceRow": 326,
+      "part": "Part 9",
+      "headword": "junior",
+      "preposition": "to",
+      "meaning": "বয়সে ছোটো",
+      "sentence": "She is junior to me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 327,
+      "part": "Part 9",
+      "headword": "keen",
+      "preposition": "on",
+      "meaning": "আগ্রহী",
+      "sentence": "I wasn't too keen on going to the party.",
+      "extra": []
+    },
+    {
+      "sourceRow": 328,
+      "part": "Part 9",
+      "headword": "key",
+      "preposition": "to",
+      "meaning": "উপায়",
+      "sentence": "The key to success is preparation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 329,
+      "part": "Part 9",
+      "headword": "kind",
+      "preposition": "of",
+      "meaning": "প্রকার",
+      "sentence": "They sell all kinds of things.",
+      "extra": []
+    },
+    {
+      "sourceRow": 330,
+      "part": "Part 9",
+      "headword": "kind",
+      "preposition": "to",
+      "meaning": "সদয়",
+      "sentence": "My boss has been extremely kind to me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 331,
+      "part": "Part 9",
+      "headword": "lack",
+      "preposition": "of",
+      "meaning": "অভাব",
+      "sentence": "There was no lack of volunteers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 332,
+      "part": "Part 9",
+      "headword": "lacking",
+      "preposition": "in",
+      "meaning": "অভাব আছে এমন",
+      "sentence": "She's not usually lacking in confidence.",
+      "extra": []
+    },
+    {
+      "sourceRow": 333,
+      "part": "Part 9",
+      "headword": "lame",
+      "preposition": "of",
+      "meaning": "খোঁড়া",
+      "sentence": "He is lame of one leg.",
+      "extra": []
+    },
+    {
+      "sourceRow": 334,
+      "part": "Part 9",
+      "headword": "lament",
+      "preposition": "for",
+      "meaning": "বিলাপ করা",
+      "sentence": "She lamented for her child.",
+      "extra": []
+    },
+    {
+      "sourceRow": 335,
+      "part": "Part 9",
+      "headword": "laugh",
+      "preposition": "at",
+      "meaning": "বিদ্রূপ করা",
+      "sentence": "She laughs at my accent.",
+      "extra": []
+    },
+    {
+      "sourceRow": 336,
+      "part": "Part 9",
+      "headword": "lay",
+      "preposition": "by",
+      "meaning": "সঞ্চয় করা",
+      "sentence": "Lay by something for the old age.",
+      "extra": []
+    },
+    {
+      "sourceRow": 337,
+      "part": "Part 9",
+      "headword": "liable",
+      "preposition": "to sb/sth, for sth",
+      "meaning": "দায়ী",
+      "sentence": "You will be liable to the authority for any damage caused.",
+      "extra": []
+    },
+    {
+      "sourceRow": 338,
+      "part": "Part 9",
+      "headword": "liking",
+      "preposition": "for",
+      "meaning": "পছন্দ",
+      "sentence": "I have a great liking for fast cars.",
+      "extra": []
+    },
+    {
+      "sourceRow": 339,
+      "part": "Part 9",
+      "headword": "limit",
+      "preposition": "to",
+      "meaning": "সীমা",
+      "sentence": "There is a limit to the amount of pain we can bear.",
+      "extra": []
+    },
+    {
+      "sourceRow": 340,
+      "part": "Part 9",
+      "headword": "limited",
+      "preposition": "to",
+      "meaning": "সীমাবদ্ধ",
+      "sentence": "She kept the plans limited to a circle of a few trusted friends.",
+      "extra": []
+    },
+    {
+      "sourceRow": 341,
+      "part": "Part 9",
+      "headword": "listen",
+      "preposition": "to",
+      "meaning": "শোনা",
+      "sentence": "I listened carefully to her story.",
+      "extra": []
+    },
+    {
+      "sourceRow": 342,
+      "part": "Part 9",
+      "headword": "live",
+      "preposition": "by",
+      "meaning": "বাঁচা (কোনো পেশার মাধ্যমে)",
+      "sentence": "He lives by cultivation.",
+      "extra": []
+    },
+    {
+      "sourceRow": 343,
+      "part": "Part 9",
+      "headword": "live",
+      "preposition": "for",
+      "meaning": "বেঁচে থাকা",
+      "sentence": "Spiders can live for several days without food.",
+      "extra": []
+    },
+    {
+      "sourceRow": 344,
+      "part": "Part 9",
+      "headword": "live",
+      "preposition": "on",
+      "meaning": "খেয়ে বেঁচে থাকা",
+      "sentence": "The cow lives on grass.",
+      "extra": []
+    },
+    {
+      "sourceRow": 345,
+      "part": "Part 9",
+      "headword": "live",
+      "preposition": "within",
+      "meaning": "সীমার মধ্যে জীবনযাপন করা",
+      "sentence": "He lives within his means.",
+      "extra": []
+    },
+    {
+      "sourceRow": 346,
+      "part": "Part 9",
+      "headword": "live",
+      "preposition": "beyond",
+      "meaning": "সীমার বাইরে জীবনযাপন করা",
+      "sentence": "They cannot live beyond the society.",
+      "extra": []
+    },
+    {
+      "sourceRow": 347,
+      "part": "Part 9",
+      "headword": "long",
+      "preposition": "for",
+      "meaning": "কামনা করা",
+      "sentence": "He longed for a new car.",
+      "extra": []
+    },
+    {
+      "sourceRow": 348,
+      "part": "Part 9",
+      "headword": "loyal",
+      "preposition": "to",
+      "meaning": "বিশ্বস্ত",
+      "sentence": "She has always remained loyal to her political principles.",
+      "extra": []
+    },
+    {
+      "sourceRow": 349,
+      "part": "Part 9",
+      "headword": "mad",
+      "preposition": "at/with sb",
+      "meaning": "রাগান্বিত",
+      "sentence": "She is mad at/with me for being late.",
+      "extra": []
+    },
+    {
+      "sourceRow": 350,
+      "part": "Part 9",
+      "headword": "made",
+      "preposition": "of",
+      "meaning": "তৈরি",
+      "sentence": "This ring is made of gold.",
+      "extra": []
+    },
+    {
+      "sourceRow": 351,
+      "part": "Part 9",
+      "headword": "marry",
+      "preposition": "off",
+      "meaning": "পারিবারিকভাবে বিয়ে দেওয়া",
+      "sentence": "He had tried to marry off his grandsons to three royal princesses.",
+      "extra": []
+    },
+    {
+      "sourceRow": 352,
+      "part": "Part 9",
+      "headword": "marry",
+      "preposition": "to",
+      "meaning": "বিবাহ দেওয়া/করা",
+      "sentence": "She was married (off) to a rich man.",
+      "extra": []
+    },
+    {
+      "sourceRow": 353,
+      "part": "Part 9",
+      "headword": "martyr",
+      "preposition": "to",
+      "meaning": "শহিদ",
+      "sentence": "Her father was a martyr to the cause of freedom.",
+      "extra": []
+    },
+    {
+      "sourceRow": 354,
+      "part": "Part 9",
+      "headword": "marveled",
+      "preposition": "at",
+      "meaning": "আশ্চর্য হওয়া",
+      "sentence": "She marveled at the beauty of nature.",
+      "extra": []
+    },
+    {
+      "sourceRow": 355,
+      "part": "Part 9",
+      "headword": "mindful",
+      "preposition": "of",
+      "meaning": "মনোযোগী",
+      "sentence": "Being mindful of the danger, I decided not to go out.",
+      "extra": []
+    },
+    {
+      "sourceRow": 356,
+      "part": "Part 9",
+      "headword": "motive",
+      "preposition": "for sth",
+      "meaning": "উদ্দেশ্য",
+      "sentence": "His motive for the murder is not known.",
+      "extra": []
+    },
+    {
+      "sourceRow": 357,
+      "part": "Part 9",
+      "headword": "mourn",
+      "preposition": "for",
+      "meaning": "শোক করা",
+      "sentence": "Today we mourn for all those who died in two world wars.",
+      "extra": []
+    },
+    {
+      "sourceRow": 358,
+      "part": "Part 10",
+      "headword": "name",
+      "preposition": "sb/sth after/for sb/sth",
+      "meaning": "কারো নামানুসারে নামকরণ করা",
+      "sentence": "He is named after/for his father.",
+      "extra": []
+    },
+    {
+      "sourceRow": 359,
+      "part": "Part 10",
+      "headword": "necessity",
+      "preposition": "for sth",
+      "meaning": "আবশ্যকতা",
+      "sentence": "We recognize the necessity for a written agreement.",
+      "extra": []
+    },
+    {
+      "sourceRow": 360,
+      "part": "Part 10",
+      "headword": "need",
+      "preposition": "in need of",
+      "meaning": "কোনো কিছুর দরকার হওয়া",
+      "sentence": "The house is in need of a thorough clean.",
+      "extra": []
+    },
+    {
+      "sourceRow": 361,
+      "part": "Part 10",
+      "headword": "need",
+      "preposition": "for",
+      "meaning": "প্রয়োজনীয়",
+      "sentence": "There is an urgent need for qualified teachers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 362,
+      "part": "Part 10",
+      "headword": "negligent",
+      "preposition": "in",
+      "meaning": "অমনোযোগী",
+      "sentence": "He was negligent in his job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 363,
+      "part": "Part 10",
+      "headword": "object",
+      "preposition": "to",
+      "meaning": "আপত্তি করা",
+      "sentence": "Many local people object to the building of the new airport.",
+      "extra": []
+    },
+    {
+      "sourceRow": 364,
+      "part": "Part 10",
+      "headword": "oblige",
+      "preposition": "sb with sth",
+      "meaning": "বাধিত করা",
+      "sentence": "Would you oblige me with some information?",
+      "extra": []
+    },
+    {
+      "sourceRow": 365,
+      "part": "Part 10",
+      "headword": "obliged",
+      "preposition": "to sb for sth",
+      "meaning": "বাধিত",
+      "sentence": "I am much obliged to you for helping me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 366,
+      "part": "Part 10",
+      "headword": "oblivious",
+      "preposition": "of/to",
+      "meaning": "বিস্মৃত/অচেতন",
+      "sentence": "She was oblivious of/to her surroundings.",
+      "extra": []
+    },
+    {
+      "sourceRow": 367,
+      "part": "Part 10",
+      "headword": "obstacle",
+      "preposition": "to",
+      "meaning": "বাধা",
+      "sentence": "A lack of qualifications can be a major obstacle to finding a job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 368,
+      "part": "Part 10",
+      "headword": "occupied",
+      "preposition": "in/with",
+      "meaning": "নিয়োজিত",
+      "sentence": "Only half her time is occupied in/with politics.",
+      "extra": []
+    },
+    {
+      "sourceRow": 369,
+      "part": "Part 10",
+      "headword": "occur",
+      "preposition": "to sb",
+      "meaning": "মনে হওয়া",
+      "sentence": "The idea suddenly occurred to him in a dream.",
+      "extra": []
+    },
+    {
+      "sourceRow": 370,
+      "part": "Part 10",
+      "headword": "occur",
+      "preposition": "in",
+      "meaning": "ঘটা",
+      "sentence": "Many suicides occur in prisons.",
+      "extra": []
+    },
+    {
+      "sourceRow": 371,
+      "part": "Part 10",
+      "headword": "offend",
+      "preposition": "against",
+      "meaning": "বিপক্ষে যাওয়া",
+      "sentence": "The comment offends against people's religious beliefs.",
+      "extra": []
+    },
+    {
+      "sourceRow": 372,
+      "part": "Part 10",
+      "headword": "offensive",
+      "preposition": "to sb",
+      "meaning": "বিরক্তিকর",
+      "sentence": "His comments were deeply offensive to a lot of single mothers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 373,
+      "part": "Part 10",
+      "headword": "open",
+      "preposition": "to",
+      "meaning": "উন্মুক্ত",
+      "sentence": "The house is not open to the public.",
+      "extra": []
+    },
+    {
+      "sourceRow": 374,
+      "part": "Part 10",
+      "headword": "opportunity",
+      "preposition": "for sth",
+      "meaning": "সুযোগ",
+      "sentence": "There was no opportunity for further discussion.",
+      "extra": []
+    },
+    {
+      "sourceRow": 375,
+      "part": "Part 10",
+      "headword": "opportunity",
+      "preposition": "of doing sth",
+      "meaning": "সুযোগ",
+      "sentence": "Give him the opportunity of explaining what happened.",
+      "extra": []
+    },
+    {
+      "sourceRow": 376,
+      "part": "Part 10",
+      "headword": "opposed",
+      "preposition": "to sth",
+      "meaning": "বিরোধী",
+      "sentence": "She remained bitterly opposed to the idea of moving abroad.",
+      "extra": []
+    },
+    {
+      "sourceRow": 377,
+      "part": "Part 10",
+      "headword": "opposite",
+      "preposition": "to",
+      "meaning": "বিপরীত",
+      "sentence": "The house is opposite to ours.",
+      "extra": []
+    },
+    {
+      "sourceRow": 378,
+      "part": "Part 10",
+      "headword": "opt",
+      "preposition": "for",
+      "meaning": "বেছে নেওয়া",
+      "sentence": "After graduating, she opted for a career in music.",
+      "extra": []
+    },
+    {
+      "sourceRow": 379,
+      "part": "Part 10",
+      "headword": "owe",
+      "preposition": "to",
+      "meaning": "ঋণী হওয়া",
+      "sentence": "She still owes £3,000 to her father.",
+      "extra": []
+    },
+    {
+      "sourceRow": 380,
+      "part": "Part 10",
+      "headword": "panacea",
+      "preposition": "for",
+      "meaning": "সর্বরোগ নিবারণকারী",
+      "sentence": "There is no panacea for the problem of unemployment.",
+      "extra": []
+    },
+    {
+      "sourceRow": 381,
+      "part": "Part 10",
+      "headword": "parallel",
+      "preposition": "to/with",
+      "meaning": "সমান্তরাল",
+      "sentence": "The road and the canal are parallel to/with each other.",
+      "extra": []
+    },
+    {
+      "sourceRow": 382,
+      "part": "Part 10",
+      "headword": "part",
+      "preposition": "from sb",
+      "meaning": "বিচ্ছিন্ন হওয়া",
+      "sentence": "I can not part from my friends.",
+      "extra": []
+    },
+    {
+      "sourceRow": 383,
+      "part": "Part 10",
+      "headword": "part",
+      "preposition": "with sth",
+      "meaning": "বিচ্ছিন্ন হওয়া",
+      "sentence": "She was very reluctant to part with her treasures.",
+      "extra": []
+    },
+    {
+      "sourceRow": 384,
+      "part": "Part 10",
+      "headword": "partial",
+      "preposition": "to",
+      "meaning": "পক্ষপাতদুষ্ট",
+      "sentence": "I'm not partial to anyone.",
+      "extra": []
+    },
+    {
+      "sourceRow": 385,
+      "part": "Part 10",
+      "headword": "partiality",
+      "preposition": "for",
+      "meaning": "পক্ষপাতিত্ব",
+      "sentence": "She has a partiality for Rahim.",
+      "extra": []
+    },
+    {
+      "sourceRow": 386,
+      "part": "Part 10",
+      "headword": "participate",
+      "preposition": "in",
+      "meaning": "অংশগ্রহণ করা",
+      "sentence": "She didn't participate in the discussion.",
+      "extra": []
+    },
+    {
+      "sourceRow": 387,
+      "part": "Part 10",
+      "headword": "pass",
+      "preposition": "by",
+      "meaning": "পাশ কেটে যাওয়া",
+      "sentence": "He passed by but did not notice me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 388,
+      "part": "Part 10",
+      "headword": "passion",
+      "preposition": "for",
+      "meaning": "প্রবল অনুরাগ",
+      "sentence": "His passion for Football made him blind to everything else.",
+      "extra": []
+    },
+    {
+      "sourceRow": 389,
+      "part": "Part 10",
+      "headword": "persist",
+      "preposition": "in",
+      "meaning": "লেগে থাকা",
+      "sentence": "She persisted in her search for the truth.",
+      "extra": []
+    },
+    {
+      "sourceRow": 390,
+      "part": "Part 10",
+      "headword": "pity",
+      "preposition": "for sb/sth",
+      "meaning": "করুণা",
+      "sentence": "I could only feel pity for what they were enduring.",
+      "extra": []
+    },
+    {
+      "sourceRow": 391,
+      "part": "Part 10",
+      "headword": "play",
+      "preposition": "on",
+      "meaning": "বাজানো",
+      "sentence": "He plays on Tabla.",
+      "extra": []
+    },
+    {
+      "sourceRow": 392,
+      "part": "Part 10",
+      "headword": "plead",
+      "preposition": "with sb for sth",
+      "meaning": "আবেদন করা",
+      "sentence": "She pleaded with him not to go. They pleaded for mercy.",
+      "extra": []
+    },
+    {
+      "sourceRow": 393,
+      "part": "Part 10",
+      "headword": "pleased",
+      "preposition": "with",
+      "meaning": "সন্তুষ্ট",
+      "sentence": "She was very pleased with her exam results.",
+      "extra": []
+    },
+    {
+      "sourceRow": 394,
+      "part": "Part 11",
+      "headword": "point",
+      "preposition": "out sth to sb",
+      "meaning": "ব্যাখ্যা করা",
+      "sentence": "He pointed out the dangers of driving alone to the audience.",
+      "extra": []
+    },
+    {
+      "sourceRow": 395,
+      "part": "Part 11",
+      "headword": "polite",
+      "preposition": "to",
+      "meaning": "নম্র",
+      "sentence": "Please be polite to our guests.",
+      "extra": []
+    },
+    {
+      "sourceRow": 396,
+      "part": "Part 11",
+      "headword": "ponder",
+      "preposition": "about/on/over sth",
+      "meaning": "চিন্তা করা",
+      "sentence": "She pondered about/on/over his words.",
+      "extra": []
+    },
+    {
+      "sourceRow": 397,
+      "part": "Part 11",
+      "headword": "poor",
+      "preposition": "in sth",
+      "meaning": "খুব কম থাকা",
+      "sentence": "Don't be poor in spirit. Iceland is poor in natural resources.",
+      "extra": []
+    },
+    {
+      "sourceRow": 398,
+      "part": "Part 11",
+      "headword": "popular",
+      "preposition": "with sb",
+      "meaning": "জনপ্রিয়",
+      "sentence": "He is very popular with middle-class voters.",
+      "extra": []
+    },
+    {
+      "sourceRow": 399,
+      "part": "Part 11",
+      "headword": "prefer",
+      "preposition": "to",
+      "meaning": "অধিক পছন্দ করা",
+      "sentence": "I prefer tea to coffee.",
+      "extra": []
+    },
+    {
+      "sourceRow": 400,
+      "part": "Part 11",
+      "headword": "preferable",
+      "preposition": "to",
+      "meaning": "অধিক পছন্দনীয়",
+      "sentence": "He finds country life preferable to city life.",
+      "extra": []
+    },
+    {
+      "sourceRow": 401,
+      "part": "Part 11",
+      "headword": "present",
+      "preposition": "sb with sth",
+      "meaning": "উপহার দেওয়া",
+      "sentence": "I presented her with a book.",
+      "extra": []
+    },
+    {
+      "sourceRow": 402,
+      "part": "Part 11",
+      "headword": "preside",
+      "preposition": "over",
+      "meaning": "সভাপতিত্ব করা",
+      "sentence": "He asked if I would preside over the committee meeting.",
+      "extra": []
+    },
+    {
+      "sourceRow": 403,
+      "part": "Part 11",
+      "headword": "pretend",
+      "preposition": "to",
+      "meaning": "ভান করা",
+      "sentence": "He pretended to his family that everything was fine.",
+      "extra": []
+    },
+    {
+      "sourceRow": 404,
+      "part": "Part 11",
+      "headword": "prevent",
+      "preposition": "sb from sth",
+      "meaning": "বারণ করা",
+      "sentence": "Nothing would prevent him from speaking out against injustice.",
+      "extra": []
+    },
+    {
+      "sourceRow": 405,
+      "part": "Part 11",
+      "headword": "pride",
+      "preposition": "in",
+      "meaning": "গর্ব",
+      "sentence": "We take great pride in offering the best service in town.",
+      "extra": []
+    },
+    {
+      "sourceRow": 406,
+      "part": "Part 11",
+      "headword": "prior",
+      "preposition": "to",
+      "meaning": "পূর্বে",
+      "sentence": "All utensils (বাসনকোসন) should be washed prior to use.",
+      "extra": []
+    },
+    {
+      "sourceRow": 407,
+      "part": "Part 11",
+      "headword": "proficient",
+      "preposition": "in",
+      "meaning": "দক্ষ",
+      "sentence": "She's proficient in several languages.",
+      "extra": []
+    },
+    {
+      "sourceRow": 408,
+      "part": "Part 11",
+      "headword": "prohibit",
+      "preposition": "from",
+      "meaning": "বাঁধা দেওয়া",
+      "sentence": "Soviet citizens were prohibited from travelling abroad.",
+      "extra": []
+    },
+    {
+      "sourceRow": 409,
+      "part": "Part 11",
+      "headword": "prone",
+      "preposition": "to",
+      "meaning": "ঝুঁকগ্রস্ত",
+      "sentence": "Working without a break makes you more prone to error.",
+      "extra": []
+    },
+    {
+      "sourceRow": 410,
+      "part": "Part 11",
+      "headword": "proportionate",
+      "preposition": "to",
+      "meaning": "আনুপাতিক",
+      "sentence": "The number of accidents is proportionate to the volume of traffic.",
+      "extra": []
+    },
+    {
+      "sourceRow": 411,
+      "part": "Part 11",
+      "headword": "proud",
+      "preposition": "of",
+      "meaning": "গর্বিত",
+      "sentence": "Your achievements are something to be proud of.",
+      "extra": []
+    },
+    {
+      "sourceRow": 412,
+      "part": "Part 11",
+      "headword": "provide",
+      "preposition": "sth for sb",
+      "meaning": "সরবরাহ করা",
+      "sentence": "We are here to provide a service for the public.",
+      "extra": []
+    },
+    {
+      "sourceRow": 413,
+      "part": "Part 11",
+      "headword": "provide",
+      "preposition": "sb with sth",
+      "meaning": "সরবরাহ করা",
+      "sentence": "We are here to provide the public with a service.",
+      "extra": []
+    },
+    {
+      "sourceRow": 414,
+      "part": "Part 11",
+      "headword": "qualified",
+      "preposition": "for",
+      "meaning": "যোগ্য",
+      "sentence": "She's really qualified for the job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 415,
+      "part": "Part 11",
+      "headword": "quarrel",
+      "preposition": "with sb",
+      "meaning": "কলহ করা",
+      "sentence": "She quarrelled with her brother over their father's will.",
+      "extra": []
+    },
+    {
+      "sourceRow": 416,
+      "part": "Part 11",
+      "headword": "quarrel",
+      "preposition": "about/over sth",
+      "meaning": "কলহ করা",
+      "sentence": "Did you quarrel about/over this insignificant issue?",
+      "extra": []
+    },
+    {
+      "sourceRow": 417,
+      "part": "Part 11",
+      "headword": "quick",
+      "preposition": "at",
+      "meaning": "চটপটে",
+      "sentence": "She was quick at understanding what we wanted her to do.",
+      "extra": []
+    },
+    {
+      "sourceRow": 418,
+      "part": "Part 11",
+      "headword": "recommend",
+      "preposition": "sb/sth to sb",
+      "meaning": "সুপারিশ করা",
+      "sentence": "I recommend the book to all my students.",
+      "extra": []
+    },
+    {
+      "sourceRow": 419,
+      "part": "Part 11",
+      "headword": "reconcile",
+      "preposition": "to",
+      "meaning": "মেনে নেওয়া",
+      "sentence": "He could not reconcile himself to the prospect of losing her.",
+      "extra": []
+    },
+    {
+      "sourceRow": 420,
+      "part": "Part 11",
+      "headword": "refer",
+      "preposition": "to sb/sth (as sth)",
+      "meaning": "নির্দেশ করা",
+      "sentence": "She always referred to Ben as 'that nice man'.",
+      "extra": []
+    },
+    {
+      "sourceRow": 421,
+      "part": "Part 11",
+      "headword": "refrain",
+      "preposition": "from",
+      "meaning": "বিরত হওয়া",
+      "sentence": "They appealed to the protesters to refrain from violence.",
+      "extra": []
+    },
+    {
+      "sourceRow": 422,
+      "part": "Part 11",
+      "headword": "rejoice",
+      "preposition": "at/in/over sth",
+      "meaning": "আনন্দ করা",
+      "sentence": "Everyone rejoiced at/in/over the news of his safe return.",
+      "extra": []
+    },
+    {
+      "sourceRow": 423,
+      "part": "Part 11",
+      "headword": "related",
+      "preposition": "to",
+      "meaning": "সম্পর্কিত",
+      "sentence": "Much of the crime in this area is related to drug abuse.",
+      "extra": []
+    },
+    {
+      "sourceRow": 424,
+      "part": "Part 11",
+      "headword": "relevant",
+      "preposition": "to",
+      "meaning": "প্রাসঙ্গিক",
+      "sentence": "These comments are not directly relevant to this inquiry.",
+      "extra": []
+    },
+    {
+      "sourceRow": 425,
+      "part": "Part 11",
+      "headword": "rely",
+      "preposition": "on/upon",
+      "meaning": "নির্ভর করা",
+      "sentence": "As babies, we rely entirely on/upon others for food.",
+      "extra": []
+    },
+    {
+      "sourceRow": 426,
+      "part": "Part 11",
+      "headword": "remedy",
+      "preposition": "for",
+      "meaning": "প্রতিকার",
+      "sentence": "There is no simple remedy for unemployment.",
+      "extra": []
+    },
+    {
+      "sourceRow": 427,
+      "part": "Part 11",
+      "headword": "remind",
+      "preposition": "sb of",
+      "meaning": "মনে করিয়ে দেওয়া",
+      "sentence": "That smell reminds me of France.",
+      "extra": []
+    },
+    {
+      "sourceRow": 428,
+      "part": "Part 11",
+      "headword": "render",
+      "preposition": "into sth",
+      "meaning": "অনুবাদ করা",
+      "sentence": "It's a concept that is difficult to render into English.",
+      "extra": []
+    },
+    {
+      "sourceRow": 429,
+      "part": "Part 11",
+      "headword": "render",
+      "preposition": "to",
+      "meaning": "কোনো কিছু দেওয়া",
+      "sentence": "They rendered assistance to the disaster victims.",
+      "extra": []
+    },
+    {
+      "sourceRow": 430,
+      "part": "Part 11",
+      "headword": "renowned",
+      "preposition": "for sth",
+      "meaning": "বিখ্যাত",
+      "sentence": "She is renowned for her patience.",
+      "extra": []
+    },
+    {
+      "sourceRow": 431,
+      "part": "Part 11",
+      "headword": "repent",
+      "preposition": "of",
+      "meaning": "অনুতাপ করা",
+      "sentence": "She repented of what she had done.",
+      "extra": []
+    },
+    {
+      "sourceRow": 432,
+      "part": "Part 12",
+      "headword": "replace",
+      "preposition": "by/with",
+      "meaning": "প্রতিস্থাপন করা",
+      "sentence": "It is not good to miss meals and replace them with snacks.",
+      "extra": []
+    },
+    {
+      "sourceRow": 433,
+      "part": "Part 12",
+      "headword": "resign",
+      "preposition": "oneself to",
+      "meaning": "আত্মসমর্পণ করা",
+      "sentence": "She resigned herself to her fate.",
+      "extra": []
+    },
+    {
+      "sourceRow": 434,
+      "part": "Part 12",
+      "headword": "respect",
+      "preposition": "in respect of sth",
+      "meaning": "সম্বন্ধে",
+      "sentence": "A writ was served on the firm in respect of their unpaid bill.",
+      "extra": []
+    },
+    {
+      "sourceRow": 435,
+      "part": "Part 12",
+      "headword": "respond",
+      "preposition": "to sb/sth",
+      "meaning": "উত্তর দেওয়া",
+      "sentence": "She never responded to my letter.",
+      "extra": []
+    },
+    {
+      "sourceRow": 436,
+      "part": "Part 12",
+      "headword": "responsible",
+      "preposition": "for",
+      "meaning": "দায়ী/দায়িত্বে নিয়োজিত",
+      "sentence": "Mike is responsible for designing the entire project.",
+      "extra": []
+    },
+    {
+      "sourceRow": 437,
+      "part": "Part 12",
+      "headword": "responsible",
+      "preposition": "to (authority)",
+      "meaning": "দায়ী/দায়িত্বে নিয়োজিত",
+      "sentence": "The Prime Minister and cabinet are responsible to Parliament.",
+      "extra": []
+    },
+    {
+      "sourceRow": 438,
+      "part": "Part 12",
+      "headword": "rest",
+      "preposition": "on/upon sth",
+      "meaning": "নির্ভর করা",
+      "sentence": "The country's security rested on/upon its alliances.",
+      "extra": []
+    },
+    {
+      "sourceRow": 439,
+      "part": "Part 12",
+      "headword": "restore",
+      "preposition": "sb/sth to sth",
+      "meaning": "ফিরিয়ে আনা",
+      "sentence": "The effort to restore him to office isn't working.",
+      "extra": []
+    },
+    {
+      "sourceRow": 440,
+      "part": "Part 12",
+      "headword": "restrict",
+      "preposition": "to",
+      "meaning": "সীমাবদ্ধ করা",
+      "sentence": "Speed is restricted to 30 mph in towns.",
+      "extra": []
+    },
+    {
+      "sourceRow": 441,
+      "part": "Part 12",
+      "headword": "result",
+      "preposition": "from",
+      "meaning": "ফলাফল সৃষ্টি হওয়া",
+      "sentence": "Australia needs to get a result from this match.",
+      "extra": []
+    },
+    {
+      "sourceRow": 442,
+      "part": "Part 12",
+      "headword": "retire",
+      "preposition": "from",
+      "meaning": "অবসর নেওয়া",
+      "sentence": "She was forced to retire early from teaching because of ill health.",
+      "extra": []
+    },
+    {
+      "sourceRow": 443,
+      "part": "Part 12",
+      "headword": "rich",
+      "preposition": "in sth",
+      "meaning": "সমৃদ্ধ",
+      "sentence": "The area is rich in wildlife.",
+      "extra": []
+    },
+    {
+      "sourceRow": 444,
+      "part": "Part 12",
+      "headword": "rid",
+      "preposition": "get rid of sb/sth",
+      "meaning": "মুক্ত হওয়া",
+      "sentence": "We need to get rid of nuclear waste.",
+      "extra": []
+    },
+    {
+      "sourceRow": 445,
+      "part": "Part 12",
+      "headword": "rob",
+      "preposition": "sb/sth of sth",
+      "meaning": "অর্থ বা সম্পদ ছিনিয়ে নেওয়া",
+      "sentence": "The tourists were robbed of their bags.",
+      "extra": []
+    },
+    {
+      "sourceRow": 446,
+      "part": "Part 12",
+      "headword": "sacrifice",
+      "preposition": "for",
+      "meaning": "ত্যাগ করা",
+      "sentence": "Rafiq sacrificed his life for our mother language.",
+      "extra": []
+    },
+    {
+      "sourceRow": 447,
+      "part": "Part 12",
+      "headword": "satisfied",
+      "preposition": "with",
+      "meaning": "সন্তুষ্ট",
+      "sentence": "She's never satisfied with what she's got.",
+      "extra": []
+    },
+    {
+      "sourceRow": 448,
+      "part": "Part 12",
+      "headword": "search",
+      "preposition": "for sb/sth",
+      "meaning": "অনুসন্ধান",
+      "sentence": "The police launched a nationwide search for the killer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 449,
+      "part": "Part 12",
+      "headword": "search",
+      "preposition": "of (Location)",
+      "meaning": "অনুসন্ধান",
+      "sentence": "Detectives carried out a thorough search of the building.",
+      "extra": []
+    },
+    {
+      "sourceRow": 450,
+      "part": "Part 12",
+      "headword": "send",
+      "preposition": "for",
+      "meaning": "ডাকা/তলব করা",
+      "sentence": "The police sent for the informer.",
+      "extra": []
+    },
+    {
+      "sourceRow": 451,
+      "part": "Part 12",
+      "headword": "senior",
+      "preposition": "to",
+      "meaning": "বয়সে বড়, উচ্চপদস্থ",
+      "sentence": "He is senior to me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 452,
+      "part": "Part 12",
+      "headword": "sensible",
+      "preposition": "of",
+      "meaning": "বোধসম্পন্ন",
+      "sentence": "I am sensible of the fact that mathematics is not a popular subject.",
+      "extra": []
+    },
+    {
+      "sourceRow": 453,
+      "part": "Part 12",
+      "headword": "sensitive",
+      "preposition": "to",
+      "meaning": "সংবেদনশীল",
+      "sentence": "She is very sensitive to other people's feelings",
+      "extra": []
+    },
+    {
+      "sourceRow": 454,
+      "part": "Part 12",
+      "headword": "sentence",
+      "preposition": "to",
+      "meaning": "দণ্ডাদেশ দেওয়া",
+      "sentence": "The judge sentenced her to life imprisonment.",
+      "extra": []
+    },
+    {
+      "sourceRow": 455,
+      "part": "Part 12",
+      "headword": "sick",
+      "preposition": "of",
+      "meaning": "পীড়িত, ক্লান্ত",
+      "sentence": "I'm sick of your complaining.",
+      "extra": []
+    },
+    {
+      "sourceRow": 456,
+      "part": "Part 12",
+      "headword": "similar",
+      "preposition": "to",
+      "meaning": "সদৃশ",
+      "sentence": "My teaching style is similar to that of most other teachers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 457,
+      "part": "Part 12",
+      "headword": "sink",
+      "preposition": "into",
+      "meaning": "ডুবে যাওয়া",
+      "sentence": "The wheels sank into the mud.",
+      "extra": []
+    },
+    {
+      "sourceRow": 458,
+      "part": "Part 12",
+      "headword": "sit",
+      "preposition": "for",
+      "meaning": "পরীক্ষা দেওয়া",
+      "sentence": "He was about to sit for his SSC exam.",
+      "extra": []
+    },
+    {
+      "sourceRow": 459,
+      "part": "Part 12",
+      "headword": "skim",
+      "preposition": "through sth",
+      "meaning": "দ্রুত চোখ বুলিয়ে পড়া",
+      "sentence": "He skimmed through the article trying to find his name.",
+      "extra": []
+    },
+    {
+      "sourceRow": 460,
+      "part": "Part 12",
+      "headword": "slow",
+      "preposition": "of (speech)",
+      "meaning": "শ্লথ/ধীর",
+      "sentence": "He is slow of speech.",
+      "extra": []
+    },
+    {
+      "sourceRow": 461,
+      "part": "Part 12",
+      "headword": "slow",
+      "preposition": "in (doing sth)",
+      "meaning": "শ্লথ/ধীর",
+      "sentence": "He is slow in writing.",
+      "extra": []
+    },
+    {
+      "sourceRow": 462,
+      "part": "Part 12",
+      "headword": "smell",
+      "preposition": "of sth",
+      "meaning": "গন্ধ ছড়ানো",
+      "sentence": "The house smelt of fresh polish.",
+      "extra": []
+    },
+    {
+      "sourceRow": 463,
+      "part": "Part 12",
+      "headword": "smile",
+      "preposition": "on",
+      "meaning": "সহায় হওয়া",
+      "sentence": "At last, fortune smiled on him.",
+      "extra": []
+    },
+    {
+      "sourceRow": 464,
+      "part": "Part 13",
+      "headword": "solution",
+      "preposition": "to",
+      "meaning": "সমাধান",
+      "sentence": "There's no simple solution to this problem.",
+      "extra": []
+    },
+    {
+      "sourceRow": 465,
+      "part": "Part 13",
+      "headword": "sorry",
+      "preposition": "for",
+      "meaning": "দুঃখিত",
+      "sentence": "He says he's really sorry for taking the car without asking.",
+      "extra": []
+    },
+    {
+      "sourceRow": 466,
+      "part": "Part 13",
+      "headword": "stare",
+      "preposition": "at",
+      "meaning": "একদৃষ্টিতে তাকানো",
+      "sentence": "I stared at the paper in front of me.",
+      "extra": []
+    },
+    {
+      "sourceRow": 467,
+      "part": "Part 13",
+      "headword": "stick",
+      "preposition": "to",
+      "meaning": "লেগে থাকা",
+      "sentence": "She finds it impossible to stick to a diet.",
+      "extra": []
+    },
+    {
+      "sourceRow": 468,
+      "part": "Part 13",
+      "headword": "subject",
+      "preposition": "to",
+      "meaning": "শর্তাধীন",
+      "sentence": "Flights are subject to delay because of the fog.",
+      "extra": []
+    },
+    {
+      "sourceRow": 469,
+      "part": "Part 13",
+      "headword": "succeed",
+      "preposition": "in",
+      "meaning": "সাফল্য লাভ করা",
+      "sentence": "She will not succeed in business.",
+      "extra": []
+    },
+    {
+      "sourceRow": 470,
+      "part": "Part 13",
+      "headword": "suffer",
+      "preposition": "from",
+      "meaning": "কষ্ট পাওয়া",
+      "sentence": "He suffers from asthma.",
+      "extra": []
+    },
+    {
+      "sourceRow": 471,
+      "part": "Part 13",
+      "headword": "suitable",
+      "preposition": "for",
+      "meaning": "উপযুক্ত",
+      "sentence": "This programme is not suitable for children.",
+      "extra": []
+    },
+    {
+      "sourceRow": 472,
+      "part": "Part 13",
+      "headword": "superior",
+      "preposition": "to",
+      "meaning": "উৎকৃষ্টতর",
+      "sentence": "This model is technically superior to others.",
+      "extra": []
+    },
+    {
+      "sourceRow": 473,
+      "part": "Part 13",
+      "headword": "supply",
+      "preposition": "sth to sb/sth",
+      "meaning": "যোগান দেওয়া",
+      "sentence": "Foreign governments supplied arms to the rebels.",
+      "extra": []
+    },
+    {
+      "sourceRow": 474,
+      "part": "Part 13",
+      "headword": "supply",
+      "preposition": "sb/sth with sth",
+      "meaning": "যোগান দেওয়া",
+      "sentence": "Foreign governments supplied the rebels with arms.",
+      "extra": []
+    },
+    {
+      "sourceRow": 475,
+      "part": "Part 13",
+      "headword": "sure",
+      "preposition": "of",
+      "meaning": "নিশ্চিত",
+      "sentence": "I hope you are sure of your facts.",
+      "extra": []
+    },
+    {
+      "sourceRow": 476,
+      "part": "Part 13",
+      "headword": "surprised",
+      "preposition": "at, by",
+      "meaning": "বিস্মিত",
+      "sentence": "I was surprised at how quickly she agreed.",
+      "extra": []
+    },
+    {
+      "sourceRow": 477,
+      "part": "Part 13",
+      "headword": "surrounded",
+      "preposition": "by/with",
+      "meaning": "পরিবেষ্টিত",
+      "sentence": "The lake is surrounded by/with trees.",
+      "extra": []
+    },
+    {
+      "sourceRow": 478,
+      "part": "Part 13",
+      "headword": "susceptible",
+      "preposition": "to",
+      "meaning": "সহজে প্রভাবিত হয় এমন",
+      "sentence": "He is highly susceptible to flattery.",
+      "extra": []
+    },
+    {
+      "sourceRow": 479,
+      "part": "Part 13",
+      "headword": "suspect",
+      "preposition": "of",
+      "meaning": "সন্দেহ করা",
+      "sentence": "He resigned after being suspected of theft.",
+      "extra": []
+    },
+    {
+      "sourceRow": 480,
+      "part": "Part 13",
+      "headword": "sympathy",
+      "preposition": "for",
+      "meaning": "সহানুভূতি",
+      "sentence": "I have no sympathy for Asif; it is completely his fault.",
+      "extra": []
+    },
+    {
+      "sourceRow": 481,
+      "part": "Part 13",
+      "headword": "sympathize",
+      "preposition": "with, in",
+      "meaning": "সমবেদনা প্রকাশ করা",
+      "sentence": "I can really sympathize with what she's going through.",
+      "extra": []
+    },
+    {
+      "sourceRow": 482,
+      "part": "Part 13",
+      "headword": "take",
+      "preposition": "after",
+      "meaning": "সদৃশ হওয়া",
+      "sentence": "Your daughter doesn't take after you at all.",
+      "extra": []
+    },
+    {
+      "sourceRow": 483,
+      "part": "Part 13",
+      "headword": "take",
+      "preposition": "over",
+      "meaning": "কর্তৃত্ব গ্রহণ করা",
+      "sentence": "The army is threatening to take over if civil unrest continues.",
+      "extra": []
+    },
+    {
+      "sourceRow": 484,
+      "part": "Part 13",
+      "headword": "talk",
+      "preposition": "over",
+      "meaning": "আলোচনা করা",
+      "sentence": "They talked over the proposal and decided to give it their approval.",
+      "extra": []
+    },
+    {
+      "sourceRow": 485,
+      "part": "Part 13",
+      "headword": "talk",
+      "preposition": "to/with sb",
+      "meaning": "কারো সাথে কথা বলা",
+      "sentence": "We looked around the school and talked to/with the principal.",
+      "extra": []
+    },
+    {
+      "sourceRow": 486,
+      "part": "Part 13",
+      "headword": "talk",
+      "preposition": "of sth/doing sth",
+      "meaning": "কিছু নিয়ে বা কিছু করা নিয়ে কথা বলা",
+      "sentence": "Mary is talking of looking for another job.",
+      "extra": []
+    },
+    {
+      "sourceRow": 487,
+      "part": "Part 13",
+      "headword": "talk",
+      "preposition": "about sb/sth",
+      "meaning": "কাউকে নিয়ে বা কিছু নিয়ে কথা বলা",
+      "sentence": "When they get together, all they talk about is football.",
+      "extra": []
+    },
+    {
+      "sourceRow": 488,
+      "part": "Part 13",
+      "headword": "taste",
+      "preposition": "for, in",
+      "meaning": "ঝোঁক",
+      "sentence": "That trip gave me a taste for foreign travel.",
+      "extra": []
+    },
+    {
+      "sourceRow": 489,
+      "part": "Part 13",
+      "headword": "testify",
+      "preposition": "to sth/doing sth",
+      "meaning": "সাক্ষ্য দেওয়া",
+      "sentence": "Arman testified to receiving $200,000 in bribes.",
+      "extra": []
+    },
+    {
+      "sourceRow": 490,
+      "part": "Part 13",
+      "headword": "think",
+      "preposition": "of/about",
+      "meaning": "চিন্তা করা",
+      "sentence": "Don't you ever think of/about other people?",
+      "extra": []
+    },
+    {
+      "sourceRow": 491,
+      "part": "Part 13",
+      "headword": "tide",
+      "preposition": "sb over",
+      "meaning": "সাহায্য করা",
+      "sentence": "Can you lend me some money to tide me over?",
+      "extra": []
+    },
+    {
+      "sourceRow": 492,
+      "part": "Part 13",
+      "headword": "tired",
+      "preposition": "of",
+      "meaning": "ক্লান্ত",
+      "sentence": "I'm tired of all the arguments",
+      "extra": []
+    },
+    {
+      "sourceRow": 493,
+      "part": "Part 13",
+      "headword": "tolerant",
+      "preposition": "of",
+      "meaning": "সহিষ্ণু",
+      "sentence": "We must be tolerant of others.",
+      "extra": []
+    },
+    {
+      "sourceRow": 494,
+      "part": "Part 13",
+      "headword": "translate",
+      "preposition": "into",
+      "meaning": "অনুবাদ করা",
+      "sentence": "The book has been translated from Bangla into English.",
+      "extra": []
+    },
+    {
+      "sourceRow": 495,
+      "part": "Part 13",
+      "headword": "trouble",
+      "preposition": "for",
+      "meaning": "অসুবিধা/দুশ্চিন্তা",
+      "sentence": "He got into trouble for not doing his homework.",
+      "extra": []
+    },
+    {
+      "sourceRow": 496,
+      "part": "Part 13",
+      "headword": "true",
+      "preposition": "to",
+      "meaning": "বিশ্বস্ত",
+      "sentence": "Many were executed for remaining true to their principles.",
+      "extra": []
+    },
+    {
+      "sourceRow": 497,
+      "part": "Part 13",
+      "headword": "trust",
+      "preposition": "in",
+      "meaning": "আস্থা রাখা",
+      "sentence": "I trusted in the system.",
+      "extra": []
+    },
+    {
+      "sourceRow": 498,
+      "part": "Part 13",
+      "headword": "trust",
+      "preposition": "sth to sb",
+      "meaning": "কারো প্রতি আস্থা রাখা",
+      "sentence": "I'd trust my life to her.",
+      "extra": []
+    },
+    {
+      "sourceRow": 499,
+      "part": "Part 13",
+      "headword": "trust",
+      "preposition": "sb with sth/sb",
+      "meaning": "বিশ্বাস করে কাউকে কিছু দেওয়া",
+      "sentence": "I'd trust her with my life.",
+      "extra": []
+    },
+    {
+      "sourceRow": 500,
+      "part": "Part 14",
+      "headword": "unite",
+      "preposition": "with",
+      "meaning": "ঐক্যবদ্ধ হওয়া/করা",
+      "sentence": "He unites business skills with a charming personality.",
+      "extra": []
+    },
+    {
+      "sourceRow": 501,
+      "part": "Part 14",
+      "headword": "upset",
+      "preposition": "about",
+      "meaning": "বিষণ্ণ",
+      "sentence": "There's no point getting upset about it.",
+      "extra": []
+    },
+    {
+      "sourceRow": 502,
+      "part": "Part 14",
+      "headword": "useful",
+      "preposition": "to sb",
+      "meaning": "উপকারী",
+      "sentence": "He might be useful to us.",
+      "extra": []
+    },
+    {
+      "sourceRow": 503,
+      "part": "Part 14",
+      "headword": "vain",
+      "preposition": "of",
+      "meaning": "অহঙ্কারী",
+      "sentence": "He was vain of his success.",
+      "extra": []
+    },
+    {
+      "sourceRow": 504,
+      "part": "Part 14",
+      "headword": "vary",
+      "preposition": "from",
+      "meaning": "পৃথক হওয়া",
+      "sentence": "Pulse rates vary slightly from person to person.",
+      "extra": []
+    },
+    {
+      "sourceRow": 505,
+      "part": "Part 14",
+      "headword": "vexed",
+      "preposition": "with/at",
+      "meaning": "বিরক্ত",
+      "sentence": "Are you vexed with/at me?",
+      "extra": []
+    },
+    {
+      "sourceRow": 506,
+      "part": "Part 14",
+      "headword": "victim",
+      "preposition": "of",
+      "meaning": "বলি",
+      "sentence": "These children are victims of domestic violence.",
+      "extra": []
+    },
+    {
+      "sourceRow": 507,
+      "part": "Part 14",
+      "headword": "victim",
+      "preposition": "fall victim to sth",
+      "meaning": "শিকার হওয়া",
+      "sentence": "Many plants have fallen victim to the sudden frost.",
+      "extra": []
+    },
+    {
+      "sourceRow": 508,
+      "part": "Part 14",
+      "headword": "void",
+      "preposition": "of",
+      "meaning": "বিহীন",
+      "sentence": "The sky was void of stars.",
+      "extra": []
+    },
+    {
+      "sourceRow": 509,
+      "part": "Part 14",
+      "headword": "vote",
+      "preposition": "for, against",
+      "meaning": "ভোট দেওয়া",
+      "sentence": "Will you vote for me?",
+      "extra": []
+    },
+    {
+      "sourceRow": 510,
+      "part": "Part 14",
+      "headword": "vulnerable",
+      "preposition": "to",
+      "meaning": "সহজে প্রভাবিত/ক্ষতিগ্রস্ত হয়",
+      "sentence": "Old people are particularly vulnerable to the flu.",
+      "extra": []
+    },
+    {
+      "sourceRow": 511,
+      "part": "Part 14",
+      "headword": "wait",
+      "preposition": "for",
+      "meaning": "অপেক্ষা করা",
+      "sentence": "We're waiting for the rain to stop before we go out.",
+      "extra": []
+    },
+    {
+      "sourceRow": 512,
+      "part": "Part 14",
+      "headword": "wait",
+      "preposition": "on",
+      "meaning": "সেবা করা",
+      "sentence": "The store manager waits on the customers.",
+      "extra": []
+    },
+    {
+      "sourceRow": 513,
+      "part": "Part 14",
+      "headword": "want",
+      "preposition": "of",
+      "meaning": "অভাব",
+      "sentence": "There is a want of adequate medical facilities in different areas.",
+      "extra": []
+    },
+    {
+      "sourceRow": 514,
+      "part": "Part 14",
+      "headword": "wanting",
+      "preposition": "in",
+      "meaning": "বিহীন",
+      "sentence": "They weren't wanting in confidence.",
+      "extra": []
+    },
+    {
+      "sourceRow": 515,
+      "part": "Part 14",
+      "headword": "warn",
+      "preposition": "against/of",
+      "meaning": "সতর্ক করা",
+      "sentence": "I warned him against/of the danger.",
+      "extra": []
+    },
+    {
+      "sourceRow": 516,
+      "part": "Part 14",
+      "headword": "weak",
+      "preposition": "in",
+      "meaning": "কাঁচা",
+      "sentence": "I was always weak in Matematics.",
+      "extra": []
+    },
+    {
+      "sourceRow": 517,
+      "part": "Part 14",
+      "headword": "weary",
+      "preposition": "of",
+      "meaning": "ক্লান্ত",
+      "sentence": "I soon grew weary of listenting to his lecture.",
+      "extra": []
+    },
+    {
+      "sourceRow": 518,
+      "part": "Part 14",
+      "headword": "welcome",
+      "preposition": "to",
+      "meaning": "স্বাগতম জানানো",
+      "sentence": "It is a pleasure to welcome you to our home.",
+      "extra": []
+    },
+    {
+      "sourceRow": 519,
+      "part": "Part 14",
+      "headword": "wish",
+      "preposition": "for",
+      "meaning": "আকাঙ্ক্ষা করা",
+      "sentence": "What do you wish for?",
+      "extra": []
+    },
+    {
+      "sourceRow": 520,
+      "part": "Part 14",
+      "headword": "wonder",
+      "preposition": "at",
+      "meaning": "অবাক হওয়া",
+      "sentence": "She wondered at her own stupidity.",
+      "extra": []
+    },
+    {
+      "sourceRow": 521,
+      "part": "Part 14",
+      "headword": "worry",
+      "preposition": "about",
+      "meaning": "উদ্বিগ্ন হওয়া",
+      "sentence": "Don't worry about me. I'll be all right.",
+      "extra": []
+    },
+    {
+      "sourceRow": 522,
+      "part": "Part 14",
+      "headword": "worthy",
+      "preposition": "of",
+      "meaning": "যোগ্য",
+      "sentence": "He was not worthy of the fame that he had achieved",
+      "extra": []
+    },
+    {
+      "sourceRow": 523,
+      "part": "Part 14",
+      "headword": "yearn",
+      "preposition": "for",
+      "meaning": "আকাঙ্ক্ষা করা",
+      "sentence": "The people yearned for peace.",
+      "extra": []
+    },
+    {
+      "sourceRow": 524,
+      "part": "Part 14",
+      "headword": "yield",
+      "preposition": "to",
+      "meaning": "আত্মসমর্পণ করা",
+      "sentence": "He reluctantly yielded to their demands.",
+      "extra": []
+    },
+    {
+      "sourceRow": 525,
+      "part": "Part 14",
+      "headword": "zeal",
+      "preposition": "for",
+      "meaning": "প্রবল উৎসাহ",
+      "sentence": "She had a true zeal for journalism.",
+      "extra": []
+    },
+    {
+      "sourceRow": 526,
+      "part": "Part 14",
+      "headword": "zest",
+      "preposition": "for",
+      "meaning": "অনুরাগ",
+      "sentence": "She has no zest for music.",
+      "extra": []
+    }
+  ]
+}
