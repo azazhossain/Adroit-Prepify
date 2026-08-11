@@ -42,19 +42,18 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Validate mobile app
-        run: pnpm --filter @workspace/adroit-prepify run typecheck
+        run: pnpm run typecheck
 
       - name: Generate native Android project
-        working-directory: artifacts/adroit-prepify
         run: pnpm exec expo prebuild --platform android --non-interactive
 
       - name: Assemble release APK
-        working-directory: artifacts/adroit-prepify/android
+        working-directory: android
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: adroit-prepify-release
-          path: artifacts/adroit-prepify/android/app/build/outputs/apk/release/app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
