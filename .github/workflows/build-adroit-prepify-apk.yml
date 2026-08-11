@@ -47,8 +47,11 @@ jobs:
       - name: Align Expo dependencies
         run: pnpm exec expo install --fix
 
+      - name: Refresh lockfile after Expo alignment
+        run: pnpm install --no-frozen-lockfile
+
       - name: Generate native Android project
-        run: pnpm exec expo prebuild --platform android --non-interactive
+        run: CI=1 pnpm exec expo prebuild --platform android --no-install
 
       - name: Assemble release APK
         working-directory: android
