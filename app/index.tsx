@@ -21,6 +21,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import colors, { AppPalette } from '@/constants/colors';
 import wordsSource from '@/assets/data/words.json';
@@ -94,9 +95,6 @@ const initialState: SavedState = {
 
 const words = (wordsSource as { entries: Word[] }).entries;
 const previousSource = (previousSourceData as { text: string }).text;
-const prepositions = Array.from(
-  new Set(words.flatMap((word) => word.preposition.split(/[,/]/).map((item) => item.trim())))
-).filter(Boolean);
 const parts = Array.from({ length: 14 }, (_, index) => `Part ${index + 1}`);
 let palette: AppPalette = colors.light;
 let styles = createStyles(palette);
@@ -115,13 +113,18 @@ function barePrepositions(value: string): string[] {
 }
 
 function shuffle<T>(items: T[]): T[] {
-  return [...items].sort(() => Math.random() - 0.5);
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
 }
 
 function makeQuestion(word: Word): QuizQuestion {
   const valid = barePrepositions(word.preposition);
   const correct = valid[0] ?? '';
-  const distractors = shuffle(prepositions.filter((item) => !valid.includes(item) && !item.includes(' '))).slice(0, 3);
+  const distractors = shuffle(prepositionWords.filter((item) => !valid.includes(item))).slice(0, 3);
   return {
     ...word,
     correct,
@@ -144,9 +147,11 @@ function parsePreviousQuestions(text: string): QuizQuestion[] {
     if (!current || current.options.length !== 4) return;
     const correctIndex = ['A', 'B', 'C', 'D'].indexOf(answerLabel);
     if (correctIndex < 0) return;
-    if (!current.options.every((option) => prepositionWords.includes(option.toLocaleLowerCase()))) return;
-    const sentence = current.lines.join(' ').trim();
-    const source = (sentence.match(/\[[^\]]+\]/g) ?? []).join(' ');
+    const normalizedOptions = current.options.map((option) => option.toLocaleLowerCase().trim());
+    if (!normalizedOptions.every((option) => prepositionWords.includes(option))) return;
+    const sentenceWithSource = current.lines.join(' ').trim();
+    const source = (sentenceWithSource.match(/\[[^\]]+\]/g) ?? []).join(' ');
+    const sentence = sentenceWithSource.replace(/\s*\[[^\]]+\]/g, '').trim();
     result.push({
       sourceRow: result.length + 1,
       part,
@@ -155,10 +160,10 @@ function parsePreviousQuestions(text: string): QuizQuestion[] {
       meaning: 'Board and admission question',
       sentence,
       extra: [],
-      options: current.options,
-      correct: current.options[correctIndex],
+      options: normalizedOptions,
+      correct: normalizedOptions[correctIndex],
       source,
-      explanation: `Correct answer: “${current.options[correctIndex]}”. ${source ? `Source: ${source}` : 'Review the sentence pattern and usage.'}`,
+      explanation: `Correct answer: “${normalizedOptions[correctIndex]}”. ${source ? `Source: ${source}` : 'Review the sentence pattern and usage.'}`,
     });
     current = null;
   };
@@ -175,9 +180,9 @@ function parsePreviousQuestions(text: string): QuizQuestion[] {
       return;
     }
     if (!current) return;
-    const option = line.match(/^[A-D]\.\s+(.*)$/);
-    if (option && current.options.length < 4) {
-      current.options.push(option[1].trim());
+    const inlineOptions = Array.from(line.matchAll(/(?:^|\s)([A-D])\.\s*([A-Za-z]+)/gi));
+    if (inlineOptions.length > 0 && current.options.length < 4) {
+      inlineOptions.slice(0, 4 - current.options.length).forEach((match) => current?.options.push(match[2].trim()));
       return;
     }
     const answer = line.match(new RegExp(`^${current.number}\\.[A-D]$`));
@@ -198,7 +203,11 @@ function usePersistedState() {
   useEffect(() => {
     AsyncStorage.getItem('adroit-prepify-state')
       .then((value) => {
-        if (value) setState({ ...initialState, ...JSON.parse(value) });
+        if (!value) return;
+        const parsed = JSON.parse(value) as Partial<SavedState>;
+        const themeColor = parsed.themeColor && parsed.themeColor in colors.themes ? parsed.themeColor : initialState.themeColor;
+        const colorMode = parsed.colorMode && ['system', 'light', 'dark'].includes(parsed.colorMode) ? parsed.colorMode : initialState.colorMode;
+        setState({ ...initialState, ...parsed, themeColor, colorMode });
       })
       .catch(() => undefined)
       .finally(() => setLoaded(true));
@@ -383,7 +392,7 @@ export default function HomeScreen() {
 
   const startPreviousSession = (part = previousPart) => {
     const source = parsePreviousQuestions(previousSource).filter((question) => part === 'All parts' || question.part === part);
-    setQuestions(shuffle(source));
+    setQuestions(shuffle(source).slice(0, 25));
     setQuestionIndex(0);
     setAnswers({});
     setReviewing(false);
@@ -512,8 +521,8 @@ export default function HomeScreen() {
         <Text style={styles.sessionMeaning}>{wordOfSession.meaning}</Text>
         <Text style={styles.sessionSentence}>{wordOfSession.sentence}</Text>
         <View style={styles.sessionActions}>
-          <Pressable onPress={() => toggleIn('memorized', wordOfSession.headword)} style={styles.lightPill}><Feather name={state.memorized.includes(wordOfSession.headword) ? 'check' : 'plus'} size={15} color="#123A51" /><Text style={styles.lightPillText}>{state.memorized.includes(wordOfSession.headword) ? 'Memorized' : 'Memorize'}</Text></Pressable>
-          <Pressable onPress={() => toggleIn('bookmarked', wordOfSession.headword)} style={styles.ghostPill}><Feather name="star" size={15} color="#D5F4EF" /><Text style={styles.ghostPillText}>{state.bookmarked.includes(wordOfSession.headword) ? 'Saved' : 'Save'}</Text></Pressable>
+          <Pressable onPress={() => toggleIn('memorized', wordOfSession.headword)} style={[styles.lightPill, { backgroundColor: theme.accent }]}><Feather name={state.memorized.includes(wordOfSession.headword) ? 'check' : 'plus'} size={15} color={theme.accentForeground} /><Text style={[styles.lightPillText, { color: theme.accentForeground }]}>{state.memorized.includes(wordOfSession.headword) ? 'Memorized' : 'Memorize'}</Text></Pressable>
+          <Pressable onPress={() => toggleIn('bookmarked', wordOfSession.headword)} style={styles.ghostPill}><Feather name="star" size={15} color={theme.heroMuted} /><Text style={[styles.ghostPillText, { color: theme.heroMuted }]}>{state.bookmarked.includes(wordOfSession.headword) ? 'Saved' : 'Save'}</Text></Pressable>
         </View>
       </LinearGradient>
       <View style={styles.statsRow}>
@@ -555,7 +564,7 @@ export default function HomeScreen() {
         ))}
       </View>
       <View style={styles.integrityBanner}>
-        <Feather name={sourceStatus === 'ok' ? 'check-circle' : 'info'} size={17} color={sourceStatus === 'ok' ? theme.accentForeground : '#B97920'} />
+        <Feather name={sourceStatus === 'ok' ? 'check-circle' : 'info'} size={17} color={sourceStatus === 'ok' ? theme.accentForeground : theme.primary} />
         <Text style={styles.integrityText}>{sourceStatus === 'ok' ? 'All source entries verified.' : 'Source workbook contains 525 entries; integrity check expected 526.'}</Text>
       </View>
     </ScrollView>
@@ -582,7 +591,33 @@ export default function HomeScreen() {
             <Text style={styles.flashCounter}>{(flashIndex % flashWords.length) + 1} / {flashWords.length}</Text>
             <Animated.View
               {...flashResponder.panHandlers}
-              style={[styles.flashCard, { transform: [{ translateX: flashPan }] }]}
+              style={[
+                styles.flashCard,
+                {
+                  opacity: flashPan.interpolate({
+                    inputRange: [-500, -160, 0, 160, 500],
+                    outputRange: [0.15, 0.92, 1, 0.92, 0.15],
+                    extrapolate: 'clamp',
+                  }),
+                  transform: [
+                    { translateX: flashPan },
+                    {
+                      rotate: flashPan.interpolate({
+                        inputRange: [-500, 0, 500],
+                        outputRange: ['-10deg', '0deg', '10deg'],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                    {
+                      scale: flashPan.interpolate({
+                        inputRange: [-500, 0, 500],
+                        outputRange: [0.94, 1, 0.94],
+                        extrapolate: 'clamp',
+                      }),
+                    },
+                  ],
+                },
+              ]}
             >
               <Pressable onPress={() => setFlashFlipped((current) => !current)} style={styles.flashCardPressable}>
               <LinearGradient colors={[theme.heroStart, theme.heroEnd]} style={styles.flashCardGradient}>
@@ -633,7 +668,7 @@ export default function HomeScreen() {
               </Pressable>
             ))}
           </ScrollView>
-          <ActionButton label={`Start ${previousPart} quiz`} icon="play" onPress={() => startPreviousSession()} />
+          <ActionButton label={`Start ${previousPart} quiz · 25 random questions`} icon="play" onPress={() => startPreviousSession()} />
           <SectionTitle title="Source preview" eyebrow="Previous year questions" />
           <Text style={styles.rawSource}>{(chunks.find((chunk) => chunk.includes(`Part-${previousPart.replace('Part ', '')}`)) ?? chunks[0]).slice(0, 9000)}</Text>
         </ScrollView>
@@ -679,15 +714,16 @@ export default function HomeScreen() {
     if (reviewing) {
       const wrong = questions.filter((question, index) => answers[index] !== question.correct);
       const totalCorrect = questions.length - wrong.length;
-      return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.resultCircle}><Text style={styles.resultValue}>{Math.round((totalCorrect / questions.length) * 100)}%</Text><Text style={styles.resultLabel}>{totalCorrect} / {questions.length} correct</Text></View><Text style={styles.resultTitle}>{totalCorrect === questions.length ? 'Perfect recall.' : 'Good work. Review and return stronger.'}</Text><ActionButton label="Back to home" icon="home" onPress={() => setView('home')} />{wrong.length > 0 && <><SectionTitle title="Review mistakes" eyebrow={`${wrong.length} to revisit`} />{wrong.map((question, index) => <View key={`${question.sourceRow}-${index}`} style={styles.reviewCard}><Text style={styles.reviewQuestion}>{question.sentence.replace(question.preposition, '____')}</Text><Text style={styles.reviewAnswer}>Correct: {question.correct}</Text><Text style={styles.reviewMeaning}>{question.meaning}</Text><Text style={styles.reviewSentence}>{question.sentence}</Text></View>)}</>}</ScrollView></View>;
+      return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.resultCircle}><Text style={styles.resultValue}>{Math.round((totalCorrect / questions.length) * 100)}%</Text><Text style={styles.resultLabel}>{totalCorrect} / {questions.length} correct</Text></View><Text style={styles.resultTitle}>{totalCorrect === questions.length ? 'Perfect recall.' : 'Good work. Review and return stronger.'}</Text><ActionButton label="Back to home" icon="home" onPress={() => setView('home')} />{wrong.length > 0 && <><SectionTitle title="Review mistakes" eyebrow={`${wrong.length} to revisit`} />{wrong.map((question, index) => <View key={`${question.sourceRow}-${index}`} style={styles.reviewCard}><Text style={styles.reviewQuestion}>{question.sentence.replace(question.preposition, '____')}</Text><Text style={styles.reviewAnswer}>Correct: {question.correct}</Text><Text style={styles.reviewMeaning}>{question.meaning}</Text><Text style={styles.reviewSentence}>{question.sentence}</Text>{question.source && <Text style={styles.reviewSource}>{question.source}</Text>}</View>)}</>}</ScrollView></View>;
     }
     const picked = answers[questionIndex];
-    return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.questionTop}><Text style={styles.questionCount}>{questionIndex + 1} / {questions.length}</Text><Text style={styles.questionScore}>{Object.values(answers).filter((answer, index) => answer === questions[index]?.correct).length} correct</Text></View><View style={styles.questionProgressTrack}><View style={[styles.progressFill, { width: `${((questionIndex + 1) / questions.length) * 100}%` }]} /></View><View style={styles.questionCard}><View style={styles.questionTag}><Text style={styles.questionTagText}>{currentQuestion.part}</Text></View><Text style={styles.questionSentence}>{currentQuestion.sentence.replace(currentQuestion.preposition, '____')}</Text>{mode === 'quiz' && <Text style={styles.questionMeaning}>{currentQuestion.meaning}</Text>}</View><Text style={styles.chooseText}>Choose the appropriate preposition</Text><View style={styles.options}>{currentQuestion.options.map((option, index) => { const isPicked = picked === option; const isCorrect = option === currentQuestion.correct; return <Pressable key={`${option}-${index}`} onPress={() => handleAnswer(option)} style={[styles.option, isPicked && (isCorrect ? styles.optionCorrect : styles.optionWrong), picked && isCorrect && styles.optionCorrect]}><View style={[styles.optionLetter, isPicked && { backgroundColor: isCorrect ? '#328B74' : '#C95C67' }]}><Text style={styles.optionLetterText}>{String.fromCharCode(65 + index)}</Text></View><Text style={styles.optionText}>{option}</Text>{picked && isCorrect && <Feather name="check" size={18} color="#328B74" />}{picked && isPicked && !isCorrect && <Feather name="x" size={18} color="#C95C67" />}</Pressable>; })}</View>{picked && mode === 'quiz' && picked !== currentQuestion.correct && <View style={styles.explanation}><Feather name="info" size={18} color="#A86C18" /><View style={{ flex: 1 }}><Text style={styles.explanationTitle}>Remember this</Text><Text style={styles.explanationText}>{currentQuestion.headword} takes “{currentQuestion.correct}”. {currentQuestion.meaning}. {currentQuestion.sentence}</Text></View></View>}{picked && <ActionButton label={questionIndex === questions.length - 1 ? 'See results' : 'Next question'} icon={questionIndex === questions.length - 1 ? 'award' : 'arrow-right'} onPress={() => questionIndex === questions.length - 1 ? finishSession() : setQuestionIndex((current) => current + 1)} />}</ScrollView></View>;
+     return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.questionTop}><Text style={styles.questionCount}>{questionIndex + 1} / {questions.length}</Text><Text style={styles.questionScore}>{Object.values(answers).filter((answer, index) => answer === questions[index]?.correct).length} correct</Text></View><View style={styles.questionProgressTrack}><View style={[styles.progressFill, { width: `${((questionIndex + 1) / questions.length) * 100}%` }]} /></View><View style={styles.questionCard}><View style={styles.questionTag}><Text style={styles.questionTagText}>{currentQuestion.part}</Text></View><Text style={styles.questionSentence}>{currentQuestion.sentence.replace(currentQuestion.preposition, '____')}</Text>{mode === 'quiz' && <Text style={styles.questionMeaning}>{currentQuestion.meaning}</Text>}{currentQuestion.source && <Text style={styles.questionSource}>{currentQuestion.source}</Text>}</View><Text style={styles.chooseText}>Choose the appropriate preposition</Text><View style={styles.options}>{currentQuestion.options.map((option, index) => { const isPicked = picked === option; const isCorrect = option === currentQuestion.correct; return <Pressable key={`${option}-${index}`} onPress={() => handleAnswer(option)} style={[styles.option, isPicked && (isCorrect ? styles.optionCorrect : styles.optionWrong), picked && isCorrect && styles.optionCorrect]}><View style={[styles.optionLetter, isPicked && { backgroundColor: isCorrect ? palette.accentForeground : palette.destructive }]}><Text style={[styles.optionLetterText, isPicked && { color: palette.primaryForeground }]}>{String.fromCharCode(65 + index)}</Text></View><Text style={styles.optionText}>{option}</Text>{picked && isCorrect && <Feather name="check" size={18} color={palette.accentForeground} />}{picked && isPicked && !isCorrect && <Feather name="x" size={18} color={palette.destructive} />}</Pressable>; })}</View>{picked && <View style={[styles.explanation, picked === currentQuestion.correct ? styles.explanationCorrect : styles.explanationWrong]}><Feather name={picked === currentQuestion.correct ? 'check-circle' : 'info'} size={18} color={picked === currentQuestion.correct ? palette.accentForeground : palette.destructive} /><View style={{ flex: 1 }}><Text style={styles.explanationTitle}>{picked === currentQuestion.correct ? 'Correct answer' : 'Answer details'}</Text><Text style={styles.explanationText}>Correct option: “{currentQuestion.correct}”. {currentQuestion.explanation ?? `${currentQuestion.headword} takes “${currentQuestion.correct}”. ${currentQuestion.meaning}`}</Text></View></View>}{picked && <ActionButton label={questionIndex === questions.length - 1 ? 'See results' : 'Next question'} icon={questionIndex === questions.length - 1 ? 'award' : 'arrow-right'} onPress={() => questionIndex === questions.length - 1 ? finishSession() : setQuestionIndex((current) => current + 1)} />}</ScrollView></View>;
   };
 
   if (!state || !words.length) return <SafeAreaView style={styles.loading}><ActivityIndicator color={theme.primary} /></SafeAreaView>;
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: theme.background }]}>
+      <StatusBar style={dark ? 'light' : 'dark'} />
       {view === 'home' && renderHome()}
       {view === 'dictionary' && renderDictionary()}
       {view === 'flashcards' && renderFlashcards()}
@@ -739,23 +775,23 @@ function createStyles(palette: AppPalette) {
   sectionHeading: { fontSize: 21, fontWeight: '800', color: palette.foreground, letterSpacing: -0.4 },
   partsGrid: { gap: 9, marginBottom: 28 },
   partCard: { minHeight: 67, borderRadius: 18, backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, padding: 11, flexDirection: 'row', alignItems: 'center' },
-  partNumber: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: 13, backgroundColor: '#E4EEF8' },
+  partNumber: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: 13, backgroundColor: palette.secondary },
   partNumberText: { fontSize: 13, fontWeight: '800', color: palette.primary },
   partInfo: { flex: 1, marginLeft: 11 },
   partName: { fontSize: 14, fontWeight: '800', color: palette.foreground },
   partCount: { color: palette.mutedForeground, fontSize: 11, marginTop: 2 },
   partButtons: { flexDirection: 'row', gap: 6 },
-  partAction: { paddingVertical: 8, paddingHorizontal: 10, borderRadius: 12, backgroundColor: '#EDF4FB', flexDirection: 'row', alignItems: 'center', gap: 4 },
-  partMockAction: { backgroundColor: '#E7F2EE' },
+  partAction: { paddingVertical: 8, paddingHorizontal: 10, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  partMockAction: { backgroundColor: palette.accent },
   partActionText: { color: palette.primary, fontSize: 11, fontWeight: '800' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 },
   toolCard: { width: '48.2%', minHeight: 130, borderRadius: 18, padding: 14, backgroundColor: palette.card, borderColor: palette.border, borderWidth: 1 },
-  toolIcon: { width: 34, height: 34, borderRadius: 12, backgroundColor: '#E5F0FA', alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
+  toolIcon: { width: 34, height: 34, borderRadius: 12, backgroundColor: palette.secondary, alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
   toolTitle: { color: palette.foreground, fontWeight: '800', fontSize: 14 },
   toolText: { color: palette.mutedForeground, fontSize: 11, lineHeight: 16, marginTop: 4, paddingRight: 5 },
   toolArrow: { position: 'absolute', right: 13, top: 15 },
-  integrityBanner: { backgroundColor: '#FFF4D9', borderRadius: 15, padding: 13, flexDirection: 'row', gap: 9, alignItems: 'center', marginBottom: 14 },
-  integrityText: { color: '#76511D', fontSize: 12, lineHeight: 18, flex: 1 },
+  integrityBanner: { backgroundColor: palette.secondary, borderRadius: 15, padding: 13, flexDirection: 'row', gap: 9, alignItems: 'center', marginBottom: 14 },
+  integrityText: { color: palette.secondaryForeground, fontSize: 12, lineHeight: 18, flex: 1 },
   actionButton: { minHeight: 49, borderRadius: 16, paddingHorizontal: 17, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 9 },
   primaryButton: { backgroundColor: palette.primary },
   secondaryButton: { backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border },
@@ -770,7 +806,7 @@ function createStyles(palette: AppPalette) {
   wordCard: { borderRadius: 18, padding: 16, marginBottom: 10, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card },
   compactWordCard: { padding: 13 },
   wordCardTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  partPill: { borderRadius: 10, paddingVertical: 4, paddingHorizontal: 8, backgroundColor: '#E7F2EE' },
+  partPill: { borderRadius: 10, paddingVertical: 4, paddingHorizontal: 8, backgroundColor: palette.accent },
   partPillText: { color: palette.accentForeground, fontSize: 10, fontWeight: '800' },
   wordActions: { flexDirection: 'row', gap: 2 },
   headword: { color: palette.foreground, fontWeight: '800', fontSize: 19, marginTop: 12 },
@@ -810,7 +846,7 @@ function createStyles(palette: AppPalette) {
   progressPart: { color: palette.foreground, fontWeight: '700', fontSize: 13 },
   progressPercent: { color: palette.primary, fontWeight: '800', fontSize: 13 },
   progressTrack: { height: 8, borderRadius: 5, backgroundColor: palette.secondary, marginTop: 8, overflow: 'hidden' },
-  progressFill: { height: '100%', borderRadius: 5, backgroundColor: '#4EA08D' },
+  progressFill: { height: '100%', borderRadius: 5, backgroundColor: palette.accentForeground },
   progressCaption: { color: palette.mutedForeground, fontSize: 10, marginTop: 5 },
   heatmap: { flexDirection: 'row', flexWrap: 'wrap', gap: 7, marginBottom: 20 },
   heatCell: { width: 47, height: 47, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
@@ -833,22 +869,25 @@ function createStyles(palette: AppPalette) {
   questionScore: { color: palette.accentForeground, fontWeight: '800', fontSize: 13 },
   questionProgressTrack: { height: 7, backgroundColor: palette.secondary, borderRadius: 4, marginTop: 10, marginBottom: 19, overflow: 'hidden' },
   questionCard: { backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, borderRadius: 21, padding: 20 },
-  questionTag: { alignSelf: 'flex-start', paddingHorizontal: 9, paddingVertical: 5, borderRadius: 8, backgroundColor: '#E7F2EE' },
+  questionTag: { alignSelf: 'flex-start', paddingHorizontal: 9, paddingVertical: 5, borderRadius: 8, backgroundColor: palette.accent },
   questionTagText: { color: palette.accentForeground, fontSize: 10, fontWeight: '800' },
   questionSentence: { color: palette.foreground, fontSize: 20, lineHeight: 30, fontWeight: '700', marginTop: 17 },
   questionMeaning: { color: palette.mutedForeground, fontSize: 13, marginTop: 15 },
+  questionSource: { color: palette.primary, fontSize: 11, lineHeight: 17, marginTop: 12, fontWeight: '700' },
   chooseText: { color: palette.mutedForeground, fontSize: 12, fontWeight: '700', marginTop: 20, marginBottom: 9 },
   options: { gap: 9 },
   option: { minHeight: 54, borderRadius: 15, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 11, gap: 11 },
-  optionCorrect: { borderColor: '#62AE9C', backgroundColor: '#EAF6F1' },
-  optionWrong: { borderColor: '#D97B83', backgroundColor: '#FCEDEF' },
+  optionCorrect: { borderColor: palette.accentForeground, backgroundColor: palette.accent },
+  optionWrong: { borderColor: palette.destructive, backgroundColor: palette.card },
   optionLetter: { width: 31, height: 31, borderRadius: 11, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.secondary },
   optionLetterText: { color: palette.foreground, fontSize: 12, fontWeight: '800' },
   optionText: { color: palette.foreground, fontSize: 14, fontWeight: '700', flex: 1 },
-  explanation: { marginTop: 14, padding: 14, borderRadius: 16, backgroundColor: '#FFF4D9', flexDirection: 'row', gap: 10 },
-  explanationTitle: { color: '#76511D', fontWeight: '800', fontSize: 13 },
-  explanationText: { color: '#76511D', fontSize: 12, lineHeight: 18, marginTop: 4 },
-  resultCircle: { width: 150, height: 150, borderRadius: 75, backgroundColor: '#E7F2EE', alignItems: 'center', justifyContent: 'center', alignSelf: 'center', marginTop: 28 },
+  explanation: { marginTop: 14, padding: 14, borderRadius: 16, flexDirection: 'row', gap: 10 },
+  explanationCorrect: { backgroundColor: palette.accent },
+  explanationWrong: { backgroundColor: palette.secondary },
+  explanationTitle: { color: palette.secondaryForeground, fontWeight: '800', fontSize: 13 },
+  explanationText: { color: palette.secondaryForeground, fontSize: 12, lineHeight: 18, marginTop: 4 },
+  resultCircle: { width: 150, height: 150, borderRadius: 75, backgroundColor: palette.accent, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', marginTop: 28 },
   resultValue: { color: palette.accentForeground, fontSize: 34, fontWeight: '800' },
   resultLabel: { color: palette.accentForeground, fontSize: 11, fontWeight: '700', marginTop: 2 },
   resultTitle: { color: palette.foreground, fontSize: 21, fontWeight: '800', textAlign: 'center', marginTop: 17, marginBottom: 10 },
@@ -857,6 +896,7 @@ function createStyles(palette: AppPalette) {
   reviewAnswer: { color: palette.accentForeground, fontWeight: '800', fontSize: 12, marginTop: 8 },
   reviewMeaning: { color: palette.mutedForeground, fontSize: 12, marginTop: 4 },
   reviewSentence: { color: palette.foreground, fontStyle: 'italic', fontSize: 12, lineHeight: 18, marginTop: 7 },
+  reviewSource: { color: palette.primary, fontSize: 11, fontWeight: '700', marginTop: 8 },
   modalBackdrop: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(11, 24, 44, 0.42)' },
   modalSheet: { backgroundColor: palette.background, borderTopLeftRadius: 25, borderTopRightRadius: 25, padding: 18 },
   modalTitle: { color: palette.foreground, fontSize: 20, fontWeight: '800', marginBottom: 8 },

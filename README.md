@@ -13,6 +13,6 @@ Open **Actions → Build Adroit Prepify APK → Run workflow**, then download th
 - Flashcards support animated swipe navigation: swipe right for the previous word and swipe left for the next word.
 - Workbook MCQs use only preposition options.
 - Answers and explanations appear after the user selects an option.
-- Previous-year board and admission questions are parsed into a dedicated quiz with part filters and answer explanations.
+- Previous-year board and admission questions are parsed into a dedicated quiz with part filters, 25 randomly selected questions per session, and answer explanations.
 
 The app stores study progress, memorized words, bookmarks, mistakes, streaks, and settings locally on the device.

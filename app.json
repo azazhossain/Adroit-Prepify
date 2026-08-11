@@ -2,7 +2,7 @@
   "expo": {
     "name": "Adroit Prepify",
     "slug": "adroit-prepify",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "adroit-prepify",
@@ -18,7 +18,7 @@
     },
     "android": {
       "package": "com.adroitprepify.app",
-      "versionCode": 2,
+      "versionCode": 3,
       "permissions": []
     },
     "web": {
