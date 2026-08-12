@@ -59,6 +59,7 @@ const skyLight = {
     heroEnd: '#1C6D78',
     heroText: '#FFFFFF',
     heroMuted: '#D4EBF1',
+    sessionAccent: '#F7C96B',
 };
 
 const skyDark = {
@@ -91,6 +92,7 @@ const skyDark = {
     heroEnd: '#173B49',
     heroText: '#FFFFFF',
     heroMuted: '#C8E0E4',
+    sessionAccent: '#F5C66B',
 };
 
 const emeraldLight = {

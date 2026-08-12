@@ -45,6 +45,7 @@ type ViewName =
   | 'flashcards'
   | 'progress'
   | 'previous'
+  | 'part'
   | 'settings'
   | 'quiz'
   | 'exam';
@@ -52,6 +53,7 @@ type ViewName =
 type QuizQuestion = Word & {
   options: string[];
   correct: string;
+  questionText: string;
   explanation?: string;
   source?: string;
 };
@@ -105,13 +107,42 @@ const prepositionWords = [
   'about', 'above', 'across', 'after', 'against', 'along', 'among', 'around', 'at', 'before', 'behind',
   'below', 'beneath', 'beside', 'between', 'beyond', 'by', 'despite', 'down', 'during', 'for', 'from',
   'in', 'inside', 'into', 'of', 'off', 'on', 'onto', 'over', 'through', 'to', 'toward', 'under',
-  'until', 'up', 'upon', 'with', 'within', 'without', 'via',
+  'until', 'up', 'upon', 'with', 'within', 'without', 'via', 'out',
 ];
 
 function barePrepositions(value: string): string[] {
   const normalized = value.toLocaleLowerCase().replace(/[-–—]/g, ' ');
   const found = normalized.match(/\b[a-z]+\b/g) ?? [];
   return Array.from(new Set(found.filter((item) => prepositionWords.includes(item))));
+}
+
+function stripSourceAnnotations(value: string): string {
+  return value.replace(/\s*\[[^\]]+\]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function findAnswerPreposition(word: Word): string {
+  const sentence = stripSourceAnnotations(word.sentence);
+  const candidates = barePrepositions(word.preposition);
+  return (
+    candidates.find((candidate) => new RegExp(`\\b${escapeRegExp(candidate)}\\b`, 'i').test(sentence)) ??
+    candidates[0] ??
+    word.preposition.trim()
+  );
+}
+
+function makeBlankedSentence(word: Word, answer: string): string {
+  const sentence = stripSourceAnnotations(word.sentence);
+  const answerPattern = new RegExp(`\\b${escapeRegExp(answer)}\\b`, 'i');
+  const blanked = sentence.replace(answerPattern, '____');
+  if (blanked !== sentence) return blanked;
+
+  // Preserve a usable question for source typos such as "wih" in the supplied workbook.
+  const typoPattern = answer === 'with' ? /\bwih\b/i : null;
+  return typoPattern ? sentence.replace(typoPattern, '____') : `Choose the appropriate preposition for “${word.headword}”: ${sentence}`;
 }
 
 function shuffle<T>(items: T[]): T[] {
@@ -124,19 +155,21 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 function makeQuestion(word: Word): QuizQuestion {
-  const valid = barePrepositions(word.preposition);
-  const correct = valid[0] ?? '';
-  const distractors = shuffle(prepositionWords.filter((item) => !valid.includes(item))).slice(0, 3);
+  const correct = findAnswerPreposition(word);
+  const distractors = shuffle(prepositionWords.filter((item) => item !== correct)).slice(0, 3);
   return {
     ...word,
     correct,
     options: shuffle([correct, ...distractors]),
-    explanation: `${word.headword} is used with “${word.preposition}”. ${word.meaning}`,
+    questionText: makeBlankedSentence(word, correct),
+    explanation: `${word.headword} is used with “${word.preposition}”. ${word.meaning} Choose the preposition that best completes the sentence.`,
   };
 }
 
 function makeQuestions(source: Word[], count?: number): QuizQuestion[] {
-  const pool = shuffle(source).filter((word) => barePrepositions(word.preposition).length > 0).map(makeQuestion);
+  const pool = shuffle(source)
+    .filter((word) => barePrepositions(word.preposition).length > 0)
+    .map(makeQuestion);
   return count ? pool.slice(0, Math.min(count, pool.length)) : pool;
 }
 
@@ -153,7 +186,7 @@ function parsePreviousQuestions(text: string): QuizQuestion[] {
     if (!normalizedOptions.every((option) => prepositionWords.includes(option))) return;
     const sentenceWithSource = current.lines.join(' ').trim();
     const source = (sentenceWithSource.match(/\[[^\]]+\]/g) ?? []).join(' ');
-    const sentence = sentenceWithSource.replace(/\s*\[[^\]]+\]/g, '').trim();
+      const sentence = stripSourceAnnotations(sentenceWithSource);
     result.push({
       sourceRow: result.length + 1,
       part,
@@ -164,6 +197,7 @@ function parsePreviousQuestions(text: string): QuizQuestion[] {
       extra: [],
       options: normalizedOptions,
       correct: normalizedOptions[correctIndex],
+        questionText: sentence.replace(new RegExp(`\\b${escapeRegExp(normalizedOptions[correctIndex])}\\b`, 'i'), '____'),
       source,
       explanation: `Correct answer: “${normalizedOptions[correctIndex]}”. ${source ? `Source: ${source}` : 'Review the sentence pattern and usage.'}`,
     });
@@ -336,7 +370,7 @@ export default function HomeScreen() {
   const [view, setView] = useState<ViewName>('home');
   const [activePart, setActivePart] = useState('Part 1');
   const [query, setQuery] = useState('');
-  const [modal, setModal] = useState<'part' | 'mode' | null>(null);
+  const [modal, setModal] = useState<'part' | 'mode' | 'word' | null>(null);
   const [flashIndex, setFlashIndex] = useState(0);
   const [flashFlipped, setFlashFlipped] = useState(false);
   const [flashDeck, setFlashDeck] = useState('All parts');
@@ -348,12 +382,15 @@ export default function HomeScreen() {
   const [sessionDate, setSessionDate] = useState(todayKey());
   const [sourceStatus, setSourceStatus] = useState<'ok' | 'mismatch'>('mismatch');
   const [previousPart, setPreviousPart] = useState('All parts');
+  const [tablePart, setTablePart] = useState('Part 1');
+  const [selectedWord, setSelectedWord] = useState<Word | null>(null);
+  const [sessionWordIndex, setSessionWordIndex] = useState(() => (new Date().getDate() * 7) % words.length);
   const flashPan = useRef(new Animated.Value(0)).current;
   const dark = state.colorMode === 'dark' || (state.colorMode === 'system' && systemScheme === 'dark');
   const theme = colors.themes[state.themeColor][dark ? 'dark' : 'light'];
   palette = theme;
   styles = createStyles(theme);
-  const wordOfSession = useMemo(() => words[(new Date().getDate() * 7) % words.length], []);
+  const wordOfSession = useMemo(() => words[sessionWordIndex % words.length], [sessionWordIndex]);
   const accuracy = state.answered ? Math.round((state.correct / state.answered) * 100) : 0;
   const currentQuestion = questions[questionIndex];
   const previousQuestions = useMemo(() => parsePreviousQuestions(previousSource), []);
@@ -386,7 +423,7 @@ export default function HomeScreen() {
 
   const startSession = (mode: 'quiz' | 'exam', part = activePart, full = false) => {
     const source = full ? words : words.filter((word) => word.part === part);
-    const generated = makeQuestions(source, mode === 'exam' ? 30 : undefined);
+    const generated = makeQuestions(source, full ? 40 : mode === 'exam' ? 30 : 20);
     setQuestions(generated);
     setQuestionIndex(0);
     setAnswers({});
@@ -569,11 +606,19 @@ export default function HomeScreen() {
       <LinearGradient colors={[theme.heroStart, theme.heroEnd]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.sessionCard}>
         <View style={styles.sessionGlow} />
         <View style={styles.sessionCardHeader}>
-          <View style={styles.sessionBadge}><Feather name="zap" size={13} color="#F7C96B" /><Text style={styles.sessionBadgeText}>WORD OF THE SESSION</Text></View>
-          <IconButton icon="refresh-cw" color="#D5F4EF" onPress={() => Alert.alert('Fresh word', 'Your next session will begin with a new word.')} accessibilityLabel="Refresh word of the session" />
+          <View style={styles.sessionBadge}><Feather name="zap" size={13} color={theme.sessionAccent} /><Text style={styles.sessionBadgeText}>PREPOSITION OF THE SESSION</Text></View>
+          <IconButton icon="refresh-cw" color={theme.heroMuted} onPress={() => { setSessionWordIndex((current) => (current + 1) % words.length); setSelectedWord(null); }} accessibilityLabel="Show another preposition of the session" />
         </View>
         <Text style={styles.sessionWord}>{wordOfSession.headword}</Text>
-        <Text style={styles.sessionPrep}>{wordOfSession.preposition}</Text>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={`Open details for ${wordOfSession.preposition}`}
+          onPress={() => { setSelectedWord(wordOfSession); setModal('word'); }}
+          style={({ pressed }) => [styles.sessionPrepButton, { opacity: pressed ? 0.7 : 1 }]}
+        >
+          <Text style={styles.sessionPrep}>{wordOfSession.preposition}</Text>
+          <Feather name="external-link" size={14} color={theme.sessionAccent} />
+        </Pressable>
         <Text style={styles.sessionMeaning}>{wordOfSession.meaning}</Text>
         <Text style={styles.sessionSentence}>{wordOfSession.sentence}</Text>
         <View style={styles.sessionActions}>
@@ -595,6 +640,7 @@ export default function HomeScreen() {
               <View style={styles.partNumber}><Text style={styles.partNumberText}>{String(index + 1).padStart(2, '0')}</Text></View>
               <View style={styles.partInfo}><Text style={styles.partName}>{part}</Text><Text style={styles.partCount}>{count} words</Text></View>
               <View style={styles.partButtons}>
+                <Pressable onPress={() => { setActivePart(part); setTablePart(part); setView('part'); }} style={styles.partTableAction}><Feather name="list" size={13} color={theme.primary} /><Text style={styles.partActionText}>Table</Text></Pressable>
                 <Pressable onPress={() => { setActivePart(part); startSession('quiz', part); }} style={styles.partAction}><Feather name="play" size={13} color={theme.primary} /><Text style={styles.partActionText}>Quiz</Text></Pressable>
                 <Pressable onPress={() => { setActivePart(part); startSession('exam', part); }} style={[styles.partAction, styles.partMockAction]}><Feather name="clock" size={13} color={theme.accentForeground} /><Text style={[styles.partActionText, { color: theme.accentForeground }]}>Mock</Text></Pressable>
               </View>
@@ -635,6 +681,45 @@ export default function HomeScreen() {
     </View>
   );
 
+  const renderPartReference = () => {
+    const partWords = words.filter((word) => word.part === tablePart);
+    return (
+      <View style={styles.screen}>
+        {renderHeader(`${tablePart} reference`)}
+        <FlatList
+          data={partWords}
+          keyExtractor={(item) => String(item.sourceRow)}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}
+          ListHeaderComponent={
+            <View style={styles.referenceIntro}>
+              <View style={styles.referenceIntroIcon}><Feather name="list" size={20} color={theme.primaryForeground} /></View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.referenceIntroTitle}>Appropriate preposition table</Text>
+                <Text style={styles.referenceIntroText}>{partWords.length} headwords with meanings and example sentences</Text>
+              </View>
+            </View>
+          }
+          renderItem={({ item, index }) => (
+            <View style={styles.referenceRow}>
+              <View style={styles.referenceIndex}><Text style={styles.referenceIndexText}>{String(index + 1).padStart(2, '0')}</Text></View>
+              <View style={styles.referenceBody}>
+                <View style={styles.referenceHeadRow}>
+                  <Text style={styles.referenceHeadword}>{item.headword}</Text>
+                  <Text style={styles.referencePart}>{item.part.replace('Part ', 'P')}</Text>
+                </View>
+                <Text style={styles.referencePreposition}>{item.preposition}</Text>
+                <View style={styles.referenceDivider} />
+                <Text style={styles.referenceMeaning}>{item.meaning}</Text>
+                <Text style={styles.referenceSentence}>{stripSourceAnnotations(item.sentence)}</Text>
+              </View>
+            </View>
+          )}
+          ListEmptyComponent={<View style={styles.emptyState}><Feather name="list" size={30} color={theme.mutedForeground} /><Text style={styles.emptyTitle}>No entries in this part</Text><Text style={styles.emptyText}>Choose another part to browse the workbook.</Text></View>}
+        />
+      </View>
+    );
+  };
+
   const renderFlashcards = () => (
     <View style={styles.screen}>
       {renderHeader('Flashcards')}
@@ -644,7 +729,11 @@ export default function HomeScreen() {
         </ScrollView>
         {flashWord ? (
           <>
-            <Text style={styles.flashCounter}>{(flashIndex % flashWords.length) + 1} / {flashWords.length}</Text>
+            <View style={styles.flashProgressHeader}>
+              <Text style={styles.flashCounter}>{(flashIndex % flashWords.length) + 1} / {flashWords.length}</Text>
+              <Text style={styles.flashDeckLabel}>{flashDeck}</Text>
+            </View>
+            <View style={styles.flashProgressTrack}><View style={[styles.flashProgressFill, { width: `${((flashIndex % flashWords.length) + 1) / flashWords.length * 100}%` }]} /></View>
             <Animated.View
               {...flashResponder.panHandlers}
               style={[
@@ -676,16 +765,25 @@ export default function HomeScreen() {
               ]}
             >
               <Pressable onPress={() => setFlashFlipped((current) => !current)} style={styles.flashCardPressable}>
-              <LinearGradient colors={[theme.heroStart, theme.heroEnd]} style={styles.flashCardGradient}>
-                <Text style={styles.flashHint}>{flashFlipped ? 'ANSWER' : 'TAP TO FLIP'}</Text>
-                <Text style={styles.flashHeadword}>{flashFlipped ? flashWord.preposition : flashWord.headword}</Text>
-                {flashFlipped && <><Text style={styles.flashMeaning}>{flashWord.meaning}</Text><Text style={styles.flashSentence}>{flashWord.sentence}</Text></>}
-                {!flashFlipped && <Feather name="rotate-cw" size={34} color="#B8DDE7" />}
-              </LinearGradient>
+                <LinearGradient colors={[theme.heroStart, theme.heroEnd]} style={styles.flashCardGradient}>
+                  <BlurView intensity={22} tint={dark ? 'dark' : 'light'} style={StyleSheet.absoluteFillObject} pointerEvents="none" />
+                  <View style={styles.flashCardContent}>
+                    <View style={styles.flashCardBadge}><Feather name={flashFlipped ? 'check-circle' : 'layers'} size={13} color={theme.sessionAccent} /><Text style={styles.flashHint}>{flashFlipped ? 'ANSWER REVEALED' : 'ACTIVE RECALL'}</Text></View>
+                    <Text style={styles.flashHeadword}>{flashFlipped ? flashWord.preposition : flashWord.headword}</Text>
+                    {flashFlipped ? (
+                      <>
+                        <Text style={styles.flashMeaning}>{flashWord.meaning}</Text>
+                        <Text style={styles.flashSentence}>{stripSourceAnnotations(flashWord.sentence)}</Text>
+                        <View style={styles.flashAnswerPill}><Text style={styles.flashAnswerPillText}>Appropriate preposition</Text></View>
+                      </>
+                    ) : (
+                      <View style={styles.flashRevealHint}><Feather name="rotate-cw" size={22} color={theme.heroMuted} /><Text style={styles.flashRevealText}>Tap to reveal meaning and sentence</Text></View>
+                    )}
+                  </View>
+                </LinearGradient>
               </Pressable>
             </Animated.View>
-            <Text style={styles.swipeHint}>ডানে swipe → পূর্ববর্তী word · বামে swipe → পরবর্তী word</Text>
-            {flashFlipped && <View style={styles.flashDetails}><Text style={styles.detailLabel}>{flashWord.headword}</Text><Text style={styles.detailText}>{flashWord.meaning}</Text></View>}
+            <Text style={styles.swipeHint}>Swipe right for previous · swipe left for next</Text>
             <View style={styles.flashControls}><ActionButton label="Previous" icon="chevron-left" secondary compact onPress={() => { setFlashIndex((current) => (current - 1 + flashWords.length) % flashWords.length); setFlashFlipped(false); }} /><ActionButton label="Next" icon="chevron-right" compact onPress={() => { setFlashIndex((current) => (current + 1) % flashWords.length); setFlashFlipped(false); }} /></View>
             <View style={styles.flashControls}><ActionButton label={state.memorized.includes(flashWord.headword) ? 'Memorized' : 'Mark memorized'} icon="check" secondary compact onPress={() => toggleIn('memorized', flashWord.headword)} /><ActionButton label={state.bookmarked.includes(flashWord.headword) ? 'Bookmarked' : 'Bookmark'} icon="star" secondary compact onPress={() => toggleIn('bookmarked', flashWord.headword)} /></View>
           </>
@@ -770,10 +868,10 @@ export default function HomeScreen() {
     if (reviewing) {
       const wrong = questions.filter((question, index) => answers[index] !== question.correct);
       const totalCorrect = questions.length - wrong.length;
-      return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.resultCircle}><Text style={styles.resultValue}>{Math.round((totalCorrect / questions.length) * 100)}%</Text><Text style={styles.resultLabel}>{totalCorrect} / {questions.length} correct</Text></View><Text style={styles.resultTitle}>{totalCorrect === questions.length ? 'Perfect recall.' : 'Good work. Review and return stronger.'}</Text><ActionButton label="Back to home" icon="home" onPress={() => setView('home')} />{wrong.length > 0 && <><SectionTitle title="Review mistakes" eyebrow={`${wrong.length} to revisit`} />{wrong.map((question, index) => <View key={`${question.sourceRow}-${index}`} style={styles.reviewCard}><Text style={styles.reviewQuestion}>{question.sentence.replace(question.preposition, '____')}</Text><Text style={styles.reviewAnswer}>Correct: {question.correct}</Text><Text style={styles.reviewMeaning}>{question.meaning}</Text><Text style={styles.reviewSentence}>{question.sentence}</Text>{question.source && <Text style={styles.reviewSource}>{question.source}</Text>}</View>)}</>}</ScrollView></View>;
+      return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.resultCircle}><Text style={styles.resultValue}>{Math.round((totalCorrect / questions.length) * 100)}%</Text><Text style={styles.resultLabel}>{totalCorrect} / {questions.length} correct</Text></View><Text style={styles.resultTitle}>{totalCorrect === questions.length ? 'Perfect recall.' : 'Good work. Review and return stronger.'}</Text><ActionButton label="Back to home" icon="home" onPress={() => setView('home')} />{wrong.length > 0 && <><SectionTitle title="Review mistakes" eyebrow={`${wrong.length} to revisit`} />{wrong.map((question, index) => <View key={`${question.sourceRow}-${index}`} style={styles.reviewCard}><Text style={styles.reviewQuestion}>{question.questionText}</Text><Text style={styles.reviewAnswer}>Correct: {question.correct}</Text><Text style={styles.reviewMeaning}>{question.meaning}</Text><Text style={styles.reviewSentence}>{stripSourceAnnotations(question.sentence)}</Text>{question.source && <Text style={styles.reviewSource}>{question.source}</Text>}</View>)}</>}</ScrollView></View>;
     }
     const picked = answers[questionIndex];
-     return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.questionTop}><Text style={styles.questionCount}>{questionIndex + 1} / {questions.length}</Text><Text style={styles.questionScore}>{Object.values(answers).filter((answer, index) => answer === questions[index]?.correct).length} correct</Text></View><View style={styles.questionProgressTrack}><View style={[styles.progressFill, { width: `${((questionIndex + 1) / questions.length) * 100}%` }]} /></View><View style={styles.questionCard}><View style={styles.questionTag}><Text style={styles.questionTagText}>{currentQuestion.part}</Text></View><Text style={styles.questionSentence}>{currentQuestion.sentence.replace(currentQuestion.preposition, '____')}</Text>{mode === 'quiz' && <Text style={styles.questionMeaning}>{currentQuestion.meaning}</Text>}{currentQuestion.source && <Text style={styles.questionSource}>{currentQuestion.source}</Text>}</View><Text style={styles.chooseText}>Choose the appropriate preposition</Text><View style={styles.options}>{currentQuestion.options.map((option, index) => { const isPicked = picked === option; const isCorrect = option === currentQuestion.correct; return <Pressable key={`${option}-${index}`} onPress={() => handleAnswer(option)} style={[styles.option, isPicked && (isCorrect ? styles.optionCorrect : styles.optionWrong), picked && isCorrect && styles.optionCorrect]}><View style={[styles.optionLetter, isPicked && { backgroundColor: isCorrect ? palette.accentForeground : palette.destructive }]}><Text style={[styles.optionLetterText, isPicked && { color: palette.primaryForeground }]}>{String.fromCharCode(65 + index)}</Text></View><Text style={styles.optionText}>{option}</Text>{picked && isCorrect && <Feather name="check" size={18} color={palette.accentForeground} />}{picked && isPicked && !isCorrect && <Feather name="x" size={18} color={palette.destructive} />}</Pressable>; })}</View>{picked && <View style={[styles.explanation, picked === currentQuestion.correct ? styles.explanationCorrect : styles.explanationWrong]}><Feather name={picked === currentQuestion.correct ? 'check-circle' : 'info'} size={18} color={picked === currentQuestion.correct ? palette.accentForeground : palette.destructive} /><View style={{ flex: 1 }}><Text style={styles.explanationTitle}>{picked === currentQuestion.correct ? 'Correct answer' : 'Answer details'}</Text><Text style={styles.explanationText}>Correct option: “{currentQuestion.correct}”. {currentQuestion.explanation ?? `${currentQuestion.headword} takes “${currentQuestion.correct}”. ${currentQuestion.meaning}`}</Text></View></View>}{picked && <ActionButton label={questionIndex === questions.length - 1 ? 'See results' : 'Next question'} icon={questionIndex === questions.length - 1 ? 'award' : 'arrow-right'} onPress={() => questionIndex === questions.length - 1 ? finishSession() : setQuestionIndex((current) => current + 1)} />}</ScrollView></View>;
+      return <View style={styles.screen}>{renderHeader(sessionLabel)}<ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]}><View style={styles.questionTop}><Text style={styles.questionCount}>{questionIndex + 1} / {questions.length}</Text><Text style={styles.questionScore}>{Object.values(answers).filter((answer, index) => answer === questions[index]?.correct).length} correct</Text></View><View style={styles.questionProgressTrack}><View style={[styles.progressFill, { width: `${((questionIndex + 1) / questions.length) * 100}%` }]} /></View><View style={styles.questionCard}><View style={styles.questionTag}><Text style={styles.questionTagText}>{currentQuestion.part}</Text></View><Text style={styles.questionPrompt}>Complete the sentence with the appropriate preposition</Text><Text style={styles.questionSentence}>{currentQuestion.questionText}</Text>{mode === 'quiz' && <Text style={styles.questionMeaning}>{currentQuestion.meaning}</Text>}{currentQuestion.source && <Text style={styles.questionSource}>{currentQuestion.source}</Text>}</View><Text style={styles.chooseText}>Choose the appropriate preposition</Text><View style={styles.options}>{currentQuestion.options.map((option, index) => { const isPicked = picked === option; const isCorrect = option === currentQuestion.correct; return <Pressable key={`${option}-${index}`} onPress={() => handleAnswer(option)} style={[styles.option, isPicked && (isCorrect ? styles.optionCorrect : styles.optionWrong), picked && isCorrect && styles.optionCorrect]}><View style={[styles.optionLetter, isPicked && { backgroundColor: isCorrect ? palette.accentForeground : palette.destructive }]}><Text style={[styles.optionLetterText, isPicked && { color: palette.primaryForeground }]}>{String.fromCharCode(65 + index)}</Text></View><Text style={styles.optionText}>{option}</Text>{picked && isCorrect && <Feather name="check" size={18} color={palette.accentForeground} />}{picked && isPicked && !isCorrect && <Feather name="x" size={18} color={palette.destructive} />}</Pressable>; })}</View>{picked && <View style={[styles.explanation, picked === currentQuestion.correct ? styles.explanationCorrect : styles.explanationWrong]}><Feather name={picked === currentQuestion.correct ? 'check-circle' : 'info'} size={18} color={picked === currentQuestion.correct ? palette.accentForeground : palette.destructive} /><View style={{ flex: 1 }}><Text style={styles.explanationTitle}>{picked === currentQuestion.correct ? 'Correct answer' : 'Answer details'}</Text><Text style={styles.explanationText}>Correct option: “{currentQuestion.correct}”. {currentQuestion.explanation ?? `${currentQuestion.headword} takes “${currentQuestion.correct}”. ${currentQuestion.meaning}`}</Text></View></View>}{picked && <ActionButton label={questionIndex === questions.length - 1 ? 'See results' : 'Next question'} icon={questionIndex === questions.length - 1 ? 'award' : 'arrow-right'} onPress={() => questionIndex === questions.length - 1 ? finishSession() : setQuestionIndex((current) => current + 1)} />}</ScrollView></View>;
   };
 
   if (!state || !words.length) return <SafeAreaView style={styles.loading}><ActivityIndicator color={theme.primary} /></SafeAreaView>;
@@ -794,13 +892,34 @@ export default function HomeScreen() {
           {view === 'flashcards' && renderFlashcards()}
           {view === 'progress' && renderProgress()}
           {view === 'previous' && renderPrevious()}
+           {view === 'part' && renderPartReference()}
           {view === 'settings' && renderSettings()}
           {view === 'quiz' && renderSession('quiz')}
           {view === 'exam' && renderSession('exam')}
         </View>
         {['home', 'dictionary', 'flashcards', 'progress', 'settings'].includes(view) && renderBottomTabBar()}
       </View>
-      <Modal visible={modal !== null} transparent animationType="slide" onRequestClose={() => setModal(null)}><Pressable style={styles.modalBackdrop} onPress={() => setModal(null)}><View style={[styles.modalSheet, { paddingBottom: insets.bottom + 18 }]}><Text style={styles.modalTitle}>{modal === 'part' ? 'Choose a part' : 'Choose a practice mode'}</Text>{(modal === 'part' ? parts : ['Quiz', 'Mock exam', 'Full mock exam']).map((item) => <Pressable key={item} onPress={() => { setModal(null); if (modal === 'part') setActivePart(item); else if (item === 'Quiz') startSession('quiz', activePart); else if (item === 'Mock exam') startSession('exam', activePart); else startSession('exam', activePart, true); }} style={styles.modalItem}><Text style={styles.modalItemText}>{item}</Text><Feather name="chevron-right" size={18} color={theme.mutedForeground} /></Pressable>)}</View></Pressable></Modal>
+      <Modal visible={modal !== null} transparent animationType="slide" onRequestClose={() => setModal(null)}>
+        <Pressable style={styles.modalBackdrop} onPress={() => setModal(null)}>
+          <View style={[styles.modalSheet, { paddingBottom: insets.bottom + 18 }]}>
+            {modal === 'word' && selectedWord ? (
+              <>
+                <View style={styles.modalWordBadge}><Feather name="zap" size={14} color={theme.primary} /><Text style={styles.modalWordBadgeText}>PREPOSITION OF THE SESSION</Text></View>
+                <Text style={styles.modalTitle}>{selectedWord.headword}</Text>
+                <Text style={styles.modalPreposition}>{selectedWord.preposition}</Text>
+                <Text style={styles.modalMeaning}>{selectedWord.meaning}</Text>
+                <Text style={styles.modalSentence}>{stripSourceAnnotations(selectedWord.sentence)}</Text>
+                <ActionButton label="Add to flashcards" icon="layers" onPress={() => { toggleIn('bookmarked', selectedWord.headword); setModal(null); setView('flashcards'); setFlashDeck('Bookmarked deck'); }} />
+              </>
+            ) : (
+              <>
+                <Text style={styles.modalTitle}>{modal === 'part' ? 'Choose a part' : 'Choose a practice mode'}</Text>
+                {(modal === 'part' ? parts : ['Quiz', 'Mock exam', 'Full mock exam']).map((item) => <Pressable key={item} onPress={() => { setModal(null); if (modal === 'part') setActivePart(item); else if (item === 'Quiz') startSession('quiz', activePart); else if (item === 'Mock exam') startSession('exam', activePart); else startSession('exam', activePart, true); }} style={styles.modalItem}><Text style={styles.modalItemText}>{item}</Text><Feather name="chevron-right" size={18} color={theme.mutedForeground} /></Pressable>)}
+              </>
+            )}
+          </View>
+        </Pressable>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -826,11 +945,12 @@ function createStyles(palette: AppPalette) {
   sessionGlow: { position: 'absolute', width: 160, height: 160, borderRadius: 80, right: -45, top: -70, backgroundColor: 'rgba(255,255,255,0.09)' },
   sessionCardHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sessionBadge: { flexDirection: 'row', alignItems: 'center', gap: 7 },
-  sessionBadgeText: { color: '#B9E9E0', fontSize: 10, letterSpacing: 1.1, fontWeight: '800' },
-  sessionWord: { color: '#FFFFFF', fontSize: 29, lineHeight: 34, fontWeight: '800', marginTop: 17 },
-  sessionPrep: { color: '#F7C96B', fontSize: 18, fontWeight: '700', marginTop: 2 },
-  sessionMeaning: { color: '#D4EBF1', fontSize: 15, marginTop: 8 },
-  sessionSentence: { color: '#B9D4DE', fontSize: 13, fontStyle: 'italic', lineHeight: 20, marginTop: 12 },
+  sessionBadgeText: { color: palette.heroMuted, fontSize: 10, letterSpacing: 1.1, fontWeight: '800' },
+  sessionWord: { color: palette.heroText, fontSize: 29, lineHeight: 34, fontWeight: '800', marginTop: 17 },
+  sessionPrepButton: { flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start', gap: 7, paddingVertical: 4 },
+  sessionPrep: { color: palette.sessionAccent, fontSize: 18, fontWeight: '700', marginTop: 2 },
+  sessionMeaning: { color: palette.heroMuted, fontSize: 15, marginTop: 8 },
+  sessionSentence: { color: palette.heroMuted, fontSize: 13, fontStyle: 'italic', lineHeight: 20, marginTop: 12 },
   sessionActions: { flexDirection: 'row', gap: 9, marginTop: 17 },
   lightPill: { backgroundColor: '#D9F1EC', borderRadius: 18, paddingHorizontal: 13, paddingVertical: 9, flexDirection: 'row', gap: 7, alignItems: 'center' },
   lightPillText: { color: '#123A51', fontSize: 12, fontWeight: '700' },
@@ -850,8 +970,9 @@ function createStyles(palette: AppPalette) {
   partInfo: { flex: 1, marginLeft: 11 },
   partName: { fontSize: 14, fontWeight: '800', color: palette.foreground },
   partCount: { color: palette.mutedForeground, fontSize: 11, marginTop: 2 },
-  partButtons: { flexDirection: 'row', gap: 6 },
-  partAction: { paddingVertical: 8, paddingHorizontal: 10, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  partButtons: { flexDirection: 'row', gap: 5 },
+  partTableAction: { paddingVertical: 8, paddingHorizontal: 8, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  partAction: { paddingVertical: 8, paddingHorizontal: 8, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', alignItems: 'center', gap: 4 },
   partMockAction: { backgroundColor: palette.accent },
   partActionText: { color: palette.primary, fontSize: 11, fontWeight: '800' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 },
@@ -888,15 +1009,24 @@ function createStyles(palette: AppPalette) {
   deckChipActive: { backgroundColor: palette.primary, borderColor: palette.primary },
   deckChipText: { color: palette.mutedForeground, fontSize: 12, fontWeight: '700' },
   deckChipTextActive: { color: palette.primaryForeground },
-  flashCounter: { textAlign: 'center', color: palette.mutedForeground, fontSize: 12, marginBottom: 10 },
-  flashCard: { borderRadius: 24, overflow: 'hidden', minHeight: 380, shadowColor: '#0A1B34', shadowOpacity: 0.16, shadowRadius: 15, shadowOffset: { width: 0, height: 7 }, elevation: 5 },
+  flashProgressHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  flashCounter: { color: palette.foreground, fontSize: 12, fontWeight: '800', marginBottom: 8 },
+  flashDeckLabel: { color: palette.primary, fontSize: 11, fontWeight: '700', marginBottom: 8 },
+  flashProgressTrack: { height: 5, borderRadius: 3, backgroundColor: palette.secondary, overflow: 'hidden', marginBottom: 12 },
+  flashProgressFill: { height: '100%', borderRadius: 3, backgroundColor: palette.primary },
+  flashCard: { borderRadius: 28, overflow: 'hidden', minHeight: 380, shadowColor: '#0A1B34', shadowOpacity: 0.2, shadowRadius: 18, shadowOffset: { width: 0, height: 9 }, elevation: 7, borderWidth: 1, borderColor: palette.glassBorder },
   flashCardPressable: { flex: 1 },
-  flashCardGradient: { flex: 1, minHeight: 380, alignItems: 'center', justifyContent: 'center', padding: 25 },
-  flashHint: { color: '#AFDDE0', fontSize: 10, fontWeight: '800', letterSpacing: 1.2, marginBottom: 17 },
-  flashHeadword: { color: '#FFFFFF', fontSize: 34, fontWeight: '800', textAlign: 'center' },
-  flashMeaning: { color: '#C9EBE4', fontSize: 17, marginTop: 18, textAlign: 'center' },
-  flashSentence: { color: '#C0D6E0', fontSize: 14, lineHeight: 22, fontStyle: 'italic', textAlign: 'center', marginTop: 18 },
-  flashDetails: { paddingVertical: 14, paddingHorizontal: 16, borderRadius: 16, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, marginTop: 12 },
+  flashCardGradient: { flex: 1, minHeight: 380, justifyContent: 'center', padding: 25 },
+  flashCardContent: { alignItems: 'center', justifyContent: 'center', flex: 1 },
+  flashCardBadge: { flexDirection: 'row', alignItems: 'center', gap: 7, marginBottom: 18 },
+  flashHint: { color: palette.heroMuted, fontSize: 10, fontWeight: '800', letterSpacing: 1.2 },
+  flashHeadword: { color: palette.heroText, fontSize: 34, fontWeight: '800', textAlign: 'center' },
+  flashMeaning: { color: palette.heroText, fontSize: 17, marginTop: 18, textAlign: 'center', fontWeight: '700' },
+  flashSentence: { color: palette.heroMuted, fontSize: 14, lineHeight: 22, fontStyle: 'italic', textAlign: 'center', marginTop: 18 },
+  flashAnswerPill: { marginTop: 20, paddingHorizontal: 13, paddingVertical: 8, borderRadius: 16, backgroundColor: 'rgba(255,255,255,0.14)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.22)' },
+  flashAnswerPillText: { color: palette.heroMuted, fontSize: 11, fontWeight: '700' },
+  flashRevealHint: { alignItems: 'center', gap: 9, marginTop: 25 },
+  flashRevealText: { color: palette.heroMuted, fontSize: 12 },
   detailLabel: { color: palette.primary, fontSize: 11, fontWeight: '800', letterSpacing: 0.8, marginBottom: 4 },
   detailText: { color: palette.foreground, fontSize: 14, lineHeight: 20 },
   flashControls: { flexDirection: 'row', gap: 10, marginTop: 12 },
@@ -904,6 +1034,21 @@ function createStyles(palette: AppPalette) {
   emptyState: { padding: 50, alignItems: 'center' },
   emptyTitle: { fontWeight: '800', color: palette.foreground, fontSize: 17, marginTop: 15 },
   emptyText: { color: palette.mutedForeground, fontSize: 13, textAlign: 'center', lineHeight: 20, marginTop: 6 },
+  referenceIntro: { padding: 15, borderRadius: 20, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, flexDirection: 'row', gap: 12, marginBottom: 12 },
+  referenceIntroIcon: { width: 42, height: 42, borderRadius: 14, backgroundColor: palette.primary, alignItems: 'center', justifyContent: 'center' },
+  referenceIntroTitle: { color: palette.foreground, fontSize: 15, fontWeight: '800' },
+  referenceIntroText: { color: palette.mutedForeground, fontSize: 12, lineHeight: 18, marginTop: 4 },
+  referenceRow: { flexDirection: 'row', gap: 10, padding: 13, borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, marginBottom: 9 },
+  referenceIndex: { width: 31, height: 31, borderRadius: 11, backgroundColor: palette.secondary, alignItems: 'center', justifyContent: 'center' },
+  referenceIndexText: { color: palette.primary, fontSize: 11, fontWeight: '800' },
+  referenceBody: { flex: 1 },
+  referenceHeadRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
+  referenceHeadword: { color: palette.foreground, fontSize: 16, fontWeight: '800', flex: 1 },
+  referencePart: { color: palette.accentForeground, backgroundColor: palette.accent, borderRadius: 8, paddingHorizontal: 7, paddingVertical: 4, fontSize: 10, fontWeight: '800' },
+  referencePreposition: { color: palette.primary, fontSize: 14, fontWeight: '800', marginTop: 4 },
+  referenceDivider: { height: 1, backgroundColor: palette.border, marginVertical: 9 },
+  referenceMeaning: { color: palette.secondaryForeground, fontSize: 13, fontWeight: '700' },
+  referenceSentence: { color: palette.mutedForeground, fontSize: 12, lineHeight: 18, fontStyle: 'italic', marginTop: 6 },
   progressHero: { borderRadius: 24, padding: 23, marginBottom: 12 },
   progressHeroLabel: { color: '#B9E9E0', fontSize: 10, fontWeight: '800', letterSpacing: 1.1 },
   progressHeroValue: { color: '#FFFFFF', fontSize: 48, lineHeight: 56, fontWeight: '800', marginTop: 6 },
@@ -941,6 +1086,7 @@ function createStyles(palette: AppPalette) {
   questionCard: { backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, borderRadius: 21, padding: 20 },
   questionTag: { alignSelf: 'flex-start', paddingHorizontal: 9, paddingVertical: 5, borderRadius: 8, backgroundColor: palette.accent },
   questionTagText: { color: palette.accentForeground, fontSize: 10, fontWeight: '800' },
+  questionPrompt: { color: palette.primary, fontSize: 11, lineHeight: 17, fontWeight: '800', marginTop: 16 },
   questionSentence: { color: palette.foreground, fontSize: 20, lineHeight: 30, fontWeight: '700', marginTop: 17 },
   questionMeaning: { color: palette.mutedForeground, fontSize: 13, marginTop: 15 },
   questionSource: { color: palette.primary, fontSize: 11, lineHeight: 17, marginTop: 12, fontWeight: '700' },
@@ -970,6 +1116,11 @@ function createStyles(palette: AppPalette) {
   modalBackdrop: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(11, 24, 44, 0.42)' },
   modalSheet: { backgroundColor: palette.background, borderTopLeftRadius: 25, borderTopRightRadius: 25, padding: 18 },
   modalTitle: { color: palette.foreground, fontSize: 20, fontWeight: '800', marginBottom: 8 },
+  modalWordBadge: { flexDirection: 'row', alignItems: 'center', gap: 7, marginBottom: 12 },
+  modalWordBadgeText: { color: palette.primary, fontSize: 10, fontWeight: '800', letterSpacing: 1 },
+  modalPreposition: { color: palette.primary, fontSize: 17, fontWeight: '800', marginBottom: 5 },
+  modalMeaning: { color: palette.secondaryForeground, fontSize: 14, fontWeight: '700' },
+  modalSentence: { color: palette.foreground, fontSize: 14, lineHeight: 22, fontStyle: 'italic', marginTop: 15, marginBottom: 8 },
   modalItem: { minHeight: 52, borderBottomWidth: 1, borderBottomColor: palette.border, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   modalItemText: { color: palette.foreground, fontSize: 15, fontWeight: '700' },
   themeGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 9, marginBottom: 16 },
