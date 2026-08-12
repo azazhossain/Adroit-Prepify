@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Feather } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
+import * as SystemUI from 'expo-system-ui';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -361,6 +363,10 @@ export default function HomeScreen() {
   );
 
   useEffect(() => {
+    SystemUI.setBackgroundColorAsync(theme.background).catch(() => undefined);
+  }, [theme.background]);
+
+  useEffect(() => {
     const expected = (wordsSource as { expectedCount: number }).expectedCount;
     setSourceStatus(words.length === expected ? 'ok' : 'mismatch');
     if (words.length !== expected) {
@@ -496,6 +502,56 @@ export default function HomeScreen() {
       <IconButton icon="search" color={theme.foreground} onPress={() => setView('dictionary')} accessibilityLabel="Open dictionary search" />
     </View>
   );
+
+  const renderBottomTabBar = () => {
+    const tabs = [
+      { key: 'home' as const, label: 'Home', icon: 'home' as const },
+      { key: 'dictionary' as const, label: 'Words', icon: 'book-open' as const },
+      { key: 'flashcards' as const, label: 'Cards', icon: 'layers' as const },
+      { key: 'progress' as const, label: 'Progress', icon: 'bar-chart-2' as const },
+      { key: 'settings' as const, label: 'Settings', icon: 'settings' as const },
+    ];
+    const content = (
+      <View style={styles.bottomBarInner}>
+        {tabs.map((tab) => {
+          const active = view === tab.key;
+          return (
+            <Pressable
+              key={tab.key}
+              accessibilityRole="tab"
+              accessibilityState={{ selected: active }}
+              accessibilityLabel={`Open ${tab.label}`}
+              testID={`bottom-tab-${tab.key}`}
+              onPress={() => {
+                Haptics.selectionAsync().catch(() => undefined);
+                setView(tab.key);
+              }}
+              style={({ pressed }) => [
+                styles.bottomTab,
+                active && styles.bottomTabActive,
+                { opacity: pressed ? 0.72 : 1 },
+              ]}
+            >
+              <Feather name={tab.icon} size={19} color={active ? theme.primary : theme.mutedForeground} />
+              <Text style={[styles.bottomTabLabel, active && styles.bottomTabLabelActive]}>{tab.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+    );
+
+    return (
+      <View style={[styles.bottomBarContainer, { paddingBottom: Math.max(insets.bottom, Platform.OS === 'web' ? 12 : 8) }]}>
+        {Platform.OS === 'web' ? (
+          <View style={[styles.bottomBar, { backgroundColor: theme.tabBar }]}>{content}</View>
+        ) : (
+          <BlurView intensity={80} tint={dark ? 'dark' : 'light'} style={styles.bottomBar}>
+            <View style={[styles.bottomBarTint, { backgroundColor: theme.tabBar }]}>{content}</View>
+          </BlurView>
+        )}
+      </View>
+    );
+  };
 
   const renderHome = () => (
     <ScrollView
@@ -724,14 +780,26 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: theme.background }]}>
       <StatusBar style={dark ? 'light' : 'dark'} />
-      {view === 'home' && renderHome()}
-      {view === 'dictionary' && renderDictionary()}
-      {view === 'flashcards' && renderFlashcards()}
-      {view === 'progress' && renderProgress()}
-      {view === 'previous' && renderPrevious()}
-      {view === 'settings' && renderSettings()}
-      {view === 'quiz' && renderSession('quiz')}
-      {view === 'exam' && renderSession('exam')}
+      <LinearGradient
+        colors={[theme.background, theme.backgroundGlow, theme.background]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={StyleSheet.absoluteFillObject}
+        pointerEvents="none"
+      />
+      <View style={styles.appShell}>
+        <View style={styles.contentLayer}>
+          {view === 'home' && renderHome()}
+          {view === 'dictionary' && renderDictionary()}
+          {view === 'flashcards' && renderFlashcards()}
+          {view === 'progress' && renderProgress()}
+          {view === 'previous' && renderPrevious()}
+          {view === 'settings' && renderSettings()}
+          {view === 'quiz' && renderSession('quiz')}
+          {view === 'exam' && renderSession('exam')}
+        </View>
+        {['home', 'dictionary', 'flashcards', 'progress', 'settings'].includes(view) && renderBottomTabBar()}
+      </View>
       <Modal visible={modal !== null} transparent animationType="slide" onRequestClose={() => setModal(null)}><Pressable style={styles.modalBackdrop} onPress={() => setModal(null)}><View style={[styles.modalSheet, { paddingBottom: insets.bottom + 18 }]}><Text style={styles.modalTitle}>{modal === 'part' ? 'Choose a part' : 'Choose a practice mode'}</Text>{(modal === 'part' ? parts : ['Quiz', 'Mock exam', 'Full mock exam']).map((item) => <Pressable key={item} onPress={() => { setModal(null); if (modal === 'part') setActivePart(item); else if (item === 'Quiz') startSession('quiz', activePart); else if (item === 'Mock exam') startSession('exam', activePart); else startSession('exam', activePart, true); }} style={styles.modalItem}><Text style={styles.modalItemText}>{item}</Text><Feather name="chevron-right" size={18} color={theme.mutedForeground} /></Pressable>)}</View></Pressable></Modal>
     </SafeAreaView>
   );
@@ -739,11 +807,13 @@ export default function HomeScreen() {
 
 function createStyles(palette: AppPalette) {
   return StyleSheet.create({
-  root: { flex: 1 },
+  root: { flex: 1, overflow: 'hidden' },
+  appShell: { flex: 1 },
+  contentLayer: { flex: 1 },
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.background },
   screen: { flex: 1 },
   scrollContent: { paddingHorizontal: 18 },
-  header: { minHeight: 68, paddingHorizontal: 18, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: palette.background },
+  header: { minHeight: 68, paddingHorizontal: 18, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'transparent' },
   headerTitle: { fontSize: 18, fontWeight: '700', color: palette.foreground, letterSpacing: -0.3 },
   logoMark: { width: 34, height: 34, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.primary },
   topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
@@ -752,7 +822,7 @@ function createStyles(palette: AppPalette) {
   titleAccent: { color: palette.primary },
   subtitle: { color: palette.mutedForeground, fontSize: 15, lineHeight: 22, marginTop: 7, marginBottom: 20 },
   iconButton: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
-  sessionCard: { borderRadius: 24, padding: 20, overflow: 'hidden', marginBottom: 14, shadowColor: '#0A1B34', shadowOpacity: 0.18, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 5 },
+  sessionCard: { borderRadius: 24, padding: 20, overflow: 'hidden', marginBottom: 14, shadowColor: '#0A1B34', shadowOpacity: 0.18, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 5, borderWidth: 1, borderColor: 'rgba(255,255,255,0.16)' },
   sessionGlow: { position: 'absolute', width: 160, height: 160, borderRadius: 80, right: -45, top: -70, backgroundColor: 'rgba(255,255,255,0.09)' },
   sessionCardHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   sessionBadge: { flexDirection: 'row', alignItems: 'center', gap: 7 },
@@ -767,14 +837,14 @@ function createStyles(palette: AppPalette) {
   ghostPill: { borderColor: 'rgba(213,244,239,0.4)', borderWidth: 1, borderRadius: 18, paddingHorizontal: 13, paddingVertical: 9, flexDirection: 'row', gap: 7, alignItems: 'center' },
   ghostPillText: { color: '#D5F4EF', fontSize: 12, fontWeight: '700' },
   statsRow: { flexDirection: 'row', gap: 10, marginBottom: 26 },
-  statBox: { flex: 1, borderRadius: 17, paddingVertical: 13, paddingHorizontal: 12, backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border },
+  statBox: { flex: 1, borderRadius: 17, paddingVertical: 13, paddingHorizontal: 12, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder },
   statValue: { fontSize: 21, fontWeight: '800', color: palette.foreground },
   statLabel: { fontSize: 11, color: palette.mutedForeground, marginTop: 2 },
   sectionTitle: { marginBottom: 12, marginTop: 5 },
   eyebrow: { fontSize: 10, letterSpacing: 1.2, fontWeight: '800', color: palette.primary, marginBottom: 5 },
   sectionHeading: { fontSize: 21, fontWeight: '800', color: palette.foreground, letterSpacing: -0.4 },
   partsGrid: { gap: 9, marginBottom: 28 },
-  partCard: { minHeight: 67, borderRadius: 18, backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, padding: 11, flexDirection: 'row', alignItems: 'center' },
+  partCard: { minHeight: 67, borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 11, flexDirection: 'row', alignItems: 'center' },
   partNumber: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: 13, backgroundColor: palette.secondary },
   partNumberText: { fontSize: 13, fontWeight: '800', color: palette.primary },
   partInfo: { flex: 1, marginLeft: 11 },
@@ -785,25 +855,25 @@ function createStyles(palette: AppPalette) {
   partMockAction: { backgroundColor: palette.accent },
   partActionText: { color: palette.primary, fontSize: 11, fontWeight: '800' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 },
-  toolCard: { width: '48.2%', minHeight: 130, borderRadius: 18, padding: 14, backgroundColor: palette.card, borderColor: palette.border, borderWidth: 1 },
+  toolCard: { width: '48.2%', minHeight: 130, borderRadius: 18, padding: 14, backgroundColor: palette.glass, borderColor: palette.glassBorder, borderWidth: 1 },
   toolIcon: { width: 34, height: 34, borderRadius: 12, backgroundColor: palette.secondary, alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
   toolTitle: { color: palette.foreground, fontWeight: '800', fontSize: 14 },
   toolText: { color: palette.mutedForeground, fontSize: 11, lineHeight: 16, marginTop: 4, paddingRight: 5 },
   toolArrow: { position: 'absolute', right: 13, top: 15 },
-  integrityBanner: { backgroundColor: palette.secondary, borderRadius: 15, padding: 13, flexDirection: 'row', gap: 9, alignItems: 'center', marginBottom: 14 },
+  integrityBanner: { backgroundColor: palette.glass, borderRadius: 15, padding: 13, flexDirection: 'row', gap: 9, alignItems: 'center', marginBottom: 14, borderWidth: 1, borderColor: palette.glassBorder },
   integrityText: { color: palette.secondaryForeground, fontSize: 12, lineHeight: 18, flex: 1 },
   actionButton: { minHeight: 49, borderRadius: 16, paddingHorizontal: 17, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 9 },
   primaryButton: { backgroundColor: palette.primary },
-  secondaryButton: { backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border },
+  secondaryButton: { backgroundColor: palette.glassStrong, borderWidth: 1, borderColor: palette.glassBorder },
   compactButton: { minHeight: 43, flex: 1, marginTop: 0 },
   actionText: { color: palette.primaryForeground, fontSize: 14, fontWeight: '800' },
   secondaryActionText: { color: palette.primary },
-  searchWrap: { marginHorizontal: 18, height: 49, paddingHorizontal: 14, borderRadius: 16, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card, flexDirection: 'row', alignItems: 'center', gap: 9 },
+  searchWrap: { marginHorizontal: 18, height: 49, paddingHorizontal: 14, borderRadius: 16, borderWidth: 1, borderColor: palette.glassBorder, backgroundColor: palette.glass, flexDirection: 'row', alignItems: 'center', gap: 9 },
   searchInput: { flex: 1, color: palette.foreground, fontSize: 14 },
   filterRow: { paddingHorizontal: 19, paddingVertical: 13, flexDirection: 'row', justifyContent: 'space-between' },
   resultText: { color: palette.mutedForeground, fontSize: 12 },
   clearText: { color: palette.primary, fontSize: 12, fontWeight: '700' },
-  wordCard: { borderRadius: 18, padding: 16, marginBottom: 10, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card },
+  wordCard: { borderRadius: 18, padding: 16, marginBottom: 10, borderWidth: 1, borderColor: palette.glassBorder, backgroundColor: palette.glass },
   compactWordCard: { padding: 13 },
   wordCardTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   partPill: { borderRadius: 10, paddingVertical: 4, paddingHorizontal: 8, backgroundColor: palette.accent },
@@ -826,7 +896,7 @@ function createStyles(palette: AppPalette) {
   flashHeadword: { color: '#FFFFFF', fontSize: 34, fontWeight: '800', textAlign: 'center' },
   flashMeaning: { color: '#C9EBE4', fontSize: 17, marginTop: 18, textAlign: 'center' },
   flashSentence: { color: '#C0D6E0', fontSize: 14, lineHeight: 22, fontStyle: 'italic', textAlign: 'center', marginTop: 18 },
-  flashDetails: { paddingVertical: 14, paddingHorizontal: 16, borderRadius: 16, backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, marginTop: 12 },
+  flashDetails: { paddingVertical: 14, paddingHorizontal: 16, borderRadius: 16, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, marginTop: 12 },
   detailLabel: { color: palette.primary, fontSize: 11, fontWeight: '800', letterSpacing: 0.8, marginBottom: 4 },
   detailText: { color: palette.foreground, fontSize: 14, lineHeight: 20 },
   flashControls: { flexDirection: 'row', gap: 10, marginTop: 12 },
@@ -851,14 +921,14 @@ function createStyles(palette: AppPalette) {
   heatmap: { flexDirection: 'row', flexWrap: 'wrap', gap: 7, marginBottom: 20 },
   heatCell: { width: 47, height: 47, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
   heatCellText: { color: '#FFFFFF', fontWeight: '800', fontSize: 12 },
-  previousIntro: { padding: 15, borderRadius: 18, backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, flexDirection: 'row', gap: 12, marginBottom: 12 },
+  previousIntro: { padding: 15, borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, flexDirection: 'row', gap: 12, marginBottom: 12 },
   previousIcon: { width: 43, height: 43, borderRadius: 15, backgroundColor: palette.primary, alignItems: 'center', justifyContent: 'center' },
   previousTitle: { color: palette.foreground, fontSize: 15, fontWeight: '800' },
   previousText: { color: palette.mutedForeground, fontSize: 12, lineHeight: 18, marginTop: 4 },
   previousFilter: { marginTop: 24, marginBottom: 12 },
   rawSource: { color: palette.foreground, fontSize: 12, lineHeight: 20, fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace' },
   inputLabel: { color: palette.foreground, fontWeight: '700', fontSize: 13, marginBottom: 7 },
-  textField: { backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, borderRadius: 15, height: 50, paddingHorizontal: 14, color: palette.foreground, marginBottom: 12 },
+  textField: { backgroundColor: palette.glassStrong, borderWidth: 1, borderColor: palette.glassBorder, borderRadius: 15, height: 50, paddingHorizontal: 14, color: palette.foreground, marginBottom: 12 },
   settingRow: { paddingVertical: 17, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: palette.border },
   settingTitle: { color: palette.foreground, fontWeight: '800', fontSize: 14 },
   settingDescription: { color: palette.mutedForeground, fontSize: 12, marginTop: 4 },
@@ -868,7 +938,7 @@ function createStyles(palette: AppPalette) {
   questionCount: { color: palette.foreground, fontWeight: '800', fontSize: 13 },
   questionScore: { color: palette.accentForeground, fontWeight: '800', fontSize: 13 },
   questionProgressTrack: { height: 7, backgroundColor: palette.secondary, borderRadius: 4, marginTop: 10, marginBottom: 19, overflow: 'hidden' },
-  questionCard: { backgroundColor: palette.card, borderWidth: 1, borderColor: palette.border, borderRadius: 21, padding: 20 },
+  questionCard: { backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, borderRadius: 21, padding: 20 },
   questionTag: { alignSelf: 'flex-start', paddingHorizontal: 9, paddingVertical: 5, borderRadius: 8, backgroundColor: palette.accent },
   questionTagText: { color: palette.accentForeground, fontSize: 10, fontWeight: '800' },
   questionSentence: { color: palette.foreground, fontSize: 20, lineHeight: 30, fontWeight: '700', marginTop: 17 },
@@ -876,7 +946,7 @@ function createStyles(palette: AppPalette) {
   questionSource: { color: palette.primary, fontSize: 11, lineHeight: 17, marginTop: 12, fontWeight: '700' },
   chooseText: { color: palette.mutedForeground, fontSize: 12, fontWeight: '700', marginTop: 20, marginBottom: 9 },
   options: { gap: 9 },
-  option: { minHeight: 54, borderRadius: 15, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 11, gap: 11 },
+  option: { minHeight: 54, borderRadius: 15, borderWidth: 1, borderColor: palette.glassBorder, backgroundColor: palette.glass, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 11, gap: 11 },
   optionCorrect: { borderColor: palette.accentForeground, backgroundColor: palette.accent },
   optionWrong: { borderColor: palette.destructive, backgroundColor: palette.card },
   optionLetter: { width: 31, height: 31, borderRadius: 11, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.secondary },
@@ -891,7 +961,7 @@ function createStyles(palette: AppPalette) {
   resultValue: { color: palette.accentForeground, fontSize: 34, fontWeight: '800' },
   resultLabel: { color: palette.accentForeground, fontSize: 11, fontWeight: '700', marginTop: 2 },
   resultTitle: { color: palette.foreground, fontSize: 21, fontWeight: '800', textAlign: 'center', marginTop: 17, marginBottom: 10 },
-  reviewCard: { borderRadius: 17, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card, padding: 14, marginBottom: 9 },
+  reviewCard: { borderRadius: 17, borderWidth: 1, borderColor: palette.glassBorder, backgroundColor: palette.glass, padding: 14, marginBottom: 9 },
   reviewQuestion: { color: palette.foreground, fontWeight: '700', fontSize: 14, lineHeight: 20 },
   reviewAnswer: { color: palette.accentForeground, fontWeight: '800', fontSize: 12, marginTop: 8 },
   reviewMeaning: { color: palette.mutedForeground, fontSize: 12, marginTop: 4 },
@@ -903,14 +973,22 @@ function createStyles(palette: AppPalette) {
   modalItem: { minHeight: 52, borderBottomWidth: 1, borderBottomColor: palette.border, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   modalItemText: { color: palette.foreground, fontSize: 15, fontWeight: '700' },
   themeGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 9, marginBottom: 16 },
-  themeChoice: { width: '48%', minHeight: 53, padding: 10, borderRadius: 14, borderWidth: 1, borderColor: palette.border, backgroundColor: palette.card, flexDirection: 'row', alignItems: 'center', gap: 9 },
+  themeChoice: { width: '48%', minHeight: 53, padding: 10, borderRadius: 14, borderWidth: 1, borderColor: palette.glassBorder, backgroundColor: palette.glass, flexDirection: 'row', alignItems: 'center', gap: 9 },
   themeChoiceActive: { borderColor: palette.primary, backgroundColor: palette.accent },
   themeSwatch: { width: 26, height: 26, borderRadius: 13 },
   themeChoiceText: { color: palette.foreground, fontSize: 12, fontWeight: '700' },
   modeRow: { flexDirection: 'row', gap: 8, marginBottom: 14 },
-  modeChoice: { flex: 1, borderRadius: 12, borderWidth: 1, borderColor: palette.border, paddingVertical: 10, alignItems: 'center', backgroundColor: palette.card },
+  modeChoice: { flex: 1, borderRadius: 12, borderWidth: 1, borderColor: palette.glassBorder, paddingVertical: 10, alignItems: 'center', backgroundColor: palette.glass },
   modeChoiceActive: { borderColor: palette.primary, backgroundColor: palette.primary },
   modeChoiceText: { color: palette.mutedForeground, fontSize: 12, fontWeight: '700' },
   modeChoiceTextActive: { color: palette.primaryForeground },
+  bottomBarContainer: { paddingHorizontal: 12, paddingTop: 8 },
+  bottomBar: { borderRadius: 22, overflow: 'hidden', borderWidth: 1, borderColor: palette.tabBarBorder },
+  bottomBarTint: { backgroundColor: palette.tabBar },
+  bottomBarInner: { minHeight: 66, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', paddingHorizontal: 5 },
+  bottomTab: { minWidth: 58, minHeight: 54, borderRadius: 16, alignItems: 'center', justifyContent: 'center', gap: 4, paddingHorizontal: 7 },
+  bottomTabActive: { backgroundColor: palette.tabActive },
+  bottomTabLabel: { color: palette.mutedForeground, fontSize: 10, fontWeight: '700' },
+  bottomTabLabelActive: { color: palette.primary },
   });
 }
