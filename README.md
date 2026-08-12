@@ -4,7 +4,7 @@ Offline-first Android study app for mastering appropriate prepositions, built fr
 
 ## Build and release the APK
 
-Open **Actions → Build Adroit Prepify APK → Run workflow**, then download the `adroit-prepify-release` artifact or the APK attached to the generated GitHub Release. A build is also triggered automatically on pushes to `main`. The optimized Android build is version **1.3.0** (version code 130).
+Open **Actions → Build Adroit Prepify APK → Run workflow**, then download the `adroit-prepify-release` artifact or the APK attached to the generated GitHub Release. A build is also triggered automatically on pushes to `main`. The optimized Android build is version **1.3.1** (version code 131).
 
 ## Optimised study experience
 
@@ -16,5 +16,7 @@ Open **Actions → Build Adroit Prepify APK → Run workflow**, then download th
 - The Dashboard's Preposition of the Session opens a focused meaning and sentence detail sheet.
 - Answers and explanations appear after the user selects an option.
 - Previous-year board and admission questions are parsed into a dedicated quiz with part filters, 25 randomly selected questions per session, and answer explanations.
+- Online mock exams are available from the bottom navigation with 25 randomized questions, part-wise selection, delayed answer review, explanations for mistakes, and Formspree submission.
+- The Home screen uses a clearer part-action hierarchy, and the app icon is optimized from the supplied Adroit Prepify PNG.
 
 The app stores study progress, memorized words, bookmarks, mistakes, streaks, and settings locally on the device.

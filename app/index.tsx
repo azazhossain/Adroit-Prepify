@@ -48,7 +48,8 @@ type ViewName =
   | 'part'
   | 'settings'
   | 'quiz'
-  | 'exam';
+  | 'exam'
+  | 'online-mock';
 
 type QuizQuestion = Word & {
   options: string[];
@@ -100,6 +101,9 @@ const initialState: SavedState = {
 const words = (wordsSource as { entries: Word[] }).entries;
 const previousSource = (previousSourceData as { text: string }).text;
 const parts = Array.from({ length: 14 }, (_, index) => `Part ${index + 1}`);
+const ONLINE_MOCK_SIZE = 25;
+const ALL_PARTS = 'All parts';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgawyewa';
 let palette: AppPalette = colors.light;
 let styles = createStyles(palette);
 
@@ -380,6 +384,13 @@ export default function HomeScreen() {
   const [reviewing, setReviewing] = useState(false);
   const [sessionLabel, setSessionLabel] = useState('');
   const [sessionDate, setSessionDate] = useState(todayKey());
+  const [onlinePart, setOnlinePart] = useState(ALL_PARTS);
+  const [onlineQuestions, setOnlineQuestions] = useState<QuizQuestion[]>([]);
+  const [onlineQuestionIndex, setOnlineQuestionIndex] = useState(0);
+  const [onlineAnswers, setOnlineAnswers] = useState<Record<number, string>>({});
+  const [onlineSubmitted, setOnlineSubmitted] = useState(false);
+  const [onlineSubmitting, setOnlineSubmitting] = useState(false);
+  const [onlineSubmitStatus, setOnlineSubmitStatus] = useState<'idle' | 'sent' | 'failed'>('idle');
   const [sourceStatus, setSourceStatus] = useState<'ok' | 'mismatch'>('mismatch');
   const [previousPart, setPreviousPart] = useState('All parts');
   const [tablePart, setTablePart] = useState('Part 1');
@@ -444,6 +455,16 @@ export default function HomeScreen() {
     setView('quiz');
   };
 
+  const startOnlineMock = (part = onlinePart) => {
+    const source = part === ALL_PARTS ? words : words.filter((word) => word.part === part);
+    setOnlineQuestions(makeQuestions(source, ONLINE_MOCK_SIZE));
+    setOnlineQuestionIndex(0);
+    setOnlineAnswers({});
+    setOnlineSubmitted(false);
+    setOnlineSubmitStatus('idle');
+    setOnlinePart(part);
+  };
+
   const finishSession = () => {
     const correctCount = questions.reduce(
       (sum, question, index) => sum + (answers[index] === question.correct ? 1 : 0),
@@ -477,6 +498,67 @@ export default function HomeScreen() {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(() => undefined);
     } else {
       Haptics.selectionAsync().catch(() => undefined);
+    }
+  };
+
+  const handleOnlineAnswer = (option: string) => {
+    if (onlineAnswers[onlineQuestionIndex] || onlineSubmitting) return;
+    setOnlineAnswers((current) => ({ ...current, [onlineQuestionIndex]: option }));
+    Haptics.selectionAsync().catch(() => undefined);
+  };
+
+  const finishOnlineMock = async () => {
+    if (onlineSubmitting || !onlineQuestions.length) return;
+    const correctCount = onlineQuestions.reduce(
+      (sum, question, index) => sum + (onlineAnswers[index] === question.correct ? 1 : 0),
+      0,
+    );
+    const nextMistakes = { ...state.mistakes };
+    onlineQuestions.forEach((question, index) => {
+      if (onlineAnswers[index] && onlineAnswers[index] !== question.correct) {
+        nextMistakes[question.headword] = (nextMistakes[question.headword] ?? 0) + 1;
+      }
+    });
+    const today = todayKey();
+    const practicedToday = state.lastPractice === today;
+    const nextStreak = practicedToday ? state.streak : state.lastPractice ? state.streak + 1 : 1;
+
+    setOnlineSubmitting(true);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          _subject: `Adroit Prepify online mock exam · ${onlinePart}`,
+          exam_type: 'Online mock exam',
+          part: onlinePart,
+          score: `${correctCount}/${onlineQuestions.length}`,
+          responses: onlineQuestions.map((question, index) => ({
+            number: index + 1,
+            part: question.part,
+            question: question.questionText,
+            selected_answer: onlineAnswers[index] ?? 'Not answered',
+            correct_answer: question.correct,
+            correct: onlineAnswers[index] === question.correct,
+          })),
+        }),
+      });
+      if (!response.ok) throw new Error('Form submission failed');
+      setOnlineSubmitStatus('sent');
+    } catch {
+      setOnlineSubmitStatus('failed');
+    } finally {
+      saveState({
+        answered: state.answered + onlineQuestions.length,
+        correct: state.correct + correctCount,
+        sessions: state.sessions + 1,
+        mistakes: nextMistakes,
+        lastPractice: today,
+        streak: nextStreak,
+        bestStreak: Math.max(state.bestStreak, nextStreak),
+      });
+      setOnlineSubmitted(true);
+      setOnlineSubmitting(false);
     }
   };
 
@@ -546,7 +628,7 @@ export default function HomeScreen() {
       { key: 'dictionary' as const, label: 'Words', icon: 'book-open' as const },
       { key: 'flashcards' as const, label: 'Cards', icon: 'layers' as const },
       { key: 'progress' as const, label: 'Progress', icon: 'bar-chart-2' as const },
-      { key: 'settings' as const, label: 'Settings', icon: 'settings' as const },
+      { key: 'online-mock' as const, label: 'Online Mock', icon: 'send' as const },
     ];
     const content = (
       <View style={styles.bottomBarInner}>
@@ -637,8 +719,11 @@ export default function HomeScreen() {
           const count = words.filter((word) => word.part === part).length;
           return (
             <View key={part} style={styles.partCard}>
-              <View style={styles.partNumber}><Text style={styles.partNumberText}>{String(index + 1).padStart(2, '0')}</Text></View>
-              <View style={styles.partInfo}><Text style={styles.partName}>{part}</Text><Text style={styles.partCount}>{count} words</Text></View>
+              <View style={styles.partHeaderRow}>
+                <View style={styles.partNumber}><Text style={styles.partNumberText}>{String(index + 1).padStart(2, '0')}</Text></View>
+                <View style={styles.partInfo}><Text style={styles.partName}>{part}</Text><Text style={styles.partCount}>{count} words available</Text></View>
+                <Feather name="chevron-right" size={17} color={theme.mutedForeground} />
+              </View>
               <View style={styles.partButtons}>
                 <Pressable onPress={() => { setActivePart(part); setTablePart(part); setView('part'); }} style={styles.partTableAction}><Feather name="list" size={13} color={theme.primary} /><Text style={styles.partActionText}>Table</Text></Pressable>
                 <Pressable onPress={() => { setActivePart(part); startSession('quiz', part); }} style={styles.partAction}><Feather name="play" size={13} color={theme.primary} /><Text style={styles.partActionText}>Quiz</Text></Pressable>
@@ -653,7 +738,8 @@ export default function HomeScreen() {
         {[
           { title: 'Dictionary', text: 'Search all source entries', icon: 'book', action: () => setView('dictionary') },
           { title: 'Flashcards', text: 'Active recall with flip cards', icon: 'layers', action: () => setView('flashcards') },
-          { title: 'Full mock exam', text: '30 words, fresh every time', icon: 'award', action: () => startSession('exam', 'All', true) },
+          { title: 'Online mock exam', text: '25 random questions with review', icon: 'send', action: () => setView('online-mock') },
+          { title: 'Full mock exam', text: '40 words, fresh every time', icon: 'award', action: () => startSession('exam', 'All', true) },
           { title: 'Previous years', text: 'Browse the supplied PDF', icon: 'file-text', action: () => setView('previous') },
           { title: 'Progress', text: 'Your accuracy and streaks', icon: 'bar-chart-2', action: () => setView('progress') },
           { title: 'Mistake bank', text: `${Object.keys(state.mistakes).length} words to revisit`, icon: 'rotate-ccw', action: () => { setFlashDeck('Mistake Bank'); setView('flashcards'); } },
@@ -830,6 +916,162 @@ export default function HomeScreen() {
     );
   };
 
+  const renderOnlineMock = () => {
+    if (onlineSubmitted) {
+      const wrong = onlineQuestions.filter((question, index) => onlineAnswers[index] !== question.correct);
+      const totalCorrect = onlineQuestions.length - wrong.length;
+      const percentage = Math.round((totalCorrect / onlineQuestions.length) * 100);
+      return (
+        <View style={styles.screen}>
+          {renderHeader('Online mock exam')}
+          <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]} showsVerticalScrollIndicator={false}>
+            <View style={styles.onlineResultHero}>
+              <View style={styles.resultCircle}>
+                <Text style={styles.resultValue}>{percentage}%</Text>
+                <Text style={styles.resultLabel}>{totalCorrect} / {onlineQuestions.length} correct</Text>
+              </View>
+              <Text style={styles.resultTitle}>{wrong.length ? 'Review your weak spots.' : 'Excellent work.'}</Text>
+              <Text style={styles.onlineResultText}>
+                {onlineSubmitStatus === 'sent'
+                  ? 'Your online mock response was submitted successfully.'
+                  : 'Your result is saved on this device. We could not confirm the online submission.'}
+              </Text>
+            </View>
+            <ActionButton
+              label="Take another mock"
+              icon="refresh-cw"
+              onPress={() => {
+                setOnlineSubmitted(false);
+                setOnlineQuestions([]);
+                setOnlineAnswers({});
+              }}
+            />
+            {wrong.length > 0 ? (
+              <>
+                <SectionTitle title="Review mistakes" eyebrow={`${wrong.length} explanation${wrong.length === 1 ? '' : 's'} to revisit`} />
+                {wrong.map((question, index) => {
+                  const questionIndex = onlineQuestions.indexOf(question);
+                  return (
+                    <View key={`${question.sourceRow}-${index}`} style={styles.reviewCard}>
+                      <View style={styles.reviewPartBadge}><Text style={styles.reviewPartBadgeText}>{question.part}</Text></View>
+                      <Text style={styles.reviewQuestion}>{question.questionText}</Text>
+                      <Text style={styles.reviewSelected}>Your answer: {onlineAnswers[questionIndex] ?? 'Not answered'}</Text>
+                      <Text style={styles.reviewAnswer}>Correct answer: {question.correct}</Text>
+                      <Text style={styles.reviewMeaning}>{question.explanation ?? question.meaning}</Text>
+                      <Text style={styles.reviewSentence}>{stripSourceAnnotations(question.sentence)}</Text>
+                    </View>
+                  );
+                })}
+              </>
+            ) : (
+              <View style={styles.onlinePerfectCard}>
+                <Feather name="check-circle" size={22} color={theme.accentForeground} />
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.onlinePerfectTitle}>No mistakes to review</Text>
+                  <Text style={styles.onlinePerfectText}>You completed all 25 questions correctly.</Text>
+                </View>
+              </View>
+            )}
+          </ScrollView>
+        </View>
+      );
+    }
+
+    if (!onlineQuestions.length) {
+      return (
+        <View style={styles.screen}>
+          {renderHeader('Online mock exam')}
+          <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]} showsVerticalScrollIndicator={false}>
+            <LinearGradient colors={[theme.heroStart, theme.heroEnd]} style={styles.onlineIntro}>
+              <View style={styles.onlineIntroIcon}><Feather name="send" size={22} color={theme.primaryForeground} /></View>
+              <Text style={styles.onlineIntroEyebrow}>ONLINE PRACTICE ROOM</Text>
+              <Text style={styles.onlineIntroTitle}>A fresh mock every time</Text>
+              <Text style={styles.onlineIntroText}>Answer 25 randomly selected questions, submit once, then study every mistake with its explanation.</Text>
+            </LinearGradient>
+            <SectionTitle title="Choose a part" eyebrow="Part-wise practice" />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.deckRow}>
+              {[ALL_PARTS, ...parts].map((part) => (
+                <Pressable key={part} onPress={() => setOnlinePart(part)} style={[styles.deckChip, onlinePart === part && styles.deckChipActive]}>
+                  <Text style={[styles.deckChipText, onlinePart === part && styles.deckChipTextActive]}>{part}</Text>
+                </Pressable>
+              ))}
+            </ScrollView>
+            <View style={styles.onlineRulesCard}>
+              <View style={styles.onlineRule}><Feather name="shuffle" size={17} color={theme.primary} /><Text style={styles.onlineRuleText}>25 questions shuffled for each attempt</Text></View>
+              <View style={styles.onlineRule}><Feather name="eye-off" size={17} color={theme.primary} /><Text style={styles.onlineRuleText}>Answers stay hidden until submission</Text></View>
+              <View style={styles.onlineRule}><Feather name="file-text" size={17} color={theme.primary} /><Text style={styles.onlineRuleText}>Mistakes return with explanations</Text></View>
+            </View>
+            <ActionButton label={`Start ${onlinePart} · ${ONLINE_MOCK_SIZE} questions`} icon="play" onPress={() => startOnlineMock()} />
+          </ScrollView>
+        </View>
+      );
+    }
+
+    const currentQuestion = onlineQuestions[onlineQuestionIndex];
+    const picked = onlineAnswers[onlineQuestionIndex];
+    const isLastQuestion = onlineQuestionIndex === onlineQuestions.length - 1;
+    return (
+      <View style={styles.screen}>
+        {renderHeader('Online mock exam')}
+        <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 30 }]} showsVerticalScrollIndicator={false}>
+          <View style={styles.questionTop}>
+            <Text style={styles.questionCount}>{onlineQuestionIndex + 1} / {onlineQuestions.length}</Text>
+            <Text style={styles.questionScore}>{onlinePart}</Text>
+          </View>
+          <View style={styles.questionProgressTrack}>
+            <View style={[styles.progressFill, { width: `${((onlineQuestionIndex + 1) / onlineQuestions.length) * 100}%` }]} />
+          </View>
+          <View style={styles.questionCard}>
+            <View style={styles.questionTag}><Text style={styles.questionTagText}>{currentQuestion.part}</Text></View>
+            <Text style={styles.questionPrompt}>Complete the sentence with the appropriate preposition</Text>
+            <Text style={styles.questionSentence}>{currentQuestion.questionText}</Text>
+          </View>
+          <Text style={styles.chooseText}>Choose one answer</Text>
+          <View style={styles.options}>
+            {currentQuestion.options.map((option, index) => {
+              const isPicked = picked === option;
+              return (
+                <Pressable
+                  key={`${option}-${index}`}
+                  onPress={() => handleOnlineAnswer(option)}
+                  accessibilityRole="radio"
+                  accessibilityState={{ selected: isPicked }}
+                  style={[styles.option, isPicked && styles.onlineSelectedOption]}
+                >
+                  <View style={[styles.optionLetter, isPicked && styles.onlineSelectedLetter]}>
+                    <Text style={[styles.optionLetterText, isPicked && styles.onlineSelectedLetterText]}>{String.fromCharCode(65 + index)}</Text>
+                  </View>
+                  <Text style={styles.optionText}>{option}</Text>
+                  {isPicked && <Feather name="check" size={18} color={theme.primary} />}
+                </Pressable>
+              );
+            })}
+          </View>
+          <View style={styles.onlineHiddenAnswerNote}>
+            <Feather name="lock" size={15} color={theme.mutedForeground} />
+            <Text style={styles.onlineHiddenAnswerText}>The answer key will appear after you submit all questions.</Text>
+          </View>
+          <ActionButton
+            label={onlineSubmitting ? 'Sending results…' : isLastQuestion ? 'Submit mock exam' : 'Next question'}
+            icon={onlineSubmitting ? undefined : isLastQuestion ? 'send' : 'arrow-right'}
+            onPress={() => {
+              if (onlineSubmitting) return;
+              if (!picked) {
+                Alert.alert('Choose an answer', 'Select one option before continuing.');
+                return;
+              }
+              if (isLastQuestion) {
+                finishOnlineMock();
+              } else {
+                setOnlineQuestionIndex((current) => current + 1);
+              }
+            }}
+          />
+        </ScrollView>
+      </View>
+    );
+  };
+
   const renderSettings = () => (
     <View style={styles.screen}>
       {renderHeader('Settings')}
@@ -896,8 +1138,9 @@ export default function HomeScreen() {
           {view === 'settings' && renderSettings()}
           {view === 'quiz' && renderSession('quiz')}
           {view === 'exam' && renderSession('exam')}
+          {view === 'online-mock' && renderOnlineMock()}
         </View>
-        {['home', 'dictionary', 'flashcards', 'progress', 'settings'].includes(view) && renderBottomTabBar()}
+        {['home', 'dictionary', 'flashcards', 'progress', 'online-mock'].includes(view) && renderBottomTabBar()}
       </View>
       <Modal visible={modal !== null} transparent animationType="slide" onRequestClose={() => setModal(null)}>
         <Pressable style={styles.modalBackdrop} onPress={() => setModal(null)}>
@@ -964,15 +1207,16 @@ function createStyles(palette: AppPalette) {
   eyebrow: { fontSize: 10, letterSpacing: 1.2, fontWeight: '800', color: palette.primary, marginBottom: 5 },
   sectionHeading: { fontSize: 21, fontWeight: '800', color: palette.foreground, letterSpacing: -0.4 },
   partsGrid: { gap: 9, marginBottom: 28 },
-  partCard: { minHeight: 67, borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 11, flexDirection: 'row', alignItems: 'center' },
+  partCard: { borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 12 },
+  partHeaderRow: { flexDirection: 'row', alignItems: 'center' },
   partNumber: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: 13, backgroundColor: palette.secondary },
   partNumberText: { fontSize: 13, fontWeight: '800', color: palette.primary },
   partInfo: { flex: 1, marginLeft: 11 },
   partName: { fontSize: 14, fontWeight: '800', color: palette.foreground },
   partCount: { color: palette.mutedForeground, fontSize: 11, marginTop: 2 },
-  partButtons: { flexDirection: 'row', gap: 5 },
-  partTableAction: { paddingVertical: 8, paddingHorizontal: 8, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', alignItems: 'center', gap: 4 },
-  partAction: { paddingVertical: 8, paddingHorizontal: 8, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', alignItems: 'center', gap: 4 },
+  partButtons: { flexDirection: 'row', gap: 6, marginTop: 11 },
+  partTableAction: { flex: 1, paddingVertical: 9, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 4 },
+  partAction: { flex: 1, paddingVertical: 9, borderRadius: 12, backgroundColor: palette.secondary, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 4 },
   partMockAction: { backgroundColor: palette.accent },
   partActionText: { color: palette.primary, fontSize: 11, fontWeight: '800' },
   toolGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 },
@@ -1072,6 +1316,27 @@ function createStyles(palette: AppPalette) {
   previousText: { color: palette.mutedForeground, fontSize: 12, lineHeight: 18, marginTop: 4 },
   previousFilter: { marginTop: 24, marginBottom: 12 },
   rawSource: { color: palette.foreground, fontSize: 12, lineHeight: 20, fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace' },
+  onlineIntro: { borderRadius: 24, padding: 20, marginBottom: 22 },
+  onlineIntroIcon: { width: 44, height: 44, borderRadius: 15, backgroundColor: 'rgba(255,255,255,0.18)', alignItems: 'center', justifyContent: 'center', marginBottom: 18 },
+  onlineIntroEyebrow: { color: palette.heroMuted, fontSize: 10, fontWeight: '800', letterSpacing: 1.1 },
+  onlineIntroTitle: { color: palette.heroText, fontSize: 25, lineHeight: 31, fontWeight: '800', marginTop: 8 },
+  onlineIntroText: { color: palette.heroMuted, fontSize: 13, lineHeight: 20, marginTop: 8 },
+  onlineRulesCard: { borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 14, marginBottom: 8 },
+  onlineRule: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 7 },
+  onlineRuleText: { color: palette.secondaryForeground, fontSize: 12, lineHeight: 17, flex: 1 },
+  onlineHiddenAnswerNote: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7, marginTop: 16 },
+  onlineHiddenAnswerText: { color: palette.mutedForeground, fontSize: 11 },
+  onlineSelectedOption: { borderColor: palette.primary, backgroundColor: palette.tabActive },
+  onlineSelectedLetter: { backgroundColor: palette.primary },
+  onlineSelectedLetterText: { color: palette.primaryForeground },
+  onlineResultHero: { alignItems: 'center' },
+  onlineResultText: { color: palette.mutedForeground, fontSize: 13, lineHeight: 19, textAlign: 'center', maxWidth: 300 },
+  onlinePerfectCard: { marginTop: 18, borderRadius: 17, borderWidth: 1, borderColor: palette.glassBorder, backgroundColor: palette.accent, padding: 15, flexDirection: 'row', gap: 10, alignItems: 'center' },
+  onlinePerfectTitle: { color: palette.accentForeground, fontWeight: '800', fontSize: 13 },
+  onlinePerfectText: { color: palette.accentForeground, fontSize: 12, marginTop: 3 },
+  reviewPartBadge: { alignSelf: 'flex-start', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8, backgroundColor: palette.secondary, marginBottom: 8 },
+  reviewPartBadgeText: { color: palette.primary, fontSize: 10, fontWeight: '800' },
+  reviewSelected: { color: palette.destructive, fontWeight: '700', fontSize: 12, marginTop: 8 },
   inputLabel: { color: palette.foreground, fontWeight: '700', fontSize: 13, marginBottom: 7 },
   textField: { backgroundColor: palette.glassStrong, borderWidth: 1, borderColor: palette.glassBorder, borderRadius: 15, height: 50, paddingHorizontal: 14, color: palette.foreground, marginBottom: 12 },
   settingRow: { paddingVertical: 17, flexDirection: 'row', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: palette.border },
