@@ -73,6 +73,8 @@ type SavedState = {
   bestStreak: number;
   lastPractice: string;
   name: string;
+  studentName: string;
+  institutionName: string;
   dailyGoal: number;
   sound: boolean;
   notifications: boolean;
@@ -91,6 +93,8 @@ const initialState: SavedState = {
   bestStreak: 0,
   lastPractice: '',
   name: '',
+  studentName: '',
+  institutionName: '',
   dailyGoal: 10,
   sound: true,
   notifications: false,
@@ -395,7 +399,7 @@ export default function HomeScreen() {
   const [previousPart, setPreviousPart] = useState('All parts');
   const [tablePart, setTablePart] = useState('Part 1');
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
-  const [sessionWordIndex, setSessionWordIndex] = useState(() => (new Date().getDate() * 7) % words.length);
+  const [sessionWordIndex, setSessionWordIndex] = useState(() => Math.floor(Math.random() * words.length));
   const flashPan = useRef(new Animated.Value(0)).current;
   const dark = state.colorMode === 'dark' || (state.colorMode === 'system' && systemScheme === 'dark');
   const theme = colors.themes[state.themeColor][dark ? 'dark' : 'light'];
@@ -456,6 +460,10 @@ export default function HomeScreen() {
   };
 
   const startOnlineMock = (part = onlinePart) => {
+    if (!state.studentName.trim() || !state.institutionName.trim()) {
+      Alert.alert('Complete your profile first', 'Enter your student name and institution name before starting the mock exam.');
+      return;
+    }
     const source = part === ALL_PARTS ? words : words.filter((word) => word.part === part);
     setOnlineQuestions(makeQuestions(source, ONLINE_MOCK_SIZE));
     setOnlineQuestionIndex(0);
@@ -531,6 +539,8 @@ export default function HomeScreen() {
         body: JSON.stringify({
           _subject: `Adroit Prepify online mock exam · ${onlinePart}`,
           exam_type: 'Online mock exam',
+          student_name: state.studentName.trim(),
+          institution_name: state.institutionName.trim(),
           part: onlinePart,
           score: `${correctCount}/${onlineQuestions.length}`,
           responses: onlineQuestions.map((question, index) => ({
@@ -672,91 +682,118 @@ export default function HomeScreen() {
     );
   };
 
-  const renderHome = () => (
-    <ScrollView
-      contentContainerStyle={[styles.scrollContent, { paddingTop: insets.top + 18, paddingBottom: insets.bottom + 32 }]}
-      showsVerticalScrollIndicator={false}
-    >
-      <View style={styles.topRow}>
-        <View>
-          <Text style={styles.greeting}>{state.name ? `Good to see you, ${state.name}` : 'Your next breakthrough'}</Text>
-          <Text style={styles.title}>Adroit <Text style={styles.titleAccent}>Prepify</Text></Text>
-        </View>
-        <IconButton icon="settings" color={theme.foreground} onPress={() => setView('settings')} accessibilityLabel="Open settings" />
-      </View>
-      <Text style={styles.subtitle}>Master every preposition through focused practice.</Text>
-      <LinearGradient colors={[theme.heroStart, theme.heroEnd]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.sessionCard}>
-        <View style={styles.sessionGlow} />
-        <View style={styles.sessionCardHeader}>
-          <View style={styles.sessionBadge}><Feather name="zap" size={13} color={theme.sessionAccent} /><Text style={styles.sessionBadgeText}>PREPOSITION OF THE SESSION</Text></View>
-          <IconButton icon="refresh-cw" color={theme.heroMuted} onPress={() => { setSessionWordIndex((current) => (current + 1) % words.length); setSelectedWord(null); }} accessibilityLabel="Show another preposition of the session" />
-        </View>
-        <Text style={styles.sessionWord}>{wordOfSession.headword}</Text>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={`Open details for ${wordOfSession.preposition}`}
-          onPress={() => { setSelectedWord(wordOfSession); setModal('word'); }}
-          style={({ pressed }) => [styles.sessionPrepButton, { opacity: pressed ? 0.7 : 1 }]}
-        >
-          <Text style={styles.sessionPrep}>{wordOfSession.preposition}</Text>
-          <Feather name="external-link" size={14} color={theme.sessionAccent} />
-        </Pressable>
-        <Text style={styles.sessionMeaning}>{wordOfSession.meaning}</Text>
-        <Text style={styles.sessionSentence}>{wordOfSession.sentence}</Text>
-        <View style={styles.sessionActions}>
-          <Pressable onPress={() => toggleIn('memorized', wordOfSession.headword)} style={[styles.lightPill, { backgroundColor: theme.accent }]}><Feather name={state.memorized.includes(wordOfSession.headword) ? 'check' : 'plus'} size={15} color={theme.accentForeground} /><Text style={[styles.lightPillText, { color: theme.accentForeground }]}>{state.memorized.includes(wordOfSession.headword) ? 'Memorized' : 'Memorize'}</Text></Pressable>
-          <Pressable onPress={() => toggleIn('bookmarked', wordOfSession.headword)} style={styles.ghostPill}><Feather name="star" size={15} color={theme.heroMuted} /><Text style={[styles.ghostPillText, { color: theme.heroMuted }]}>{state.bookmarked.includes(wordOfSession.headword) ? 'Saved' : 'Save'}</Text></Pressable>
-        </View>
-      </LinearGradient>
-      <View style={styles.statsRow}>
-        <View style={styles.statBox}><Text style={styles.statValue}>{state.memorized.length}</Text><Text style={styles.statLabel}>Memorized</Text></View>
-        <View style={styles.statBox}><Text style={styles.statValue}>{accuracy}%</Text><Text style={styles.statLabel}>Accuracy</Text></View>
-        <View style={styles.statBox}><Text style={styles.statValue}>{state.streak}</Text><Text style={styles.statLabel}>Day streak</Text></View>
-      </View>
-      <SectionTitle title="Practice by part" eyebrow="Build your foundation" />
-      <View style={styles.partsGrid}>
-        {parts.map((part, index) => {
-          const count = words.filter((word) => word.part === part).length;
-          return (
-            <View key={part} style={styles.partCard}>
-              <View style={styles.partHeaderRow}>
-                <View style={styles.partNumber}><Text style={styles.partNumberText}>{String(index + 1).padStart(2, '0')}</Text></View>
-                <View style={styles.partInfo}><Text style={styles.partName}>{part}</Text><Text style={styles.partCount}>{count} words available</Text></View>
-                <Feather name="chevron-right" size={17} color={theme.mutedForeground} />
-              </View>
-              <View style={styles.partButtons}>
-                <Pressable onPress={() => { setActivePart(part); setTablePart(part); setView('part'); }} style={styles.partTableAction}><Feather name="list" size={13} color={theme.primary} /><Text style={styles.partActionText}>Table</Text></Pressable>
-                <Pressable onPress={() => { setActivePart(part); startSession('quiz', part); }} style={styles.partAction}><Feather name="play" size={13} color={theme.primary} /><Text style={styles.partActionText}>Quiz</Text></Pressable>
-                <Pressable onPress={() => { setActivePart(part); startSession('exam', part); }} style={[styles.partAction, styles.partMockAction]}><Feather name="clock" size={13} color={theme.accentForeground} /><Text style={[styles.partActionText, { color: theme.accentForeground }]}>Mock</Text></Pressable>
-              </View>
+  const renderHome = () => {
+    const displayName = state.studentName || state.name;
+    return (
+      <ScrollView
+        contentContainerStyle={[styles.homeScrollContent, { paddingTop: insets.top + 16, paddingBottom: insets.bottom + 32 }]}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.homeHeader}>
+          <View style={styles.brandRow}>
+            <View style={styles.brandOrb}><Feather name="book-open" size={19} color={theme.primaryForeground} /></View>
+            <View>
+              <Text style={styles.brandKicker}>ADROIT PREPIFY</Text>
+              <Text style={styles.homeGreeting}>{displayName ? `Welcome back, ${displayName}` : 'A calmer way to learn'}</Text>
             </View>
-          );
-        })}
-      </View>
-      <SectionTitle title="Study tools" eyebrow="Go beyond quizzes" />
-      <View style={styles.toolGrid}>
-        {[
-          { title: 'Dictionary', text: 'Search all source entries', icon: 'book', action: () => setView('dictionary') },
-          { title: 'Flashcards', text: 'Active recall with flip cards', icon: 'layers', action: () => setView('flashcards') },
-          { title: 'Online mock exam', text: '25 random questions with review', icon: 'send', action: () => setView('online-mock') },
-          { title: 'Full mock exam', text: '40 words, fresh every time', icon: 'award', action: () => startSession('exam', 'All', true) },
-          { title: 'Previous years', text: 'Browse the supplied PDF', icon: 'file-text', action: () => setView('previous') },
-          { title: 'Progress', text: 'Your accuracy and streaks', icon: 'bar-chart-2', action: () => setView('progress') },
-          { title: 'Mistake bank', text: `${Object.keys(state.mistakes).length} words to revisit`, icon: 'rotate-ccw', action: () => { setFlashDeck('Mistake Bank'); setView('flashcards'); } },
-        ].map((tool) => (
-          <Pressable key={tool.title} onPress={tool.action} style={({ pressed }) => [styles.toolCard, { opacity: pressed ? 0.8 : 1 }]}>
-            <View style={styles.toolIcon}><Feather name={tool.icon as keyof typeof Feather.glyphMap} size={19} color={theme.primary} /></View>
-            <Text style={styles.toolTitle}>{tool.title}</Text><Text style={styles.toolText}>{tool.text}</Text>
-            <Feather name="arrow-up-right" size={15} color={theme.mutedForeground} style={styles.toolArrow} />
-          </Pressable>
-        ))}
-      </View>
-      <View style={styles.integrityBanner}>
-        <Feather name={sourceStatus === 'ok' ? 'check-circle' : 'info'} size={17} color={sourceStatus === 'ok' ? theme.accentForeground : theme.primary} />
-        <Text style={styles.integrityText}>{sourceStatus === 'ok' ? 'All source entries verified.' : 'Source workbook contains 525 entries; integrity check expected 526.'}</Text>
-      </View>
-    </ScrollView>
-  );
+          </View>
+          <IconButton icon="settings" color={theme.foreground} onPress={() => setView('settings')} accessibilityLabel="Open settings" />
+        </View>
+
+        <View style={styles.homeHeroCopy}>
+          <Text style={styles.homeTitle}>Make progress that <Text style={styles.titleAccent}>feels good.</Text></Text>
+          <Text style={styles.homeSubtitle}>A thoughtful space to build strong English habits, one clear step at a time.</Text>
+        </View>
+
+        <LinearGradient colors={[theme.heroStart, theme.heroEnd]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.homeFocusCard}>
+          <View style={styles.homeFocusGlow} />
+          <View style={styles.homeFocusMeta}>
+            <View style={styles.sessionBadge}><Feather name="sunrise" size={13} color={theme.sessionAccent} /><Text style={styles.sessionBadgeText}>TODAY'S FOCUS</Text></View>
+            <IconButton icon="refresh-cw" color={theme.heroMuted} onPress={() => { setSessionWordIndex(Math.floor(Math.random() * words.length)); setSelectedWord(null); }} accessibilityLabel="Show another preposition of the session" />
+          </View>
+          <View style={styles.homeFocusWordRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.homeFocusHeadword}>{wordOfSession.headword}</Text>
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={`Open details for ${wordOfSession.preposition}`}
+                onPress={() => { setSelectedWord(wordOfSession); setModal('word'); }}
+                style={({ pressed }) => [styles.sessionPrepButton, { opacity: pressed ? 0.7 : 1 }]}
+              >
+                <Text style={styles.homeFocusPreposition}>{wordOfSession.preposition}</Text>
+                <Feather name="external-link" size={14} color={theme.sessionAccent} />
+              </Pressable>
+            </View>
+            <View style={styles.homeFocusIndex}><Text style={styles.homeFocusIndexValue}>{String((sessionWordIndex % 99) + 1).padStart(2, '0')}</Text><Text style={styles.homeFocusIndexLabel}>focus</Text></View>
+          </View>
+          <Text style={styles.homeFocusMeaning}>{wordOfSession.meaning}</Text>
+          <Text style={styles.sessionSentence}>{stripSourceAnnotations(wordOfSession.sentence)}</Text>
+          <View style={styles.sessionActions}>
+            <Pressable onPress={() => toggleIn('memorized', wordOfSession.headword)} style={[styles.lightPill, { backgroundColor: theme.accent }]}><Feather name={state.memorized.includes(wordOfSession.headword) ? 'check' : 'plus'} size={15} color={theme.accentForeground} /><Text style={[styles.lightPillText, { color: theme.accentForeground }]}>{state.memorized.includes(wordOfSession.headword) ? 'Memorized' : 'Memorize'}</Text></Pressable>
+            <Pressable onPress={() => toggleIn('bookmarked', wordOfSession.headword)} style={styles.ghostPill}><Feather name="star" size={15} color={theme.heroMuted} /><Text style={[styles.ghostPillText, { color: theme.heroMuted }]}>{state.bookmarked.includes(wordOfSession.headword) ? 'Saved' : 'Save'}</Text></Pressable>
+          </View>
+        </LinearGradient>
+
+        <View style={styles.homeInsightRow}>
+          <View style={styles.homeInsightCard}><Text style={styles.homeInsightValue}>{state.memorized.length}</Text><Text style={styles.homeInsightLabel}>Words mastered</Text></View>
+          <View style={styles.homeInsightCard}><Text style={styles.homeInsightValue}>{accuracy}%</Text><Text style={styles.homeInsightLabel}>Accuracy</Text></View>
+          <View style={styles.homeInsightCard}><Text style={styles.homeInsightValue}>{state.streak}</Text><Text style={styles.homeInsightLabel}>Day streak</Text></View>
+        </View>
+
+        <View style={styles.homeSectionHeader}>
+          <View><Text style={styles.homeSectionEyebrow}>KEEP YOUR MOMENTUM</Text><Text style={styles.homeSectionTitle}>Choose your next step</Text></View>
+          <Pressable onPress={() => setView('progress')}><Text style={styles.homeSectionAction}>View progress</Text></Pressable>
+        </View>
+        <Pressable onPress={() => setView('online-mock')} style={({ pressed }) => [styles.onlineLaunchCard, { opacity: pressed ? 0.86 : 1 }]}>
+          <View style={styles.onlineLaunchIcon}><Feather name="send" size={20} color={theme.primaryForeground} /></View>
+          <View style={styles.onlineLaunchBody}><Text style={styles.onlineLaunchTitle}>Online mock exam</Text><Text style={styles.onlineLaunchText}>25 fresh questions, then a calm review of every mistake.</Text></View>
+          <Feather name="arrow-up-right" size={18} color={theme.primary} />
+        </Pressable>
+
+        <SectionTitle title="Practice by part" eyebrow="Build your foundation" />
+        <View style={styles.partsGrid}>
+          {parts.map((part, index) => {
+            const count = words.filter((word) => word.part === part).length;
+            return (
+              <View key={part} style={styles.partCard}>
+                <View style={styles.partHeaderRow}>
+                  <View style={styles.partNumber}><Text style={styles.partNumberText}>{String(index + 1).padStart(2, '0')}</Text></View>
+                  <View style={styles.partInfo}><Text style={styles.partName}>{part}</Text><Text style={styles.partCount}>{count} words available</Text></View>
+                  <Feather name="chevron-right" size={17} color={theme.mutedForeground} />
+                </View>
+                <View style={styles.partButtons}>
+                  <Pressable onPress={() => { setActivePart(part); setTablePart(part); setView('part'); }} style={styles.partTableAction}><Feather name="list" size={13} color={theme.primary} /><Text style={styles.partActionText}>Table</Text></Pressable>
+                  <Pressable onPress={() => { setActivePart(part); startSession('quiz', part); }} style={styles.partAction}><Feather name="play" size={13} color={theme.primary} /><Text style={styles.partActionText}>Quiz</Text></Pressable>
+                  <Pressable onPress={() => { setActivePart(part); startSession('exam', part); }} style={[styles.partAction, styles.partMockAction]}><Feather name="clock" size={13} color={theme.accentForeground} /><Text style={[styles.partActionText, { color: theme.accentForeground }]}>Mock</Text></Pressable>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+        <SectionTitle title="Study tools" eyebrow="Go beyond quizzes" />
+        <View style={styles.toolGrid}>
+          {[
+            { title: 'Dictionary', text: 'Search all source entries', icon: 'book', action: () => setView('dictionary') },
+            { title: 'Flashcards', text: 'Active recall with flip cards', icon: 'layers', action: () => setView('flashcards') },
+            { title: 'Full mock exam', text: '40 words, fresh every time', icon: 'award', action: () => startSession('exam', 'All', true) },
+            { title: 'Previous years', text: 'Browse the supplied PDF', icon: 'file-text', action: () => setView('previous') },
+            { title: 'Progress', text: 'Your accuracy and streaks', icon: 'bar-chart-2', action: () => setView('progress') },
+            { title: 'Mistake bank', text: `${Object.keys(state.mistakes).length} words to revisit`, icon: 'rotate-ccw', action: () => { setFlashDeck('Mistake Bank'); setView('flashcards'); } },
+          ].map((tool) => (
+            <Pressable key={tool.title} onPress={tool.action} style={({ pressed }) => [styles.toolCard, { opacity: pressed ? 0.8 : 1 }]}>
+              <View style={styles.toolIcon}><Feather name={tool.icon as keyof typeof Feather.glyphMap} size={19} color={theme.primary} /></View>
+              <Text style={styles.toolTitle}>{tool.title}</Text><Text style={styles.toolText}>{tool.text}</Text>
+              <Feather name="arrow-up-right" size={15} color={theme.mutedForeground} style={styles.toolArrow} />
+            </Pressable>
+          ))}
+        </View>
+        <View style={styles.integrityBanner}>
+          <Feather name={sourceStatus === 'ok' ? 'check-circle' : 'info'} size={17} color={sourceStatus === 'ok' ? theme.accentForeground : theme.primary} />
+          <Text style={styles.integrityText}>{sourceStatus === 'ok' ? 'All source entries verified.' : 'Source workbook contains 525 entries; integrity check expected 526.'}</Text>
+        </View>
+      </ScrollView>
+    );
+  };
 
   const renderDictionary = () => (
     <View style={styles.screen}>
@@ -988,6 +1025,35 @@ export default function HomeScreen() {
               <Text style={styles.onlineIntroTitle}>A fresh mock every time</Text>
               <Text style={styles.onlineIntroText}>Answer 25 randomly selected questions, submit once, then study every mistake with its explanation.</Text>
             </LinearGradient>
+            <View style={styles.profileCard}>
+              <View style={styles.profileCardHeader}>
+                <View style={styles.profileCardIcon}><Feather name="user" size={17} color={theme.primary} /></View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.profileCardTitle}>Before you begin</Text>
+                  <Text style={styles.profileCardText}>Your result will be submitted with these details.</Text>
+                </View>
+              </View>
+              <Text style={styles.inputLabel}>Student name</Text>
+              <TextInput
+                value={state.studentName}
+                onChangeText={(studentName) => saveState({ studentName })}
+                placeholder="Enter your full name"
+                placeholderTextColor={theme.mutedForeground}
+                style={styles.textField}
+                autoCapitalize="words"
+                testID="online-student-name"
+              />
+              <Text style={styles.inputLabel}>Institution name</Text>
+              <TextInput
+                value={state.institutionName}
+                onChangeText={(institutionName) => saveState({ institutionName })}
+                placeholder="Enter your school or college"
+                placeholderTextColor={theme.mutedForeground}
+                style={[styles.textField, { marginBottom: 0 }]}
+                autoCapitalize="words"
+                testID="online-institution-name"
+              />
+            </View>
             <SectionTitle title="Choose a part" eyebrow="Part-wise practice" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.deckRow}>
               {[ALL_PARTS, ...parts].map((part) => (
@@ -1175,9 +1241,41 @@ function createStyles(palette: AppPalette) {
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.background },
   screen: { flex: 1 },
   scrollContent: { paddingHorizontal: 18 },
+  homeScrollContent: { paddingHorizontal: 18 },
   header: { minHeight: 68, paddingHorizontal: 18, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'transparent' },
   headerTitle: { fontSize: 18, fontWeight: '700', color: palette.foreground, letterSpacing: -0.3 },
   logoMark: { width: 34, height: 34, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.primary },
+  homeHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 },
+  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 11 },
+  brandOrb: { width: 40, height: 40, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.primary, shadowColor: palette.primary, shadowOpacity: 0.24, shadowRadius: 12, shadowOffset: { width: 0, height: 5 }, elevation: 4 },
+  brandKicker: { color: palette.primary, fontSize: 10, fontWeight: '900', letterSpacing: 1.3 },
+  homeGreeting: { color: palette.mutedForeground, fontSize: 12, marginTop: 3, maxWidth: 230 },
+  homeHeroCopy: { marginBottom: 20 },
+  homeTitle: { color: palette.foreground, fontSize: 31, lineHeight: 37, fontWeight: '800', letterSpacing: -1.1, maxWidth: 350 },
+  homeSubtitle: { color: palette.mutedForeground, fontSize: 14, lineHeight: 21, marginTop: 9, maxWidth: 330 },
+  homeFocusCard: { borderRadius: 27, padding: 20, overflow: 'hidden', marginBottom: 13, shadowColor: palette.heroStart, shadowOpacity: 0.24, shadowRadius: 18, shadowOffset: { width: 0, height: 9 }, elevation: 6, borderWidth: 1, borderColor: 'rgba(255,255,255,0.16)' },
+  homeFocusGlow: { position: 'absolute', width: 190, height: 190, borderRadius: 95, right: -72, top: -95, backgroundColor: 'rgba(255,255,255,0.1)' },
+  homeFocusMeta: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  homeFocusWordRow: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 20 },
+  homeFocusHeadword: { color: palette.heroText, fontSize: 30, lineHeight: 35, fontWeight: '800', letterSpacing: -0.6 },
+  homeFocusPreposition: { color: palette.sessionAccent, fontSize: 18, fontWeight: '800', marginTop: 3 },
+  homeFocusIndex: { minWidth: 54, height: 54, borderRadius: 18, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(255,255,255,0.12)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.16)' },
+  homeFocusIndexValue: { color: palette.heroText, fontSize: 18, fontWeight: '800' },
+  homeFocusIndexLabel: { color: palette.heroMuted, fontSize: 9, marginTop: 1 },
+  homeFocusMeaning: { color: palette.heroMuted, fontSize: 14, marginTop: 10, lineHeight: 20 },
+  homeInsightRow: { flexDirection: 'row', gap: 9, marginBottom: 27 },
+  homeInsightCard: { flex: 1, borderRadius: 18, paddingVertical: 14, paddingHorizontal: 10, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder },
+  homeInsightValue: { color: palette.foreground, fontSize: 20, fontWeight: '800' },
+  homeInsightLabel: { color: palette.mutedForeground, fontSize: 10, lineHeight: 14, marginTop: 3 },
+  homeSectionHeader: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 12 },
+  homeSectionEyebrow: { color: palette.primary, fontSize: 10, fontWeight: '900', letterSpacing: 1.1, marginBottom: 5 },
+  homeSectionTitle: { color: palette.foreground, fontSize: 21, fontWeight: '800', letterSpacing: -0.4 },
+  homeSectionAction: { color: palette.primary, fontSize: 11, fontWeight: '800', paddingBottom: 2 },
+  onlineLaunchCard: { borderRadius: 20, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 14, flexDirection: 'row', alignItems: 'center', gap: 11, marginBottom: 26 },
+  onlineLaunchIcon: { width: 42, height: 42, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.primary },
+  onlineLaunchBody: { flex: 1 },
+  onlineLaunchTitle: { color: palette.foreground, fontSize: 14, fontWeight: '800' },
+  onlineLaunchText: { color: palette.mutedForeground, fontSize: 11, lineHeight: 16, marginTop: 3 },
   topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   greeting: { fontSize: 13, color: palette.mutedForeground, marginBottom: 5 },
   title: { fontSize: 32, lineHeight: 36, color: palette.foreground, fontWeight: '800', letterSpacing: -1.2 },
@@ -1321,6 +1419,11 @@ function createStyles(palette: AppPalette) {
   onlineIntroEyebrow: { color: palette.heroMuted, fontSize: 10, fontWeight: '800', letterSpacing: 1.1 },
   onlineIntroTitle: { color: palette.heroText, fontSize: 25, lineHeight: 31, fontWeight: '800', marginTop: 8 },
   onlineIntroText: { color: palette.heroMuted, fontSize: 13, lineHeight: 20, marginTop: 8 },
+  profileCard: { borderRadius: 20, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 15, marginBottom: 23 },
+  profileCardHeader: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 17 },
+  profileCardIcon: { width: 35, height: 35, borderRadius: 12, alignItems: 'center', justifyContent: 'center', backgroundColor: palette.secondary },
+  profileCardTitle: { color: palette.foreground, fontSize: 14, fontWeight: '800' },
+  profileCardText: { color: palette.mutedForeground, fontSize: 11, lineHeight: 16, marginTop: 3 },
   onlineRulesCard: { borderRadius: 18, backgroundColor: palette.glass, borderWidth: 1, borderColor: palette.glassBorder, padding: 14, marginBottom: 8 },
   onlineRule: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 7 },
   onlineRuleText: { color: palette.secondaryForeground, fontSize: 12, lineHeight: 17, flex: 1 },
